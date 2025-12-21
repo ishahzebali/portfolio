@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahzeb Ali | SOC Analyst & Pentester</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0b162a;
+            --bg-card: #112240;
+            --text-main: #e6f1ff;
+            --text-muted: #8892b0;
+            --accent-gold: #c5a082;
+            --accent-hover: #d4af37;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        h1, h2, h3 { color: var(--text-main); font-weight: 700; }
+        h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1rem; }
+        h2 { font-size: 2rem; margin-bottom: 2rem; position: relative; display: inline-block; }
+        h2::after {
+            content: ''; display: block; width: 60px; height: 3px; 
+            background: var(--accent-gold); margin-top: 10px;
+        }
+        h3 { font-size: 1.25rem; color: var(--accent-gold); margin-bottom: 0.5rem; }
+        
+        p { color: var(--text-muted); margin-bottom: 1rem; }
+
+        .highlight { color: var(--accent-gold); }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: rgba(197, 160, 130, 0.1);
+            transform: translateY(-2px);
+        }
+        .btn-fill {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            font-weight: bold;
+        }
+        .btn-fill:hover {
+            background: var(--accent-hover);
+            color: var(--bg-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        section { padding: 100px 0; }
+
+        
+        #expertise {
+            padding-bottom: 180px;
+        }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            height: 80px; padding: 0 50px;
+            background: rgba(11, 22, 42, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(197, 160, 130, 0.1);
+        }
+
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo img { 
+            height: 45px; 
+            width: auto; 
+        }
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-size: 0.9rem; color: var(--text-main); }
+        .nav-links a:hover { color: var(--accent-gold); }
+        .mobile-toggle { display: none; font-size: 1.5rem; color: var(--accent-gold); cursor: pointer; }
+
+        .hero {
+            min-height: 100vh;
+            display: flex; align-items: center;
+            justify-content: space-between;
+            padding-top: 80px;
+            gap: 40px;
+        }
+        .hero-content { max-width: 600px; animation: fadeInUp 1s ease forwards; }
+        .hero-subtitle { 
+            font-family: monospace; color: var(--accent-gold); 
+            font-size: 1.1rem; margin-bottom: 1.5rem; display: block;
+        }
+        
+        .hero-image {
+            position: relative;
+            max-width: 350px;
+            flex-shrink: 0;
+            display: none;
+        }
+        .hero-image img {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 10px 10px 0px rgba(197, 160, 130, 0.2);
+            transition: 0.3s;
+            filter: grayscale(20%);
+        }
+        .hero-image img:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 15px 15px 0px rgba(197, 160, 130, 0.2);
+            filter: grayscale(0%);
+        }
+
+        .about-grid {
+            display: grid; grid-template-columns: 2fr 1fr; gap: 50px;
+            align-items: start;
+        }
+        .skill-list {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+            margin-top: 20px;
+        }
+        .skill-list li {
+            position: relative; padding-left: 20px; font-family: monospace; font-size: 0.9rem;
+        }
+        .skill-list li::before {
+            content: '▹'; position: absolute; left: 0; color: var(--accent-gold);
+        }
+
+        .cert-card {
+            background: var(--bg-card); padding: 20px; border-radius: 8px;
+            border: 1px solid rgba(197, 160, 130, 0.1);
+        }
+        .cert-card h4 { color: var(--text-main); margin-bottom: 10px; }
+        .cert-list li { margin-bottom: 8px; font-size: 0.9rem; color: var(--text-muted); display: flex; gap: 10px; }
+        .cert-list i { color: var(--accent-gold); margin-top: 4px; }
+        
+        .thm-badge-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .domains-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;
+        }
+        .domain-card {
+            background: var(--bg-card); padding: 30px; border-radius: 6px;
+            transition: 0.3s; border: 1px solid transparent;
+        }
+        .domain-card:hover { transform: translateY(-7px); border-color: var(--accent-gold); }
+        .domain-icon { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 20px; }
+        
+        .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .tag { 
+            font-family: monospace; font-size: 0.8rem; 
+            background: rgba(197, 160, 130, 0.1); 
+            color: var(--accent-gold); padding: 5px 10px; border-radius: 4px; 
+        }
+
+        .project-card {
+            background: var(--bg-card); padding: 35px; border-radius: 8px;
+            margin-bottom: 30px; position: relative; overflow: hidden;
+            border-left: 3px solid var(--accent-gold);
+        }
+        .project-top { display: flex; justify-content: space-between; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .project-type { font-family: monospace; color: var(--accent-gold); font-size: 0.9rem; }
+        .project-date { font-size: 0.85rem; color: var(--text-muted); }
+        .project-desc li { margin-bottom: 8px; }
+        
+        .project-img {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 4px;
+            border: 1px solid rgba(197, 160, 130, 0.2);
+            opacity: 0.9;
+            transition: 0.3s;
+        }
+        .project-img:hover { opacity: 1; }
+
+        .contact-box {
+            text-align: center; max-width: 600px; margin: 0 auto;
+        }
+        .social-links {
+            display: flex; justify-content: center; gap: 25px; margin-top: 30px;
+        }
+        .social-links a { font-size: 1.5rem; color: var(--text-muted); }
+        .social-links a:hover { color: var(--accent-gold); transform: translateY(-3px); }
+
+        footer {
+            text-align: center; padding: 20px; color: var(--text-muted);
+            font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (min-width: 992px) {
+            .hero-image { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            h1 { font-size: 2.5rem; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; width: 100%; background: var(--bg-card); padding: 20px; text-align: center; }
+            .nav-links.active { display: flex; }
+            .mobile-toggle { display: block; }
+            .about-grid { grid-template-columns: 1fr; }
+            .hero { align-items: center; justify-content: center; text-align: center; flex-direction: column; }
+            .hero-image { display: block; margin-top: 30px; max-width: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="assets/images/logo.png" alt="SHAHSMEN Logo">
+            <span>SHAHSMEN</span>
+        </div>
+        <div class="mobile-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#about" onclick="toggleMenu()">About</a>
+            <a href="#expertise" onclick="toggleMenu()">Expertise</a>
+            <a href="#projects" onclick="toggleMenu()">Projects</a>
+            <a href="#contact" onclick="toggleMenu()">Contact</a>
+            <a href="SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer" class="highlight">Resume</a>
+        </div>
+    </nav>
+
+    <section class="hero container">
+        <div class="hero-content">
+            <span class="hero-subtitle">Hi, my name is</span>
+            <h1>Shahzeb Ali.</h1>
+            <h1 style="color: var(--text-muted); font-size: 3rem;">I secure digital frontiers.</h1>
+            <p>
+                I am a <b>Cybersecurity Analyst</b> and <b>Penetration Tester</b> based in Abu Dhabi. 
+                I specialize in bridging the gap between <span class="highlight">Blue Team</span> defense and <span class="highlight">Red Team</span> offense to build resilient security postures.
+            </p>
+            <a href="#projects" class="btn btn-fill">Check my work</a>
+        </div>
+        
+        <div class="hero-image">
+            <img src="assets/images/profile.jpg" alt="Shahzeb Ali" onerror="this.src='https://ui-avatars.com/api/?name=Shahzeb+Ali&background=c5a082&color=0b162a&size=300'">
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2>About Me</h2>
+        <div class="about-grid">
+            <div>
+                <p>
+                    Hello! I'm Shahzeb, an entry-level SOC Analyst with a Bachelor's in <b>Computer Science</b> from Lahore Garrison University. My journey in cybersecurity is driven by a curiosity for how systems break—and how to forge them stronger.
+                </p>
+                <p>
+                    I have hands-on experience in <b>incident triage</b>, <b>log analysis</b>, and executing <b>offensive security</b> assessments. I don't just watch the alerts; I understand the attack vectors behind them.
+                </p>
+                <p>Here are a few technologies I've been working with recently:</p>
+                <ul class="skill-list">
+                    <li>Splunk & ELK Stack</li>
+                    <li>Metasploit & Nmap</li>
+                    <li>Python & Bash</li>
+                    <li>Wireshark</li>
+                    <li>Cortex & TheHive</li>
+                    <li>MITRE ATT&CK</li>
+                </ul>
+            </div>
+            
+            <div class="cert-column">
+                <div class="cert-card">
+                    <h4><i class="fas fa-certificate"></i> Certifications</h4>
+                    <ul class="cert-list">
+                        <li><i class="fas fa-shield-alt"></i> SOC L1 (TryHackMe)</li>
+                        <li><i class="fas fa-user-secret"></i> CyberSecurity 101</li>
+                        <li><i class="fas fa-lock"></i> Pre-Security (TryHackMe)</li>
+                        <li><i class="fab fa-python"></i> Python (Codedex)</li>
+                        <li><i class="fas fa-terminal"></i> Bash Scripting (CodeAcademy)</li>
+                    </ul>
+                </div>
+
+                <div class="thm-badge-container">
+                    <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=5126748" style='border:none; width: 100%; height: 250px; overflow: hidden;'></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="container">
+        <h2>Technical Arsenal</h2>
+        <div class="domains-grid">
+            
+            <div class="domain-card">
+                <div class="domain-icon"><i class="fas fa-shield-virus"></i></div>
+                <h3>Blue Team Operations</h3>
+                <p>Proactive monitoring and threat mitigation utilizing industry-standard SIEM and EDR solutions.</p>
+                <div class="tags">
+                    <span class="tag">Incident Triage</span>
+                    <span class="tag">Splunk</span>
+                    <span class="tag">MS Sentinel</span>
+                    <span class="tag">TheHive</span>
+                    <span class="tag">Cortex</span>
+                    <span class="tag">Phishing Analysis</span>
+                </div>
+            </div>
+
+            <div class="domain-card">
+                <div class="domain-icon"><i class="fas fa-dragon"></i></div>
+                <h3>Red Team Tactics</h3>
+                <p>Simulating adversary behaviors to identify vulnerabilities before they can be exploited.</p>
+                <div class="tags">
+                    <span class="tag">Penetration Testing</span>
+                    <span class="tag">Nmap</span>
+                    <span class="tag">Burp Suite</span>
+                    <span class="tag">Metasploit</span>
+                    <span class="tag">Hydra</span>
+                    <span class="tag">OWASP Top 10</span>
+                </div>
+            </div>
+
+            <div class="domain-card">
+                <div class="domain-icon"><i class="fas fa-network-wired"></i></div>
+                <h3>Network & Systems</h3>
+                <p>Deep understanding of the infrastructure that supports—and exposes—modern enterprises.</p>
+                <div class="tags">
+                    <span class="tag">TCP/IP</span>
+                    <span class="tag">Pyramid of Pain</span>
+                    <span class="tag">Linux CLI</span>
+                    <span class="tag">Windows Internals</span>
+                    <span class="tag">Active Directory</span>
+                    <span class="tag">DNS/HTTP</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2>Security Engagements</h2>
+
+        <div class="project-card">
+            <div class="project-top">
+                <h3>Independent Security Researcher | Yes WeHack</h3>
+                <span class="project-type">Bug Bounty Hunting</span>
+            </div>
+            <p class="project-date">November 2025 - Present</p>
+            <ul class="project-desc">
+                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Conducted <b>black-box security testing</b> on various web applications, focusing on critical OWASP Top 10 vulnerabilities like Broken Access Control and IDOR.</li>
+                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Successfully uncovered and reported a <b>logic vulnerability</b> in a major music streaming platform (<b>Deezer</b>), resulting in a patch and bounty reward.</li>
+                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Utilized <b>Burp Suite</b> to intercept and analyze HTTP traffic, identifying discrepancies between client-side controls and server-side validation.</li>
+            </ul>
+            <img src="assets/images/mistersavant-reward-card-2025_12_19_20_53_11.png" alt="Bug Bounty Proof or Badge" class="project-img">
+            <div class="tags">
+                <span class="tag">Bug Bounty</span>
+                <span class="tag">Web App Security</span>
+                <span class="tag">Burp Suite</span>
+                <span class="tag">Logic Vulnerabilities</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-top">
+                <h3>Enterprise Phishing & Data Exfiltration Simulation</h3>
+                <span class="project-type">TryHackMe Investigation</span>
+            </div>
+            <p class="project-date">December 2025</p>
+            <ul class="project-desc">
+                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Conducted a full-lifecycle investigation of a compromised endpoint, reconstructing the Cyber Kill Chain.</li>
+                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Analyzed <b>Sysmon logs</b> to detect "Living off the Land" (LotL) tactics, distinguishing malicious Robocopy use from benign noise.</li>
+                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Identified advanced activities including network reconnaissance via PowerView and stealthy data theft via <b>DNS Tunneling</b>.</li>
+            </ul>
+            <div class="tags">
+                <span class="tag">Sysmon</span>
+                <span class="tag">Forensics</span>
+                <span class="tag">MITRE ATT&CK</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-top">
+                <h3>Mastercard Cybersecurity Experience</h3>
+                <span class="project-type">Forage Job Simulation</span>
+            </div>
+            <p class="project-date">December 2025</p>
+            <ul class="project-desc">
+                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Served as an analyst on the Security Awareness Team to identify and report phishing threats.</li>
+                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Analyzed business areas requiring robust security training and implemented new procedural safeguards.</li>
+            </ul>
+            <div class="tags">
+                <span class="tag">Phishing Defense</span>
+                <span class="tag">Security Awareness</span>
+                <span class="tag">Risk Analysis</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-top">
+                <h3>Deloitte Australia Cyber Job Simulation</h3>
+                <span class="project-type">Forage Job Simulation</span>
+            </div>
+            <p class="project-date">December 2025</p>
+            <ul class="project-desc">
+                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Supported a client during a critical breach by analyzing web activity logs.</li>
+                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Successfully identified suspicious user activity to contain the incident.</li>
+            </ul>
+            <div class="tags">
+                <span class="tag">Log Analysis</span>
+                <span class="tag">Incident Response</span>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="contact" class="container">
+        <div class="contact-box">
+            <p class="hero-subtitle">What's Next?</p>
+            <h2>Get In Touch</h2>
+            <p>
+                I am currently based in Abu Dhabi and actively seeking opportunities in SOC Analysis and Penetration Testing. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+            </p>
+            
+            <a href="mailto:shahzeb@shahsmen.com" class="btn btn-fill">Say Hello</a>
+            
+            <div style="margin-top: 2rem;">
+                <p><i class="fas fa-phone-alt" style="color:var(--accent-gold)"></i> +971 58 611 2232</p>
+                <p><i class="fas fa-envelope" style="color:var(--accent-gold)"></i> shahzeb@shahsmen.com</p>
+            </div>
+
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/ishahzebali" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.github.com/ishahzebali" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.twitter.com/ishahzebali" target="_blank" rel="noopener noreferrer" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Shahzeb Ali | SHAHSMEN. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
