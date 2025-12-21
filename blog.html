@@ -114,7 +114,6 @@
             background: var(--bg-card); border-radius: 12px; overflow: hidden;
             display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 50px;
             border: 1px solid rgba(197, 160, 130, 0.1);
-            /* Important for JS search toggle */
             display: grid; 
         }
         .featured-img {
@@ -178,6 +177,7 @@
         .viewer-content code { background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; color: var(--accent-gold); font-family: monospace; }
         .viewer-content ul { margin-left: 20px; margin-bottom: 20px; color: var(--text-muted); }
         .viewer-content li { margin-bottom: 10px; }
+        .viewer-content pre { background: #08101e; padding: 15px; border-radius: 6px; overflow-x: auto; margin-bottom: 20px; border: 1px solid rgba(197, 160, 130, 0.1); }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -223,7 +223,7 @@
             <a href="index.html#projects">Projects</a>
             <a href="#" class="active-link">Blog</a>
             <a href="index.html#contact">Contact</a>
-            <a href="assets/resume/SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+            <a href="SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
         </div>
     </nav>
 
@@ -246,85 +246,44 @@
         <!-- CATEGORIES -->
         <div class="categories">
             <button class="cat-btn active" data-filter="all">All</button>
-            <button class="cat-btn" data-filter="cve">CVE Analysis</button>
             <button class="cat-btn" data-filter="bug-bounty">Bug Bounty</button>
-            <button class="cat-btn" data-filter="blue-team">Blue Team</button>
-            <button class="cat-btn" data-filter="writeup">Writeups</button>
+            <button class="cat-btn" data-filter="cve">Threat Intel</button>
         </div>
 
         <!-- LIST CONTAINER (Hides when reading a post) -->
         <div id="blog-list">
-            <!-- FEATURED ARTICLE -->
-            <!-- Added data-category for filter -->
-            <div class="featured-post searchable-item" data-category="bug-bounty cve">
+            
+            <!-- FEATURED ARTICLE (Deezer IDOR) -->
+            <div class="featured-post searchable-item" data-category="bug-bounty">
                 <div class="featured-img">
-                    <i class="fas fa-bug"></i>
+                    <i class="fas fa-trophy" style="color: var(--accent-gold);"></i>
                 </div>
                 <div class="featured-content">
-                    <span class="badge badge-red">Critical Vulnerability</span>
-                    <h2>Breaking Logic: My Deezer Vulnerability Discovery</h2>
+                    <span class="badge badge-gold">Bug Bounty Writeup</span>
+                    <h2>Disclosure of Private Playlist Metadata via Deezer API</h2>
                     <p>
-                        A detailed technical breakdown of how I bypassed subscription validation logic using Burp Suite to manipulate client-side controls. This vulnerability allowed unrestricted access to premium features.
+                        A deep dive into an IDOR vulnerability I discovered in Deezer's legacy API. This logic flaw allowed authenticated users to bypass privacy controls and access full metadata of private playlists belonging to other users.
                     </p>
                     <div class="meta" style="color: var(--accent-gold); font-family: monospace; font-size: 0.9rem; margin-bottom: 20px;">
-                        <i class="far fa-clock"></i> 8 Min Read &nbsp;|&nbsp; Jan 15, 2026
+                        <i class="far fa-clock"></i> Dec 19, 2025 &nbsp;|&nbsp; Status: Resolved
                     </div>
-                    <a onclick="openPost(1)" class="btn" style="width: fit-content; border: 1px solid var(--accent-gold); color: var(--accent-gold); padding: 10px 25px; border-radius: 4px; cursor: pointer;">Read Case Study</a>
+                    <a onclick="openPost(1)" class="btn" style="width: fit-content; border: 1px solid var(--accent-gold); color: var(--accent-gold); padding: 10px 25px; border-radius: 4px; cursor: pointer;">Read Full Report</a>
                 </div>
             </div>
 
-            <!-- RECENT POSTS GRID -->
+            <!-- POSTS GRID -->
             <div class="posts-grid">
 
-                <!-- Post 2 -->
-                <div class="post-card searchable-item" data-category="blue-team">
+                <!-- Post 2: React2Shell -->
+                <div class="post-card searchable-item" data-category="cve threat-intel">
                     <div class="post-body">
-                        <span class="badge badge-blue">Blue Team</span>
-                        <div class="post-date">Jan 02, 2026</div>
-                        <h3 class="post-title">Hunting "Living off the Land" Binaries (LOLBins)</h3>
+                        <span class="badge badge-red">Critical RCE</span>
+                        <div class="post-date">Dec 13, 2025</div>
+                        <h3 class="post-title">React2Shell (CVE-2025-55182): Active Exploitation Analysis</h3>
                         <p class="post-excerpt">
-                            How to detect malicious usage of native Windows tools like Certutil, Bitsadmin, and Robocopy in your SIEM logs using Sysmon Event ID 1.
+                            Deep dive into the CVSS 10.0 RCE in React Server Components. Analysis of active campaigns dropping MINOCAT tunnelers and XMRig miners.
                         </p>
                         <a onclick="openPost(2)" class="read-btn">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <!-- Post 3 -->
-                <div class="post-card searchable-item" data-category="networking blue-team">
-                    <div class="post-body">
-                        <span class="badge badge-gold">Networking</span>
-                        <div class="post-date">Dec 20, 2025</div>
-                        <h3 class="post-title">Detecting DNS Tunneling Exfiltration</h3>
-                        <p class="post-excerpt">
-                            Attackers often use DNS to sneak data out of a network. Learn to spot high-entropy domains and unusual query lengths in Wireshark.
-                        </p>
-                        <a onclick="openPost(3)" class="read-btn">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <!-- Post 4 -->
-                <div class="post-card searchable-item" data-category="cve">
-                    <div class="post-body">
-                        <span class="badge badge-red">Emerging Threat</span>
-                        <div class="post-date">Dec 10, 2025</div>
-                        <h3 class="post-title">Zero-Day Watch: The New Outlook Exploit</h3>
-                        <p class="post-excerpt">
-                            Analysis of the latest zero-click vulnerability affecting Outlook clients. Mitigation strategies and IOCs for SOC analysts.
-                        </p>
-                        <a onclick="openPost(4)" class="read-btn">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <!-- Post 5 -->
-                <div class="post-card searchable-item" data-category="writeup">
-                    <div class="post-body">
-                        <span class="badge badge-blue">Writeup</span>
-                        <div class="post-date">Nov 15, 2025</div>
-                        <h3 class="post-title">TryHackMe: Enterprise Phishing Analysis</h3>
-                        <p class="post-excerpt">
-                            Walkthrough of my latest investigation on THM. From analyzing the email header to reverse-engineering the malicious attachment.
-                        </p>
-                        <a onclick="openPost(5)" class="read-btn">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
@@ -357,68 +316,91 @@
         // --- BLOG DATA STORE ---
         const blogPosts = {
             1: {
-                title: "Breaking Logic: My Deezer Vulnerability Discovery",
-                date: "Jan 15, 2026 | Bug Bounty",
+                title: "Disclosure of Private Playlist Metadata (Deezer IDOR)",
+                date: "Dec 19, 2025 | Bug Bounty | YesWeHack",
                 content: `
-                    <p>Logic vulnerabilities are often missed by automated scanners because they don't follow a specific pattern of bad syntax (like SQLi or XSS). They require understanding the business flow. In this finding, I discovered a way to bypass premium subscription checks on Deezer.</p>
-                    <h3>The Discovery</h3>
-                    <p>While testing the payment gateway integration, I noticed that the application performed client-side validation for the subscription status. By intercepting the HTTP response from the <code>/api/user/subscription</code> endpoint using Burp Suite, I observed a JSON parameter:</p>
-                    <code>"is_premium": false</code>
-                    <h3>The Exploit</h3>
-                    <p>I created a "Match and Replace" rule in Burp Proxy to automatically swap <code>false</code> with <code>true</code> for this specific parameter in all response bodies. Upon refreshing the page, the application unlocked the high-fidelity streaming interface.</p>
+                    <p><strong>Program:</strong> Deezer Bug Bounty Program<br>
+                    <strong>Severity:</strong> Medium (Confidentiality Loss)<br>
+                    <strong>Status:</strong> Resolved & Rewarded (€250)</p>
+
+                    <h3>Summary</h3>
+                    <p>I identified an Insecure Direct Object Reference (IDOR) vulnerability within the Deezer legacy API that allows an authenticated attacker to retrieve the full metadata of Private Playlists that do not belong to them.</p>
+
+                    <h3>Vulnerability Description</h3>
+                    <p>While the API correctly filters the actual song list (returning an empty array for unauthorized users), it fails to restrict access to the playlist's details. The API returns the Title, Description, Creator Name, Creation Date, and Song Count, even when the playlist status is explicitly set to Private.</p>
+
+                    <h3>Discovery & Behavior Analysis</h3>
+                    <p>During the analysis of the <code>deezer.pagePlaylist</code> method, I observed the following:</p>
+                    <ul>
+                        <li><strong>Expected Behavior:</strong> Accessing a Private playlist ID owned by another user should return 403 Forbidden or 404 Not Found.</li>
+                        <li><strong>Actual Behavior:</strong> The server returned a 200 OK status. The JSON response contained the full playlist metadata object (DATA), revealing sensitive details like the Title and Description, despite filtering the song list.</li>
+                    </ul>
+
+                    <h3>Proof of Concept (PoC)</h3>
+                    <p><strong>Attacker Request:</strong></p>
+                    <pre><code>POST /ajax/gw-light.php?method=deezer.pagePlaylist&input=3&api_version=1.0 HTTP/2
+Host: www.deezer.com
+Content-Type: application/json
+
+{
+  "playlist_id": 14575894321,
+  "lang": "en",
+  "nb": 50,
+  "start": 0,
+  "tags": true,
+  "header": true
+}</code></pre>
+                    <p><strong>Server Response (Leak):</strong></p>
+                    <pre><code>{
+  "results": {
+    "DATA": {
+      "PLAYLIST_ID": "14575894321",
+      "TITLE": "demo testing",
+      "STATUS": 1,
+      "DESCRIPTION": "for idor check",
+      "IS_PUBLIC": false
+    }
+  }
+}</code></pre>
+
+                    <h3>Impact</h3>
+                    <p>In a real-world attack scenario, a malicious actor could exploit this vulnerability for:</p>
+                    <ul>
+                        <li><strong>User Profiling:</strong> Enumerating playlist IDs to collect titles that reveal personal context (e.g., "Medical Recovery", "Protest Planning").</li>
+                        <li><strong>Social Engineering:</strong> Leveraging this metadata to craft highly convincing phishing emails targeting specific users based on their private interests.</li>
+                    </ul>
+
                     <h3>Remediation</h3>
-                    <p>I reported this via YesWeHack. The fix involved moving the validation logic to the server-side, ensuring that the actual stream segments (chunks) are only served after a backend verification of the user's active license, regardless of what the frontend says.</p>
+                    <p>The backend logic for <code>deezer.pagePlaylist</code> was updated to check permissions <strong>before</strong> fetching the DATA object, ensuring a 403 Forbidden response for unauthorized requests.</p>
                 `
             },
             2: {
-                title: "Hunting 'Living off the Land' Binaries (LOLBins)",
-                date: "Jan 02, 2026 | Blue Team",
+                title: "React2Shell (CVE-2025-55182): Active Exploitation Analysis",
+                date: "Dec 13, 2025 | Threat Intelligence",
                 content: `
-                    <p>Attackers love "Living off the Land" (LotL) because they use tools already installed on your computer to conduct attacks. This makes them invisible to basic antivirus.</p>
-                    <h3>The Suspect: Robocopy</h3>
-                    <p>Robocopy is a standard Windows file replication tool. However, in a recent investigation, I found it being used to stage data for exfiltration.</p>
-                    <h3>Detection Logic</h3>
-                    <p>Using Sysmon Event ID 1 (Process Creation), we can look for anomalies. A standard admin might run <code>robocopy source dest /MIR</code>. An attacker might run:</p>
-                    <code>robocopy C:\\Users\\CEO\\Documents \\\\192.168.1.50\\HiddenShare /E</code>
-                    <h3>Writing the Rule</h3>
-                    <p>I wrote a Splunk query to detect Robocopy connecting to non-corporate IP ranges. We can also monitor for <code>certutil.exe</code> being used with the <code>-urlcache</code> flag, which is a common way to download malware payloads.</p>
-                `
-            },
-            3: {
-                title: "Detecting DNS Tunneling Exfiltration",
-                date: "Dec 20, 2025 | Networking",
-                content: `
-                    <p>DNS is rarely blocked by firewalls, making it a perfect tunnel for data theft. Tools like <code>dnscat2</code> or <code>iodine</code> allow attackers to encode data inside DNS queries.</p>
-                    <h3>The Indicators</h3>
+                    <p>A new critical unauthenticated remote code execution (RCE) vulnerability in React Server Components, tracked as <strong>CVE-2025-55182</strong> (aka "React2Shell"), is being actively exploited in the wild. With a CVSS score of 10.0, this is a "drop everything and patch" event.</p>
+                    
+                    <h3>The Vulnerability</h3>
+                    <p>The flaw allows unauthenticated attackers to send a single HTTP request that executes arbitrary code with the privileges of the web server process. It affects <code>react-server-dom-webpack</code>, <code>react-server-dom-parcel</code>, and <code>react-server-dom-turbopack</code> (versions 19.0 - 19.2.0).</p>
+                    
+                    <h3>Active Exploitation in the Wild</h3>
+                    <p>Google Threat Intelligence has observed multiple threat clusters exploiting this:</p>
                     <ul>
-                        <li><strong>Query Length:</strong> Normal DNS queries are short (e.g., google.com). Tunneling queries are huge (e.g., <code>[base64_data].evil.com</code>).</li>
-                        <li><strong>Entropy:</strong> The subdomains look like random garbage characters (High Entropy) rather than english words.</li>
-                        <li><strong>Volume:</strong> A sudden spike in TXT record requests to a single unknown domain.</li>
+                        <li><strong>MINOCAT Tunneler:</strong> China-nexus actors are deploying a bash script to create hidden directories (<code>$HOME/.systemd-utils</code>), kill legit processes, and install the MINOCAT tunneler for persistence.</li>
+                        <li><strong>Crypto Miners:</strong> Financially motivated actors are dropping XMRig miners via scripts like <code>sex.sh</code>, establishing persistence via systemd services.</li>
+                        <li><strong>Web Shells:</strong> Advanced exploits are deploying in-memory Next.js web shells.</li>
                     </ul>
-                    <h3>Wireshark Analysis</h3>
-                    <p>I filtered for <code>dns.flags.response == 0</code> (queries only) and sorted by Length. The malicious traffic stood out immediately as 200+ byte queries to a domain registered 2 days ago.</p>
-                `
-            },
-            4: {
-                title: "Zero-Day Watch: The New Outlook Exploit",
-                date: "Dec 10, 2025 | Emerging Threat",
-                content: `
-                    <p>A new critical vulnerability (CVE-2025-XXXX) allows attackers to capture NTLM hashes just by sending an email. The user does not even need to open the email; the Outlook Preview Pane triggers the exploit.</p>
-                    <h3>How it works</h3>
-                    <p>The email contains a specially crafted sound file path that points to an external SMB share controlled by the attacker. When Outlook tries to play the "reminder" sound, it automatically authenticates to the attacker's server, handing over the user's NTLM hash.</p>
+
+                    <h3>SOC Analyst Hunt Guide</h3>
+                    <p>If you are monitoring React or Next.js workloads, hunt for these indicators:</p>
+                    <ul>
+                        <li><strong>File System:</strong> Creation of hidden directories like <code>$HOME/.systemd-utils</code>.</li>
+                        <li><strong>Process Execution:</strong> <code>wget</code> or <code>cURL</code> commands initiated directly by web server processes.</li>
+                        <li><strong>Network:</strong> Outbound connections to known bad IPs (e.g., <code>45.76.155[.]14</code>) or domains like <code>reactcdn.windowserrorapis[.]com</code>.</li>
+                    </ul>
+
                     <h3>Mitigation</h3>
-                    <p>Immediate fix: Block outbound SMB (Port 445) at the perimeter firewall. Long term: Apply the Microsoft patch and disable NTLM where possible in favor of Kerberos.</p>
-                `
-            },
-            5: {
-                title: "TryHackMe: Enterprise Phishing Analysis",
-                date: "Nov 15, 2025 | Writeup",
-                content: `
-                    <p>Phishing remains the #1 entry point for breaches. In this THM room, I dissected a spear-phishing email targeting an HR department.</p>
-                    <h3>Header Analysis</h3>
-                    <p>The "From" address said <code>support@microsoft.com</code>, but the <strong>Return-Path</strong> showed <code>mailer@evil-server.xyz</code>. Additionally, the SPF check failed (SoftFail), indicating the sender was not authorized to send mail for Microsoft.</p>
-                    <h3>Attachment Forensics</h3>
-                    <p>The email contained an <code>invoice.docm</code> (Macro-enabled Word doc). I used <code>oletools</code> (specifically <code>olevba</code>) to extract the VBA code without opening the file. The script attempted to run a PowerShell command to download a second-stage payload from a C2 server.</p>
+                    <p><strong>Patch Immediately:</strong> Update React Server Components to version 19.2.3 or higher. If patching isn't possible immediately, deploy WAF rules to block the exploit payloads.</p>
                 `
             }
         };
@@ -459,11 +441,8 @@
                 const title = item.querySelector('h2, h3').innerText.toLowerCase();
                 const excerpt = item.querySelector('p').innerText.toLowerCase();
                 
-                // Reset categories when searching to avoid confusion
-                // (Optional: you can combine filters, but keeping it simple for now)
-                
                 if (title.includes(term) || excerpt.includes(term)) {
-                    item.style.display = ""; // Reset to CSS default (grid/flex/block)
+                    item.style.display = ""; 
                 } else {
                     item.style.display = "none";
                 }
