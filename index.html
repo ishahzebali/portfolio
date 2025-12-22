@@ -3,9 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shahzeb Ali | SOC Analyst & Pentester</title>
+    
+    <!-- --- PRIMARY SEO --- -->
+    <title>Shahzeb Ali | SOC Analyst & Pentester | Abu Dhabi</title>
+    <meta name="description" content="Portfolio of Shahzeb Ali, a Cybersecurity Analyst and Penetration Tester based in Abu Dhabi. Specializing in SOC operations, Splunk, Blue Team defense, and Bug Bounty hunting.">
+    <meta name="keywords" content="Shahzeb Ali, SOC Analyst, Pentester, Cybersecurity Abu Dhabi, Blue Team, Red Team, Splunk, Bug Bounty, YesWeHack, Network Security">
+    <meta name="author" content="Shahzeb Ali">
+    <link rel="canonical" href="https://shahsmen.com/">
+
+    <!-- --- OPEN GRAPH / LINKEDIN / FACEBOOK --- -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shahsmen.com/">
+    <meta property="og:title" content="Shahzeb Ali | SOC Analyst & Pentester">
+    <meta property="og:description" content="I bridge the gap between Blue Team defense and Red Team offense. Check out my security research and portfolio.">
+    <meta property="og:image" content="assets/images/profile.jpg">
+
+    <!-- --- TWITTER / X --- -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://shahsmen.com/">
+    <meta property="twitter:title" content="Shahzeb Ali | SOC Analyst & Pentester">
+    <meta property="twitter:description" content="Cybersecurity Analyst based in Abu Dhabi. Specializing in Threat Intel and Vulnerability Research.">
+    <meta property="twitter:image" content="assets/images/profile.jpg">
+
     <link rel="icon" href="assets/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- --- GOOGLE STRUCTURED DATA (JSON-LD) --- -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Shahzeb Ali",
+      "jobTitle": "SOC Analyst & Penetration Tester",
+      "url": "https://shahsmen.com",
+      "image": "https://shahsmen.com/assets/images/profile.jpg",
+      "sameAs": [
+        "https://www.linkedin.com/in/ishahzebali",
+        "https://github.com/ishahzebali",
+        "https://twitter.com/ishahzebali"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Abu Dhabi",
+        "addressCountry": "UAE"
+      },
+      "alumniOf": "Lahore Garrison University"
+    }
+    </script>
+
     <style>
         :root {
             --bg-dark: #0b162a;
@@ -207,7 +252,7 @@
             margin-top: 20px;
             width: 100%;
             max-width: 500px;
-            border-radius: 10px;
+            border-radius: 4px;
             border: 1px solid rgba(197, 160, 130, 0.2);
             opacity: 0.9;
             transition: 0.3s;
@@ -226,6 +271,7 @@
         footer {
             text-align: center; padding: 20px; color: var(--text-muted);
             font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: auto;
         }
 
         @keyframes fadeInUp {
@@ -263,9 +309,9 @@
             <a href="#about" onclick="toggleMenu()">About</a>
             <a href="#expertise" onclick="toggleMenu()">Expertise</a>
             <a href="#projects" onclick="toggleMenu()">Projects</a>
-            <a href="blog.html" class="highlight">Blog</a> 
+            <a href="blog.html">Blog</a>
             <a href="#contact" onclick="toggleMenu()">Contact</a>
-            <a href="assets/resume/SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+            <a href="SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer" class="highlight">Resume</a>
         </div>
     </nav>
 
@@ -278,6 +324,7 @@
                 I am a <b>Cybersecurity Analyst</b> and <b>Penetration Tester</b> based in Abu Dhabi. 
                 I specialize in bridging the gap between <span class="highlight">Blue Team</span> defense and <span class="highlight">Red Team</span> offense to build resilient security postures.
             </p>
+            <p style="font-family: monospace; color: var(--accent-gold); margin-top: 10px;">"Men of the King"</p>
             <a href="#projects" class="btn btn-fill">Check my work</a>
         </div>
         
@@ -312,8 +359,8 @@
                     <h4><i class="fas fa-certificate"></i> Certifications</h4>
                     <ul class="cert-list">
                         <li><i class="fas fa-shield-alt"></i> SOC L1 (TryHackMe)</li>
-                        <li><i class="fas fa-user-secret"></i> CyberSecurity 101</li>
                         <li><i class="fas fa-lock"></i> Pre-Security (TryHackMe)</li>
+                        <li><i class="fas fa-user-secret"></i> CyberSecurity 101</li>
                         <li><i class="fab fa-python"></i> Python (Codedex)</li>
                         <li><i class="fas fa-terminal"></i> Bash Scripting (CodeAcademy)</li>
                     </ul>
@@ -450,8 +497,6 @@
         </div>
 
     </section>
-
-    <!-- Removed Section Blog from Home Page since it's now on a separate page -->
 
     <section id="contact" class="container">
         <div class="contact-box">

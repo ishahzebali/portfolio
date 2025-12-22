@@ -3,9 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Insights | SHAHSMEN Blog</title>
+    
+    <!-- --- PRIMARY SEO --- -->
+    <title>Security Insights | SHAHSMEN Blog | Vulnerability Research</title>
+    <meta name="description" content="Cybersecurity research by Shahzeb Ali. In-depth analysis of CVE-2025-55182 (React2Shell), Deezer IDOR vulnerability, and threat intelligence.">
+    <meta name="keywords" content="Cybersecurity Blog, CVE Analysis, Bug Bounty Writeups, IDOR Vulnerability, React2Shell, Threat Intel, Shahzeb Ali">
+    <meta name="author" content="Shahzeb Ali">
+    <link rel="canonical" href="https://shahsmen.com/blog.html">
+
+    <!-- --- OPEN GRAPH / LINKEDIN --- -->
+    <meta property="og:type" content="blog">
+    <meta property="og:url" content="https://shahsmen.com/blog.html">
+    <meta property="og:title" content="SHAHSMEN Security Insights">
+    <meta property="og:description" content="Technical breakdowns of recent vulnerabilities and bug bounty findings.">
+    <meta property="og:image" content="assets/images/logo.png">
+
     <link rel="icon" href="assets/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- --- GOOGLE STRUCTURED DATA (JSON-LD) --- -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "SHAHSMEN Security Insights",
+      "description": "Cybersecurity blog covering CVE analysis, bug bounty writeups, and threat intelligence.",
+      "publisher": {
+        "@type": "Person",
+        "name": "Shahzeb Ali",
+        "url": "https://shahsmen.com"
+      }
+    }
+    </script>
+
     <style>
         /* --- REUSING CORE THEME --- */
         :root {
@@ -114,6 +144,7 @@
             background: var(--bg-card); border-radius: 12px; overflow: hidden;
             display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 50px;
             border: 1px solid rgba(197, 160, 130, 0.1);
+            /* Important for JS search toggle */
             display: grid; 
         }
         .featured-img {
@@ -343,7 +374,7 @@ Host: www.deezer.com
 Content-Type: application/json
 
 {
-  "playlist_id": 1457xxxxxxx,
+  "playlist_id": 14575894321,
   "lang": "en",
   "nb": 50,
   "start": 0,
@@ -354,7 +385,7 @@ Content-Type: application/json
                     <pre><code>{
   "results": {
     "DATA": {
-      "PLAYLIST_ID": "14575xxxxxx",
+      "PLAYLIST_ID": "14575894321",
       "TITLE": "demo testing",
       "STATUS": 1,
       "DESCRIPTION": "for idor check",
