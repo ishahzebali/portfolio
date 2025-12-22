@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Sector Not Found</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0b162a;
+            --text-main: #e6f1ff;
+            --text-muted: #8892b0;
+            --accent-gold: #c5a082;
+            --accent-hover: #d4af37;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 8rem;
+            margin: 0;
+            color: var(--bg-dark);
+            -webkit-text-stroke: 2px var(--accent-gold); /* Outline text effect */
+            opacity: 0.5;
+            font-family: monospace;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: rgba(197, 160, 130, 0.1);
+            color: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        .icon-container {
+            font-size: 4rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="icon-container">
+            <i class="fas fa-radar"></i>
+        </div>
+        <h1>404</h1>
+        <h2>Target Not Located</h2>
+        <p>
+            The resource you are looking for has been moved, deleted, or never existed. 
+            This anomaly has been logged in our system.
+        </p>
+        <a href="index.html" class="btn"><i class="fas fa-arrow-left"></i> Return to Base</a>
+    </div>
+
+</body>
+</html>
