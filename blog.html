@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- --- PRIMARY SEO --- -->
-    <title>Security Insights | SHAHSMEN Blog | Vulnerability Research</title>
-    <meta name="description" content="Cybersecurity research by Shahzeb Ali. In-depth analysis of CVE-2025-55182 (React2Shell), Deezer IDOR vulnerability, and threat intelligence.">
-    <meta name="keywords" content="Cybersecurity Blog, CVE Analysis, Bug Bounty Writeups, IDOR Vulnerability, React2Shell, Threat Intel, Shahzeb Ali">
+    <title>Cybersecurity Blog | Vulnerability Research & Writeups | SHAHSMEN</title>
+    <meta name="description" content="Expert cybersecurity insights by Shahzeb Ali. Featuring deep dives into CVE-2025-55182, Deezer IDOR discoveries, Linux privilege escalation, and SIEM detection engineering.">
+    <meta name="keywords" content="Cybersecurity Blog, Bug Bounty Writeups, CVE Analysis, React2Shell, IDOR Vulnerability, Linux Privilege Escalation, SIEM Detection Rules, Shahzeb Ali, SOC Analyst">
     <meta name="author" content="Shahzeb Ali">
     <link rel="canonical" href="https://shahsmen.com/blog.html">
 
     <!-- --- OPEN GRAPH / LINKEDIN --- -->
     <meta property="og:type" content="blog">
     <meta property="og:url" content="https://shahsmen.com/blog.html">
-    <meta property="og:title" content="SHAHSMEN Security Insights">
-    <meta property="og:description" content="Technical breakdowns of recent vulnerabilities and bug bounty findings.">
+    <meta property="og:title" content="SHAHSMEN Security Insights | Expert Cybersecurity Blog">
+    <meta property="og:description" content="Technical breakdowns of critical vulnerabilities, bug bounty wins, and defensive security strategies.">
     <meta property="og:image" content="assets/images/logo.png">
 
     <link rel="icon" href="assets/images/favicon.png" type="image/png">
@@ -32,7 +32,27 @@
         "@type": "Person",
         "name": "Shahzeb Ali",
         "url": "https://shahsmen.com"
-      }
+      },
+      "blogPost": [
+        {
+            "@type": "BlogPosting",
+            "headline": "Disclosure of Private Playlist Metadata (Deezer IDOR)",
+            "datePublished": "2025-12-19",
+            "author": {
+                "@type": "Person",
+                "name": "Shahzeb Ali"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "headline": "React2Shell (CVE-2025-55182): Active Exploitation Analysis",
+            "datePublished": "2025-12-13",
+            "author": {
+                "@type": "Person",
+                "name": "Shahzeb Ali"
+            }
+        }
+      ]
     }
     </script>
 
@@ -202,6 +222,8 @@
 
         .featured-post {
             display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 50px;
+            /* Scroll Reveal Class added */
+            opacity: 0; transform: translateY(20px);
             animation: fadeInUp 1.5s ease forwards;
         }
         .featured-img {
@@ -227,6 +249,8 @@
         /* Post Card Specifics */
         .post-card {
             display: flex; flex-direction: column;
+            /* Scroll Reveal Class added */
+            opacity: 0; transform: translateY(20px);
             animation: fadeInUp 1.6s ease forwards;
         }
         
@@ -344,7 +368,7 @@
             <a href="index.html#projects">Projects</a>
             <a href="#" class="active-link">Blog</a>
             <a href="index.html#contact">Contact</a>
-            <a href="/assets/resume/SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+            <a href="assets/resume/SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
         </div>
     </nav>
 
@@ -369,6 +393,8 @@
             <button class="cat-btn active" data-filter="all">All</button>
             <button class="cat-btn" data-filter="bug-bounty">Bug Bounty</button>
             <button class="cat-btn" data-filter="cve">Threat Intel</button>
+            <button class="cat-btn" data-filter="red-team">Red Team</button>
+            <button class="cat-btn" data-filter="blue-team">Blue Team</button>
         </div>
 
         <!-- LIST CONTAINER (Hides when reading a post) -->
@@ -405,6 +431,32 @@
                             Deep dive into the CVSS 10.0 RCE in React Server Components. Analysis of active campaigns dropping MINOCAT tunnelers and XMRig miners.
                         </p>
                         <a onclick="openPost(2)" class="read-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 3: Privilege Escalation (New) -->
+                <div class="post-card searchable-item" data-category="red-team">
+                    <div class="post-body">
+                        <span class="badge badge-red">Red Team</span>
+                        <div class="post-date">Dec 01, 2025</div>
+                        <h3 class="post-title">The Art of Privilege Escalation: From User to Root</h3>
+                        <p class="post-excerpt">
+                            Mastering the climb. Exploring common Linux misconfigurations, SUID binaries, and kernel exploits to elevate privileges in a compromised environment.
+                        </p>
+                        <a onclick="openPost(3)" class="read-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 4: SIEM Detection (New) -->
+                <div class="post-card searchable-item" data-category="blue-team">
+                    <div class="post-body">
+                        <span class="badge badge-blue">Blue Team</span>
+                        <div class="post-date">Nov 25, 2025</div>
+                        <h3 class="post-title">SIEM 101: Building Your First Detection Rule</h3>
+                        <p class="post-excerpt">
+                            Moving from logs to alerts. A practical guide to crafting effective detection rules in Splunk and ELK to spot malicious activity like brute-force attacks.
+                        </p>
+                        <a onclick="openPost(4)" class="read-btn">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
@@ -522,6 +574,39 @@ Content-Type: application/json
 
                     <h3>Mitigation</h3>
                     <p><strong>Patch Immediately:</strong> Update React Server Components to version 19.2.3 or higher. If patching isn't possible immediately, deploy WAF rules to block the exploit payloads.</p>
+                `
+            },
+            3: {
+                title: "The Art of Privilege Escalation: From User to Root",
+                date: "Dec 01, 2025 | Red Team",
+                content: `
+                    <p>Gaining initial access is only the first step. To truly compromise a system, you often need root privileges. This post explores common Linux privilege escalation vectors.</p>
+                    <h3>1. Kernel Exploits</h3>
+                    <p>Old kernels are a goldmine. Using <code>uname -a</code> can reveal the kernel version. If it's outdated, tools like <strong>DirtyCOW</strong> or <strong>PwnKit</strong> (CVE-2021-4034) might provide an instant root shell.</p>
+                    <h3>2. SUID Binaries</h3>
+                    <p>Binaries with the SUID bit set run with the privileges of the file owner (often root). Find them using: <code>find / -perm -4000 2>/dev/null</code>. If a binary like <code>nmap</code> or <code>vim</code> has SUID set, you can often spawn a root shell.</p>
+                    <h3>3. Misconfigured Cron Jobs</h3>
+                    <p>If a cron job runs a script that you can write to, you can simply add a reverse shell payload to it. The system will execute your malicious code with the privileges of the cron user (usually root).</p>
+                    <h3>Tools of the Trade</h3>
+                    <p>Automate your enumeration with scripts like <strong>LinPEAS</strong> or <strong>LinEnum</strong>. They highlight potential vectors in bright colors, saving you hours of manual searching.</p>
+                `
+            },
+            4: {
+                title: "SIEM 101: Building Your First Detection Rule",
+                date: "Nov 25, 2025 | Blue Team",
+                content: `
+                    <p>A Security Information and Event Management (SIEM) system collects logs from everywhere. But logs are useless without rules to detect threats.</p>
+                    <h3>The Scenario: SSH Brute Force</h3>
+                    <p>Imagine an attacker trying to guess your SSH password. This generates multiple "Failed password" events in <code>/var/log/auth.log</code>.</p>
+                    <h3>The Logic</h3>
+                    <p>We want to detect: <strong>Multiple failed logins</strong> from the <strong>same IP</strong> within a <strong>short time window</strong>.</p>
+                    <h3>Splunk Query Example</h3>
+                    <pre><code>index=linux_logs sourcetype=syslog "Failed password"
+| stats count by src_ip
+| where count > 5</code></pre>
+                    <p>This simple query counts failed attempts by source IP. If the count exceeds 5, it triggers an alert. You can refine this by adding a time window (e.g., <code>earliest=-5m</code>).</p>
+                    <h3>Refining the Rule</h3>
+                    <p>To reduce false positives, you might whitelist internal IP ranges or increase the threshold. The goal is high-fidelity alerts that don't fatigue the SOC team.</p>
                 `
             }
         };
