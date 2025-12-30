@@ -14,12 +14,20 @@
             --accent-gold: #c5a082;
             --accent-hover: #d4af37;
             --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            /* LIQUID GLASS VARIABLES */
+            --glass-bg: rgba(17, 34, 64, 0.6); 
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(16px) saturate(180%);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --glass-radius: 16px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-dark);
+            background: radial-gradient(circle at 50% 50%, #1a2c4e 0%, #0b162a 90%);
             color: var(--text-main);
             font-family: var(--font-main);
             height: 100vh;
@@ -28,26 +36,42 @@
             justify-content: center;
             text-align: center;
             overflow: hidden;
+            position: relative; /* For ripples */
         }
 
         .container {
             max-width: 600px;
-            padding: 40px;
+            padding: 50px;
+            
+            /* GLASS CARD */
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: var(--glass-radius);
+            
+            position: relative;
+            z-index: 10;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         h1 {
             font-size: 8rem;
             margin: 0;
-            color: var(--bg-dark);
-            -webkit-text-stroke: 2px var(--accent-gold); /* Outline text effect */
-            opacity: 0.5;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--accent-gold);
+            opacity: 0.3;
             font-family: monospace;
+            line-height: 1;
         }
 
         h2 {
             font-size: 2rem;
             color: var(--text-main);
             margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         p {
@@ -69,22 +93,61 @@
         }
 
         .btn:hover {
-            background: rgba(197, 160, 130, 0.1);
-            color: var(--accent-hover);
-            border-color: var(--accent-hover);
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(197, 160, 130, 0.3);
         }
 
         .icon-container {
             font-size: 4rem;
             color: var(--accent-gold);
             margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+            position: relative;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+        /* Radar Pulse Animation */
+        .icon-container::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            border-radius: 50%;
+            border: 2px solid var(--accent-gold);
+            animation: pulse 2s infinite;
+            opacity: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- RIPPLE EFFECT --- */
+        .ripple {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            animation: rippleAnim 0.6s linear forwards;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            z-index: 5;
+        }
+
+        @keyframes rippleAnim {
+            0% { width: 0; height: 0; opacity: 0.8; }
+            100% { width: 150px; height: 150px; opacity: 0; border-width: 0; }
         }
     </style>
 </head>
@@ -98,10 +161,28 @@
         <h2>Target Not Located</h2>
         <p>
             The resource you are looking for has been moved, deleted, or never existed. 
-            This anomaly has been logged in our system.
+            This anomaly has been logged for analysis.
         </p>
         <a href="index.html" class="btn"><i class="fas fa-arrow-left"></i> Return to Base</a>
     </div>
+
+    <script>
+        // --- LIQUID RIPPLE EFFECT ---
+        document.body.addEventListener('click', function (e) {
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+            
+            // Handle coordinates properly
+            ripple.style.left = `${e.clientX}px`;
+            ripple.style.top = `${e.clientY}px`;
+            
+            document.body.appendChild(ripple);
+            
+            ripple.addEventListener('animationend', function() {
+                ripple.remove();
+            });
+        });
+    </script>
 
 </body>
 </html>

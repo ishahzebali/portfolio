@@ -40,22 +40,32 @@
         /* --- REUSING CORE THEME --- */
         :root {
             --bg-dark: #0b162a;
-            --bg-card: #112240;
             --text-main: #e6f1ff;
             --text-muted: #8892b0;
             --accent-gold: #c5a082;
             --accent-hover: #d4af37;
             --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            /* LIQUID GLASS VARIABLES */
+            --glass-bg: rgba(17, 34, 64, 0.6); 
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(16px) saturate(180%);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --glass-radius: 16px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             background-color: var(--bg-dark);
+            /* Matching Gradient Background */
+            background: radial-gradient(circle at 50% 0%, #1a2c4e 0%, #0b162a 80%);
             color: var(--text-main);
             font-family: var(--font-main);
             line-height: 1.6;
             overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
@@ -64,10 +74,14 @@
         nav {
             display: flex; justify-content: space-between; align-items: center;
             height: 80px; padding: 0 50px;
-            background: rgba(11, 22, 42, 0.95);
-            backdrop-filter: blur(10px);
+            
+            /* Glass Navbar */
+            background: rgba(11, 22, 42, 0.7); 
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--glass-border);
+            
             position: fixed; width: 100%; top: 0; z-index: 1000;
-            border-bottom: 1px solid rgba(197, 160, 130, 0.1);
         }
 
         .logo { 
@@ -89,27 +103,38 @@
         .blog-header {
             padding: 160px 0 80px;
             text-align: center;
-            background: radial-gradient(circle at top, #1c355e 0%, var(--bg-dark) 70%);
+            /* Enhanced gradient */
+            background: radial-gradient(circle at 50% 50%, rgba(197, 160, 130, 0.1) 0%, transparent 60%);
         }
         .blog-header h1 {
             font-size: 3rem; color: var(--text-main); margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease forwards;
         }
         .blog-header p {
             color: var(--accent-gold); font-family: monospace; font-size: 1.1rem;
+            animation: fadeInUp 1s ease forwards;
         }
 
         /* --- SEARCH BAR --- */
         .search-container {
             max-width: 600px; margin: 0 auto 50px; position: relative;
+            animation: fadeInUp 1.2s ease forwards;
         }
         .search-input {
             width: 100%; padding: 15px 20px;
-            background: var(--bg-card); border: 1px solid rgba(197, 160, 130, 0.3);
+            
+            /* Glass Search Input */
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            
             border-radius: 30px; color: var(--text-main); font-size: 1rem;
             outline: none; transition: 0.3s;
         }
         .search-input:focus {
-            border-color: var(--accent-gold); box-shadow: 0 0 15px rgba(197, 160, 130, 0.1);
+            border-color: var(--accent-gold); 
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(197, 160, 130, 0.1);
         }
         .search-icon {
             position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
@@ -124,6 +149,7 @@
         /* --- CATEGORIES --- */
         .categories {
             display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap;
+            animation: fadeInUp 1.4s ease forwards;
         }
         .cat-btn {
             padding: 8px 20px; border: 1px solid var(--accent-gold);
@@ -139,21 +165,53 @@
             display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;
         }
 
-        /* --- FEATURED CARD --- */
+        /* --- FEATURED & STANDARD CARD STYLES --- */
+        .featured-post, .post-card {
+            /* Liquid Glass Style */
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: var(--glass-radius);
+            
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        /* Hover Glow Effect */
+        .featured-post::before, .post-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: 0.5s;
+            pointer-events: none;
+        }
+        .featured-post:hover::before, .post-card:hover::before {
+            left: 100%;
+        }
+
+        .featured-post:hover, .post-card:hover { 
+            transform: translateY(-7px) scale(1.01); 
+            border-color: rgba(197, 160, 130, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
         .featured-post {
-            background: var(--bg-card); border-radius: 12px; overflow: hidden;
             display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 50px;
-            border: 1px solid rgba(197, 160, 130, 0.1);
-            /* Important for JS search toggle */
-            display: grid; 
+            animation: fadeInUp 1.5s ease forwards;
         }
         .featured-img {
-            background: #1a2c4e; /* Placeholder color */
+            background: rgba(0,0,0,0.2); 
             min-height: 300px;
             display: flex; align-items: center; justify-content: center;
             color: var(--text-muted); font-size: 3rem;
         }
         .featured-content { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        
         .badge {
             display: inline-block; padding: 5px 12px; border-radius: 4px;
             font-size: 0.8rem; font-weight: bold; margin-bottom: 15px;
@@ -166,12 +224,11 @@
         .featured-content h2 { font-size: 2rem; margin-bottom: 15px; color: var(--text-main); line-height: 1.2; }
         .featured-content p { color: var(--text-muted); margin-bottom: 25px; }
 
-        /* --- STANDARD CARD --- */
+        /* Post Card Specifics */
         .post-card {
-            background: var(--bg-card); border-radius: 10px; overflow: hidden;
-            transition: 0.3s; border: 1px solid transparent; display: flex; flex-direction: column;
+            display: flex; flex-direction: column;
+            animation: fadeInUp 1.6s ease forwards;
         }
-        .post-card:hover { transform: translateY(-7px); border-color: var(--accent-gold); }
         
         .post-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
         .post-date { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; font-family: monospace; }
@@ -181,24 +238,32 @@
         .read-btn {
             color: var(--accent-gold); font-weight: 600; font-size: 0.9rem;
             display: flex; align-items: center; gap: 8px; cursor: pointer;
+            transition: 0.3s;
         }
         .read-btn:hover { color: var(--accent-hover); gap: 12px; }
 
         /* --- BLOG VIEWER (Single Post) --- */
         .blog-viewer {
-            display: none; /* Hidden by default */
-            background: var(--bg-card);
+            display: none; 
+            
+            /* Glass Style for Viewer */
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: var(--glass-radius);
+            
             padding: 50px;
-            border-radius: 12px;
-            border: 1px solid rgba(197, 160, 130, 0.1);
             animation: fadeIn 0.5s ease;
         }
 
         .viewer-back {
             display: inline-block; margin-bottom: 30px;
             color: var(--accent-gold); font-weight: bold; cursor: pointer;
+            transition: 0.3s;
         }
-        .viewer-back:hover { color: var(--text-main); }
+        .viewer-back:hover { color: var(--text-main); transform: translateX(-5px); }
         
         .viewer-title { font-size: 2.5rem; color: var(--text-main); margin-bottom: 10px; }
         .viewer-meta { font-family: monospace; color: var(--text-muted); margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
@@ -210,6 +275,31 @@
         .viewer-content li { margin-bottom: 10px; }
         .viewer-content pre { background: #08101e; padding: 15px; border-radius: 6px; overflow-x: auto; margin-bottom: 20px; border: 1px solid rgba(197, 160, 130, 0.1); }
 
+        /* --- RIPPLE EFFECT --- */
+        .ripple {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none; 
+            animation: rippleAnim 0.6s linear forwards;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            z-index: 9999;
+        }
+
+        @keyframes rippleAnim {
+            0% { width: 0; height: 0; opacity: 0.8; }
+            100% { width: 100px; height: 100px; opacity: 0; border-width: 0; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -225,7 +315,7 @@
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             nav { padding: 0 20px; }
-            .nav-links { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; width: 100%; background: var(--bg-card); padding: 20px; text-align: center; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; width: 100%; background: var(--bg-dark); padding: 20px; text-align: center; } /* Mobile menu needs solid BG */
             .nav-links.active { display: flex; }
             .mobile-toggle { display: block; }
             .featured-post { grid-template-columns: 1fr; }
@@ -254,7 +344,7 @@
             <a href="index.html#projects">Projects</a>
             <a href="#" class="active-link">Blog</a>
             <a href="index.html#contact">Contact</a>
-            <a href="assets/resume/SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+            <a href="/assets/resume/SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
         </div>
     </nav>
 
@@ -298,7 +388,7 @@
                     <div class="meta" style="color: var(--accent-gold); font-family: monospace; font-size: 0.9rem; margin-bottom: 20px;">
                         <i class="far fa-clock"></i> Dec 19, 2025 &nbsp;|&nbsp; Status: Resolved
                     </div>
-                    <a onclick="openPost(1)" class="btn" style="width: fit-content; border: 1px solid var(--accent-gold); color: var(--accent-gold); padding: 10px 25px; border-radius: 4px; cursor: pointer;">Read Full Report</a>
+                    <a onclick="openPost(1)" class="read-btn" style="width: fit-content; cursor: pointer;">Read Full Report <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -503,6 +593,24 @@ Content-Type: application/json
                         }
                     }
                 });
+            });
+        });
+
+        // --- LIQUID RIPPLE EFFECT ---
+        document.body.addEventListener('click', function (e) {
+            // Create ripple element
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+            
+            // Set position based on click
+            ripple.style.left = `${e.pageX}px`;
+            ripple.style.top = `${e.pageY}px`;
+            
+            document.body.appendChild(ripple);
+            
+            // Remove after animation
+            ripple.addEventListener('animationend', function() {
+                ripple.remove();
             });
         });
     </script>
