@@ -66,6 +66,14 @@
             --glass-blur: blur(16px) saturate(180%);
             --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             --glass-radius: 16px;
+
+            /* ANIMATION VARS FOR GLIDE */
+            --lerp-0: 1; 
+            --lerp-1: calc(sin(50deg));
+            --lerp-2: calc(sin(45deg));
+            --lerp-3: calc(sin(35deg));
+            --lerp-4: calc(sin(25deg));
+            --lerp-5: calc(sin(15deg));
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -159,6 +167,7 @@
         .nav-links a:hover { color: var(--accent-gold); }
         .mobile-toggle { display: none; font-size: 1.5rem; color: var(--accent-gold); cursor: pointer; }
 
+        /* --- HERO --- */
         .hero {
             min-height: 100vh;
             display: flex; align-items: center;
@@ -192,6 +201,7 @@
             filter: grayscale(0%);
         }
 
+        /* --- ABOUT & SKILLS --- */
         .about-grid {
             display: grid; grid-template-columns: 2fr 1fr; gap: 50px;
             align-items: start;
@@ -207,7 +217,7 @@
             content: '▹'; position: absolute; left: 0; color: var(--accent-gold);
         }
 
-        /* --- GLASS CARDS & ANIMATIONS --- */
+        /* --- CARDS & ANIMATIONS --- */
         .cert-card, .domain-card, .project-card, .contact-box {
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
@@ -301,7 +311,7 @@
         }
         .project-img:hover { opacity: 1; transform: scale(1.02); }
 
-        /* --- CONTACT BOX UPDATED --- */
+        /* --- CONTACT BOX --- */
         .contact-box {
             text-align: center; 
             margin: 0 auto;
@@ -324,6 +334,117 @@
             margin-top: auto;
         }
 
+        /* --- GLIDE REVEAL SECRET CODE CSS --- */
+        /* Scoped to #secret-zone so it doesn't break the portfolio layout */
+        
+        #secret-zone {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(11, 22, 42, 0.5);
+            overflow: hidden;
+            padding: 6rem 1rem;
+            margin: 2rem 0;
+        }
+
+        /* The grid background effect for the secret zone */
+        #secret-zone::before {
+            --line: rgba(197, 160, 130, 0.1); /* Gold low opacity */
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            background:
+                linear-gradient(90deg, var(--line) 1px, transparent 1px 10vmin) 0 -5vmin / 10vmin 10vmin,
+                linear-gradient(var(--line) 1px, transparent 1px 10vmin) 0 -5vmin / 10vmin 10vmin;
+            mask: linear-gradient(-15deg, transparent 30%, white);
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        #secret-zone p {
+            font-size: 1.5rem;
+            text-align: center;
+            background: linear-gradient(var(--text-main), var(--text-muted));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .code {
+            font-size: 3rem;
+            display: flex;
+            flex-wrap: nowrap;
+            color: var(--accent-gold);
+            border-radius: 1rem;
+            background: var(--glass-bg); /* Use glass variable */
+            border: 1px solid var(--glass-border);
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .code:hover {
+            cursor: grab;
+        }
+
+        .digit {
+            display: flex;
+            height: 100%;
+            padding: 4rem 1rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .digit:focus-visible {
+            outline-color: var(--accent-gold);
+            outline-offset: 1rem;
+        }
+
+        .digit span {
+            scale: calc(var(--active, 0) + 0.5);
+            filter: blur(calc((1 - var(--active, 0)) * 1rem));
+            transition: scale calc(((1 - var(--active, 0)) + 0.2) * 1s), filter calc(((1 - var(--active, 0)) + 0.2) * 1s);
+            display: block;
+        }
+
+        .digit:first-of-type { padding-left: 3rem; }
+        .digit:last-of-type { padding-right: 3rem; }
+
+        /* Complex Lerp Animation Logic */
+        .digit:is(:hover, :focus-visible) {
+            --active: var(--lerp-0);
+        }
+        .digit:is(:hover, :focus-visible) + .digit,
+        .digit:has(+ .digit:is(:hover, :focus-visible)) {
+            --active: var(--lerp-1);
+        }
+        .digit:is(:hover, :focus-visible) + .digit + .digit,
+        .digit:has(+ .digit + .digit:is(:hover, :focus-visible)) {
+            --active: var(--lerp-2);
+        }
+        .digit:is(:hover, :focus-visible) + .digit + .digit + .digit,
+        .digit:has(+ .digit + .digit + .digit:is(:hover, :focus-visible)) {
+            --active: var(--lerp-3);
+        }
+        .digit:is(:hover, :focus-visible) + .digit + .digit + .digit + .digit,
+        .digit:has(+ .digit + .digit + .digit + .digit:is(:hover, :focus-visible)) {
+            --active: var(--lerp-4);
+        }
+        .digit:is(:hover, :focus-visible) + .digit + .digit + .digit + .digit + .digit,
+        .digit:has(+ .digit + .digit + .digit + .digit + .digit:is(:hover, :focus-visible)) {
+            --active: var(--lerp-5);
+        }
+
+
         /* --- RIPPLE EFFECT STYLES --- */
         .ripple {
             position: absolute;
@@ -333,24 +454,15 @@
             border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            pointer-events: none; /* Let clicks pass through */
+            pointer-events: none;
             animation: rippleAnim 0.6s linear forwards;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
             z-index: 9999;
         }
 
         @keyframes rippleAnim {
-            0% {
-                width: 0;
-                height: 0;
-                opacity: 0.8;
-            }
-            100% {
-                width: 100px;
-                height: 100px;
-                opacity: 0;
-                border-width: 0;
-            }
+            0% { width: 0; height: 0; opacity: 0.8; }
+            100% { width: 100px; height: 100px; opacity: 0; border-width: 0; }
         }
 
         /* --- SCROLL ANIMATIONS --- */
@@ -382,6 +494,12 @@
             .about-grid { grid-template-columns: 1fr; }
             .hero { align-items: center; justify-content: center; text-align: center; flex-direction: column; }
             .hero-image { display: block; margin-top: 30px; max-width: 250px; }
+            
+            /* Responsive adjust for the secret code */
+            .code { font-size: 1.5rem; }
+            .digit { padding: 2rem 0.5rem; }
+            .digit:first-of-type { padding-left: 1rem; }
+            .digit:last-of-type { padding-right: 1rem; }
         }
     </style>
 </head>
@@ -389,7 +507,7 @@
 
     <nav>
         <div class="logo">
-            <img src="assets/images/logo.png" alt="SHAHSMEN Logo">
+            <img src="assets/images/logo.png" alt="SHAHSMEN Logo" onerror="this.style.display='none'">
             <span>SHAHSMEN</span>
         </div>
         <div class="mobile-toggle" onclick="toggleMenu()">
@@ -525,7 +643,7 @@
                 <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Successfully uncovered and reported a <b>logic vulnerability</b> in a major music streaming platform (<b>Deezer</b>), resulting in a patch and bounty reward.</li>
                 <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Utilized <b>Burp Suite</b> to intercept and analyze HTTP traffic, identifying discrepancies between client-side controls and server-side validation.</li>
             </ul>
-            <img src="assets/images/mistersavant-reward-card-2025_12_19_20_53_11.png" alt="Bug Bounty Proof or Badge" class="project-img">
+            <img src="assets/images/mistersavant-reward-card-2025_12_19_20_53_11.png" alt="Bug Bounty Proof or Badge" class="project-img" onerror="this.style.display='none'">
             <div class="tags">
                 <span class="tag">Bug Bounty</span>
                 <span class="tag">Web App Security</span>
@@ -568,23 +686,31 @@
                 <span class="tag">Risk Analysis</span>
             </div>
         </div>
+    </section>
 
-        <div class="project-card">
-            <div class="project-top">
-                <h3>Deloitte Australia Cyber Job Simulation</h3>
-                <span class="project-type">Forage Job Simulation</span>
-            </div>
-            <p class="project-date">December 2025</p>
-            <ul class="project-desc">
-                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Supported a client during a critical breach by analyzing web activity logs.</li>
-                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Successfully identified suspicious user activity to contain the incident.</li>
-            </ul>
-            <div class="tags">
-                <span class="tag">Log Analysis</span>
-                <span class="tag">Incident Response</span>
-            </div>
-        </div>
-
+    <!-- --- GLIDE REVEAL SECRET CODE SECTION --- -->
+    <section id="secret-zone" class="reveal">
+        <p>Hover To Decrypt System Access</p>
+        <ul class="code">
+            <li tabindex="0" class="digit">
+                <span>5</span>
+            </li>
+            <li tabindex="0" class="digit">
+                <span>Y</span>
+            </li>
+            <li tabindex="0" class="digit">
+                <span>5</span>
+            </li>
+            <li tabindex="0" class="digit">
+                <span>7</span>
+            </li>
+            <li tabindex="0" class="digit">
+                <span>3</span>
+            </li>
+            <li tabindex="0" class="digit">
+                <span>M</span>
+            </li>
+        </ul>
     </section>
 
     <section id="contact" class="container reveal">
@@ -611,7 +737,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 Shahzeb Ali | SHAHSMEN. All rights reserved.</p>
+        <p>&copy; 2026 Shahzeb Ali | SHAHSMEN. All rights reserved.</p>
     </footer>
 
     <script>
