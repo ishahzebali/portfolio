@@ -5,38 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- --- PRIMARY SEO --- -->
-    <title>Shahzeb Ali | SOC Analyst & Pentester | Abu Dhabi</title>
-    <meta name="description" content="Portfolio of Shahzeb Ali, a Cybersecurity Analyst and Penetration Tester based in Abu Dhabi. Specializing in SOC operations, Splunk, Blue Team defense, and Bug Bounty hunting.">
-    <meta name="keywords" content="Shahzeb Ali, SOC Analyst, Pentester, Cybersecurity Abu Dhabi, Blue Team, Red Team, Splunk, Bug Bounty, YesWeHack, Network Security">
+    <!-- Optimized Title: Keyword rich + Location + Brand -->
+    <title>Shahzeb Ali | Cybersecurity SOC Analyst & Pentester | Abu Dhabi</title>
+    
+    <!-- Optimized Meta Description: Includes CTA and LSI keywords -->
+    <meta name="description" content="Portfolio of Shahzeb Ali, a top-tier Cybersecurity Analyst and Penetration Tester in Abu Dhabi. Expert in Blue Team defense, Splunk operations, and Vulnerability Assessment. View my security projects.">
+    
+    <meta name="keywords" content="Shahzeb Ali, SOC Analyst Abu Dhabi, Penetration Tester UAE, Cybersecurity Consultant, Blue Team, Red Team, Splunk Expert, Bug Bounty Hunter, YesWeHack, Network Defense">
     <meta name="author" content="Shahzeb Ali">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b162a">
+    
     <link rel="canonical" href="https://shahsmen.com/">
 
+    <!-- --- PERFORMANCE PRECONNECTS --- -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <!-- --- OPEN GRAPH / LINKEDIN / FACEBOOK --- -->
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="profile">
     <meta property="og:url" content="https://shahsmen.com/">
     <meta property="og:title" content="Shahzeb Ali | SOC Analyst & Pentester">
-    <meta property="og:description" content="I bridge the gap between Blue Team defense and Red Team offense. Check out my security research and portfolio.">
-    <meta property="og:image" content="assets/images/profile.jpg">
+    <meta property="og:description" content="Bridging the gap between Blue Team defense and Red Team offense. Secure your digital frontier today.">
+    <meta property="og:image" content="https://shahsmen.com/assets/images/profile.jpg">
+    <meta property="og:locale" content="en_US">
 
     <!-- --- TWITTER / X --- -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://shahsmen.com/">
-    <meta property="twitter:title" content="Shahzeb Ali | SOC Analyst & Pentester">
-    <meta property="twitter:description" content="Cybersecurity Analyst based in Abu Dhabi. Specializing in Threat Intel and Vulnerability Research.">
-    <meta property="twitter:image" content="assets/images/profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ishahzebali">
+    <meta name="twitter:creator" content="@ishahzebali">
+    <meta name="twitter:title" content="Shahzeb Ali | Cybersecurity Specialist">
+    <meta name="twitter:description" content="Cybersecurity Analyst based in Abu Dhabi. Specializing in Threat Intel and Vulnerability Research.">
+    <meta name="twitter:image" content="https://shahsmen.com/assets/images/profile.jpg">
 
     <link rel="icon" href="assets/images/favicon.png" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- --- GOOGLE STRUCTURED DATA (JSON-LD) --- -->
+    <!-- Async loading for icons to improve First Contentful Paint -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- --- GOOGLE STRUCTURED DATA (JSON-LD) - ENHANCED --- -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Shahzeb Ali",
+      "alternateName": "Shahsmen",
       "jobTitle": "SOC Analyst & Penetration Tester",
       "url": "https://shahsmen.com",
       "image": "https://shahsmen.com/assets/images/profile.jpg",
+      "description": "Cybersecurity Analyst and Penetration Tester based in Abu Dhabi, specializing in SOC operations and offensive security.",
       "sameAs": [
         "https://www.linkedin.com/in/ishahzebali",
         "https://github.com/ishahzebali",
@@ -47,7 +64,11 @@
         "addressLocality": "Abu Dhabi",
         "addressCountry": "UAE"
       },
-      "alumniOf": "Lahore Garrison University"
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Lahore Garrison University"
+      },
+      "knowsAbout": ["Cybersecurity", "Penetration Testing", "Splunk", "Network Security", "Ethical Hacking", "SOC Operations"]
     }
     </script>
 
@@ -92,8 +113,25 @@
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        h1, h2, h3 { color: var(--text-main); font-weight: 700; }
-        h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1rem; }
+        /* Typography improvements for SEO Structure */
+        h1, h2, h3, h4 { color: var(--text-main); font-weight: 700; }
+        
+        h1 { 
+            font-size: 3.5rem; 
+            line-height: 1.1; 
+            margin-bottom: 0.5rem; 
+        }
+        
+        /* New class for the slogan to avoid multiple H1s */
+        .hero-slogan {
+            font-size: 3rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
         h2 { font-size: 2rem; margin-bottom: 2rem; position: relative; display: inline-block; }
         h2::after {
             content: ''; display: block; width: 60px; height: 3px; 
@@ -105,6 +143,7 @@
 
         .highlight { color: var(--accent-gold); }
 
+        /* Buttons */
         .btn {
             display: inline-block;
             padding: 12px 28px;
@@ -131,6 +170,7 @@
             color: var(--bg-dark);
         }
 
+        /* Layout */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -138,11 +178,9 @@
         }
 
         section { padding: 100px 0; }
+        #expertise { padding-bottom: 250px; }
 
-        #expertise {
-            padding-bottom: 250px;
-        }
-
+        /* Navigation */
         nav {
             display: flex; justify-content: space-between; align-items: center;
             height: 80px; padding: 0 50px;
@@ -163,8 +201,14 @@
         }
 
         .nav-links { display: flex; gap: 30px; }
-        .nav-links a { font-size: 0.9rem; color: var(--text-main); }
+        .nav-links a { font-size: 0.9rem; color: var(--text-main); position: relative; }
         .nav-links a:hover { color: var(--accent-gold); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 0;
+            background: var(--accent-gold); transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
         .mobile-toggle { display: none; font-size: 1.5rem; color: var(--accent-gold); cursor: pointer; }
 
         /* --- HERO --- */
@@ -189,6 +233,7 @@
         }
         .hero-image img {
             width: 100%;
+            height: auto; /* Preserve aspect ratio */
             border-radius: 16px;
             border: 2px solid var(--accent-gold);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
@@ -304,6 +349,7 @@
             margin-top: 20px;
             width: 100%;
             max-width: 500px;
+            height: auto;
             border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             opacity: 0.9;
@@ -335,8 +381,6 @@
         }
 
         /* --- GLIDE REVEAL SECRET CODE CSS --- */
-        /* Scoped to #secret-zone so it doesn't break the portfolio layout */
-        
         #secret-zone {
             position: relative;
             display: flex;
@@ -352,9 +396,8 @@
             margin: 2rem 0;
         }
 
-        /* The grid background effect for the secret zone */
         #secret-zone::before {
-            --line: rgba(197, 160, 130, 0.1); /* Gold low opacity */
+            --line: rgba(197, 160, 130, 0.1);
             content: "";
             height: 100%;
             width: 100%;
@@ -363,10 +406,7 @@
                 linear-gradient(90deg, var(--line) 1px, transparent 1px 10vmin) 0 -5vmin / 10vmin 10vmin,
                 linear-gradient(var(--line) 1px, transparent 1px 10vmin) 0 -5vmin / 10vmin 10vmin;
             mask: linear-gradient(-15deg, transparent 30%, white);
-            top: 0;
-            left: 0;
-            z-index: -1;
-            pointer-events: none;
+            top: 0; left: 0; z-index: -1; pointer-events: none;
         }
 
         #secret-zone p {
@@ -386,15 +426,12 @@
             flex-wrap: nowrap;
             color: var(--accent-gold);
             border-radius: 1rem;
-            background: var(--glass-bg); /* Use glass variable */
+            background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             justify-content: center;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
-
-        .code:hover {
-            cursor: grab;
-        }
+        .code:hover { cursor: grab; }
 
         .digit {
             display: flex;
@@ -403,11 +440,7 @@
             cursor: pointer;
             position: relative;
         }
-
-        .digit:focus-visible {
-            outline-color: var(--accent-gold);
-            outline-offset: 1rem;
-        }
+        .digit:focus-visible { outline-color: var(--accent-gold); outline-offset: 1rem; }
 
         .digit span {
             scale: calc(var(--active, 0) + 0.5);
@@ -415,41 +448,26 @@
             transition: scale calc(((1 - var(--active, 0)) + 0.2) * 1s), filter calc(((1 - var(--active, 0)) + 0.2) * 1s);
             display: block;
         }
-
         .digit:first-of-type { padding-left: 3rem; }
         .digit:last-of-type { padding-right: 3rem; }
 
-        /* Complex Lerp Animation Logic */
-        .digit:is(:hover, :focus-visible) {
-            --active: var(--lerp-0);
-        }
+        .digit:is(:hover, :focus-visible) { --active: var(--lerp-0); }
         .digit:is(:hover, :focus-visible) + .digit,
-        .digit:has(+ .digit:is(:hover, :focus-visible)) {
-            --active: var(--lerp-1);
-        }
+        .digit:has(+ .digit:is(:hover, :focus-visible)) { --active: var(--lerp-1); }
         .digit:is(:hover, :focus-visible) + .digit + .digit,
-        .digit:has(+ .digit + .digit:is(:hover, :focus-visible)) {
-            --active: var(--lerp-2);
-        }
+        .digit:has(+ .digit + .digit:is(:hover, :focus-visible)) { --active: var(--lerp-2); }
         .digit:is(:hover, :focus-visible) + .digit + .digit + .digit,
-        .digit:has(+ .digit + .digit + .digit:is(:hover, :focus-visible)) {
-            --active: var(--lerp-3);
-        }
+        .digit:has(+ .digit + .digit + .digit:is(:hover, :focus-visible)) { --active: var(--lerp-3); }
         .digit:is(:hover, :focus-visible) + .digit + .digit + .digit + .digit,
-        .digit:has(+ .digit + .digit + .digit + .digit:is(:hover, :focus-visible)) {
-            --active: var(--lerp-4);
-        }
+        .digit:has(+ .digit + .digit + .digit + .digit:is(:hover, :focus-visible)) { --active: var(--lerp-4); }
         .digit:is(:hover, :focus-visible) + .digit + .digit + .digit + .digit + .digit,
-        .digit:has(+ .digit + .digit + .digit + .digit + .digit:is(:hover, :focus-visible)) {
-            --active: var(--lerp-5);
-        }
+        .digit:has(+ .digit + .digit + .digit + .digit + .digit:is(:hover, :focus-visible)) { --active: var(--lerp-5); }
 
 
         /* --- RIPPLE EFFECT STYLES --- */
         .ripple {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 20px; height: 20px;
             background: transparent;
             border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 50%;
@@ -488,14 +506,13 @@
         @media (max-width: 768px) {
             nav { padding: 0 20px; }
             h1 { font-size: 2.5rem; }
+            .hero-slogan { font-size: 2rem; }
             .nav-links { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; width: 100%; background: var(--bg-dark); padding: 20px; text-align: center; }
             .nav-links.active { display: flex; }
             .mobile-toggle { display: block; }
             .about-grid { grid-template-columns: 1fr; }
             .hero { align-items: center; justify-content: center; text-align: center; flex-direction: column; }
             .hero-image { display: block; margin-top: 30px; max-width: 250px; }
-            
-            /* Responsive adjust for the secret code */
             .code { font-size: 1.5rem; }
             .digit { padding: 2rem 0.5rem; }
             .digit:first-of-type { padding-left: 1rem; }
@@ -505,12 +522,13 @@
 </head>
 <body>
 
-    <nav>
-        <div class="logo">
-            <img src="assets/images/logo.png" alt="SHAHSMEN Logo" onerror="this.style.display='none'">
+    <nav aria-label="Main Navigation">
+        <a href="#" class="logo" aria-label="Shahsmen Home">
+            <!-- Added width/height for CLS prevention -->
+            <img src="assets/images/logo.png" alt="SHAHSMEN Cybersecurity Logo" width="45" height="45" onerror="this.style.display='none'">
             <span>SHAHSMEN</span>
-        </div>
-        <div class="mobile-toggle" onclick="toggleMenu()">
+        </a>
+        <div class="mobile-toggle" onclick="toggleMenu()" aria-label="Toggle Menu">
             <i class="fas fa-bars"></i>
         </div>
         <div class="nav-links" id="navLinks">
@@ -519,222 +537,217 @@
             <a href="#projects" onclick="toggleMenu()">Projects</a>
             <a href="blog.html">Blog</a>
             <a href="#contact" onclick="toggleMenu()">Contact</a>
-            <a href="/assets/resume/SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer" class="highlight">Resume</a>
+            <!-- Added aria-label for accessibility -->
+            <a href="/assets/resume/SOC analyst resume.pdf" target="_blank" rel="noopener noreferrer" class="highlight" aria-label="Download SOC Analyst Resume">Resume</a>
         </div>
     </nav>
 
-    <section class="hero container">
-        <div class="hero-content">
-            <span class="hero-subtitle">Hi, my name is</span>
-            <h1>Shahzeb Ali.</h1>
-            <h1 style="color: var(--text-muted); font-size: 3rem;">I secure digital frontiers.</h1>
-            <p>
-                I am a <b>Cybersecurity Analyst</b> and <b>Penetration Tester</b> based in Abu Dhabi. 
-                I specialize in bridging the gap between <span class="highlight">Blue Team</span> defense and <span class="highlight">Red Team</span> offense to build resilient security postures.
-            </p>
-            <a href="#projects" class="btn btn-fill">Check my work</a>
-        </div>
-        
-        <div class="hero-image">
-            <img src="assets/images/profile.jpg" alt="Shahzeb Ali" onerror="this.src='https://ui-avatars.com/api/?name=Shahzeb+Ali&background=c5a082&color=0b162a&size=300'">
-        </div>
-    </section>
-
-    <section id="about" class="container reveal">
-        <h2>About Me</h2>
-        <div class="about-grid">
-            <div>
+    <main>
+        <section class="hero container">
+            <div class="hero-content">
+                <span class="hero-subtitle">Hi, my name is</span>
+                <!-- Corrected Heading Hierarchy: Only one H1 -->
+                <h1>Shahzeb Ali.</h1>
+                <!-- Converted secondary H1 to stylized p class -->
+                <p class="hero-slogan">I secure digital frontiers.</p>
                 <p>
-                    Hello! I'm Shahzeb, an entry-level SOC Analyst with a Bachelor's in <b>Computer Science</b> from Lahore Garrison University. My journey in cybersecurity is driven by a curiosity for how systems break—and how to forge them stronger.
+                    I am a <b>Cybersecurity Analyst</b> and <b>Penetration Tester</b> based in Abu Dhabi. 
+                    I specialize in bridging the gap between <span class="highlight">Blue Team</span> defense and <span class="highlight">Red Team</span> offense to build resilient security postures for UAE enterprises.
                 </p>
-                <p>
-                    I have hands-on experience in <b>incident triage</b>, <b>log analysis</b>, and executing <b>offensive security</b> assessments. I don't just watch the alerts; I understand the attack vectors behind them.
-                </p>
-                <p>Here are a few technologies I've been working with recently:</p>
-                <ul class="skill-list">
-                    <li>Splunk & ELK Stack</li>
-                    <li>Metasploit & Nmap</li>
-                    <li>Python & Bash</li>
-                    <li>Wireshark</li>
-                    <li>Cortex & TheHive</li>
-                    <li>MITRE ATT&CK</li>
-                </ul>
+                <a href="#projects" class="btn btn-fill" aria-label="View my security portfolio">Check my work</a>
             </div>
             
-            <div class="cert-column">
-                <div class="cert-card">
-                    <h4><i class="fas fa-certificate"></i> Certifications</h4>
-                    <ul class="cert-list">
-                        <li><i class="fas fa-shield-alt"></i> SOC L1 (TryHackMe)</li>
-                        <li><i class="fas fa-user-secret"></i> CyberSecurity 101</li>
-                        <li><i class="fas fa-lock"></i> Pre-Security (TryHackMe)</li>
-                        <li><i class="fab fa-python"></i> Python (Codedex)</li>
-                        <li><i class="fas fa-terminal"></i> Bash Scripting (CodeAcademy)</li>
+            <div class="hero-image">
+                <!-- Added detailed alt text for SEO image search -->
+                <img src="assets/images/profile.jpg" width="350" height="350" alt="Shahzeb Ali - Cybersecurity SOC Analyst in Abu Dhabi" onerror="this.src='https://ui-avatars.com/api/?name=Shahzeb+Ali&background=c5a082&color=0b162a&size=300'">
+            </div>
+        </section>
+
+        <section id="about" class="container reveal">
+            <h2>About Me</h2>
+            <div class="about-grid">
+                <div>
+                    <p>
+                        Hello! I'm Shahzeb, an entry-level SOC Analyst with a Bachelor's in <b>Computer Science</b> from Lahore Garrison University. My journey in cybersecurity is driven by a curiosity for how systems break—and how to forge them stronger.
+                    </p>
+                    <p>
+                        I have hands-on experience in <b>incident triage</b>, <b>log analysis</b>, and executing <b>offensive security</b> assessments. I don't just watch the alerts; I understand the attack vectors behind them to protect data integrity.
+                    </p>
+                    <p>Here are a few technologies I've been working with recently:</p>
+                    <ul class="skill-list">
+                        <li>Splunk & ELK Stack</li>
+                        <li>Metasploit & Nmap</li>
+                        <li>Python & Bash</li>
+                        <li>Wireshark</li>
+                        <li>Cortex & TheHive</li>
+                        <li>MITRE ATT&CK Framework</li>
                     </ul>
                 </div>
+                
+                <div class="cert-column">
+                    <div class="cert-card">
+                        <h4><i class="fas fa-certificate"></i> Certifications</h4>
+                        <ul class="cert-list">
+                            <li><i class="fas fa-shield-alt"></i> SOC L1 (TryHackMe)</li>
+                            <li><i class="fas fa-user-secret"></i> CyberSecurity 101</li>
+                            <li><i class="fas fa-lock"></i> Pre-Security (TryHackMe)</li>
+                            <li><i class="fab fa-python"></i> Python (Codedex)</li>
+                            <li><i class="fas fa-terminal"></i> Bash Scripting (CodeAcademy)</li>
+                        </ul>
+                    </div>
 
-                <div class="thm-badge-container">
-                    <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=5126748" style='border:none; width: 100%; height: 250px; overflow: hidden;'></iframe>
+                    <div class="thm-badge-container">
+                        <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=5126748" title="TryHackMe Profile Badge" style='border:none; width: 100%; height: 250px; overflow: hidden;' loading="lazy"></iframe>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="expertise" class="container reveal">
-        <h2>Technical Arsenal</h2>
-        <div class="domains-grid">
-            
-            <div class="domain-card">
-                <div class="domain-icon"><i class="fas fa-shield-virus"></i></div>
-                <h3>Blue Team Operations</h3>
-                <p>Proactive monitoring and threat mitigation utilizing industry-standard SIEM and EDR solutions.</p>
-                <div class="tags">
-                    <span class="tag">Incident Triage</span>
-                    <span class="tag">Splunk</span>
-                    <span class="tag">MS Sentinel</span>
-                    <span class="tag">TheHive</span>
-                    <span class="tag">Cortex</span>
-                    <span class="tag">Phishing Analysis</span>
+        <section id="expertise" class="container reveal">
+            <h2>Technical Arsenal</h2>
+            <div class="domains-grid">
+                
+                <div class="domain-card">
+                    <div class="domain-icon"><i class="fas fa-shield-virus"></i></div>
+                    <h3>Blue Team Operations</h3>
+                    <p>Proactive monitoring and threat mitigation utilizing industry-standard SIEM and EDR solutions.</p>
+                    <div class="tags">
+                        <span class="tag">Incident Triage</span>
+                        <span class="tag">Splunk</span>
+                        <span class="tag">MS Sentinel</span>
+                        <span class="tag">TheHive</span>
+                        <span class="tag">Cortex</span>
+                        <span class="tag">Phishing Analysis</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="domain-card">
-                <div class="domain-icon"><i class="fas fa-dragon"></i></div>
-                <h3>Red Team Tactics</h3>
-                <p>Simulating adversary behaviors to identify vulnerabilities before they can be exploited.</p>
+                <div class="domain-card">
+                    <div class="domain-icon"><i class="fas fa-dragon"></i></div>
+                    <h3>Red Team Tactics</h3>
+                    <p>Simulating adversary behaviors to identify vulnerabilities before they can be exploited.</p>
+                    <div class="tags">
+                        <span class="tag">Penetration Testing</span>
+                        <span class="tag">Nmap</span>
+                        <span class="tag">Burp Suite</span>
+                        <span class="tag">Metasploit</span>
+                        <span class="tag">Hydra</span>
+                        <span class="tag">OWASP Top 10</span>
+                    </div>
+                </div>
+
+                <div class="domain-card">
+                    <div class="domain-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>Network & Systems</h3>
+                    <p>Deep understanding of the infrastructure that supports—and exposes—modern enterprises.</p>
+                    <div class="tags">
+                        <span class="tag">TCP/IP</span>
+                        <span class="tag">Pyramid of Pain</span>
+                        <span class="tag">Linux CLI</span>
+                        <span class="tag">Windows Internals</span>
+                        <span class="tag">Active Directory</span>
+                        <span class="tag">DNS/HTTP</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projects" class="container reveal">
+            <h2>Security Engagements</h2>
+
+            <div class="project-card">
+                <div class="project-top">
+                    <h3>Independent Security Researcher | Yes WeHack</h3>
+                    <span class="project-type">Bug Bounty Hunting</span>
+                </div>
+                <p class="project-date">November 2025 - Present</p>
+                <ul class="project-desc">
+                    <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Conducted <b>black-box security testing</b> on various web applications, focusing on critical OWASP Top 10 vulnerabilities like Broken Access Control and IDOR.</li>
+                    <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Successfully uncovered and reported a <b>logic vulnerability</b> in a major music streaming platform (<b>Deezer</b>), resulting in a patch and bounty reward.</li>
+                    <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Utilized <b>Burp Suite</b> to intercept and analyze HTTP traffic, identifying discrepancies between client-side controls and server-side validation.</li>
+                </ul>
+                <!-- Added loading lazy for performance -->
+                <img src="assets/images/mistersavant-reward-card-2025_12_19_20_53_11.png" alt="YesWeHack Bug Bounty Reward Confirmation" class="project-img" loading="lazy" onerror="this.style.display='none'">
                 <div class="tags">
-                    <span class="tag">Penetration Testing</span>
-                    <span class="tag">Nmap</span>
+                    <span class="tag">Bug Bounty</span>
+                    <span class="tag">Web App Security</span>
                     <span class="tag">Burp Suite</span>
-                    <span class="tag">Metasploit</span>
-                    <span class="tag">Hydra</span>
-                    <span class="tag">OWASP Top 10</span>
+                    <span class="tag">Logic Vulnerabilities</span>
                 </div>
             </div>
 
-            <div class="domain-card">
-                <div class="domain-icon"><i class="fas fa-network-wired"></i></div>
-                <h3>Network & Systems</h3>
-                <p>Deep understanding of the infrastructure that supports—and exposes—modern enterprises.</p>
+            <div class="project-card">
+                <div class="project-top">
+                    <h3>Enterprise Phishing & Data Exfiltration Simulation</h3>
+                    <span class="project-type">TryHackMe Investigation</span>
+                </div>
+                <p class="project-date">December 2025</p>
+                <ul class="project-desc">
+                    <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Conducted a full-lifecycle investigation of a compromised endpoint, reconstructing the Cyber Kill Chain.</li>
+                    <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Analyzed <b>Sysmon logs</b> to detect "Living off the Land" (LotL) tactics, distinguishing malicious Robocopy use from benign noise.</li>
+                    <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Identified advanced activities including network reconnaissance via PowerView and stealthy data theft via <b>DNS Tunneling</b>.</li>
+                </ul>
                 <div class="tags">
-                    <span class="tag">TCP/IP</span>
-                    <span class="tag">Pyramid of Pain</span>
-                    <span class="tag">Linux CLI</span>
-                    <span class="tag">Windows Internals</span>
-                    <span class="tag">Active Directory</span>
-                    <span class="tag">DNS/HTTP</span>
+                    <span class="tag">Sysmon</span>
+                    <span class="tag">Forensics</span>
+                    <span class="tag">MITRE ATT&CK</span>
                 </div>
             </div>
 
-        </div>
-    </section>
-
-    <section id="projects" class="container reveal">
-        <h2>Security Engagements</h2>
-
-        <div class="project-card">
-            <div class="project-top">
-                <h3>Independent Security Researcher | Yes WeHack</h3>
-                <span class="project-type">Bug Bounty Hunting</span>
+            <div class="project-card">
+                <div class="project-top">
+                    <h3>Mastercard Cybersecurity Experience</h3>
+                    <span class="project-type">Forage Job Simulation</span>
+                </div>
+                <p class="project-date">December 2025</p>
+                <ul class="project-desc">
+                    <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Served as an analyst on the Security Awareness Team to identify and report phishing threats.</li>
+                    <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Analyzed business areas requiring robust security training and implemented new procedural safeguards.</li>
+                </ul>
+                <div class="tags">
+                    <span class="tag">Phishing Defense</span>
+                    <span class="tag">Security Awareness</span>
+                    <span class="tag">Risk Analysis</span>
+                </div>
             </div>
-            <p class="project-date">November 2025 - Present</p>
-            <ul class="project-desc">
-                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Conducted <b>black-box security testing</b> on various web applications, focusing on critical OWASP Top 10 vulnerabilities like Broken Access Control and IDOR.</li>
-                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Successfully uncovered and reported a <b>logic vulnerability</b> in a major music streaming platform (<b>Deezer</b>), resulting in a patch and bounty reward.</li>
-                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Utilized <b>Burp Suite</b> to intercept and analyze HTTP traffic, identifying discrepancies between client-side controls and server-side validation.</li>
+        </section>
+
+        <!-- --- GLIDE REVEAL SECRET CODE SECTION --- -->
+        <section id="secret-zone" class="reveal">
+            <p>Hover To Decrypt System Access</p>
+            <ul class="code">
+                <li tabindex="0" class="digit"><span>5</span></li>
+                <li tabindex="0" class="digit"><span>Y</span></li>
+                <li tabindex="0" class="digit"><span>5</span></li>
+                <li tabindex="0" class="digit"><span>7</span></li>
+                <li tabindex="0" class="digit"><span>3</span></li>
+                <li tabindex="0" class="digit"><span>M</span></li>
             </ul>
-            <img src="assets/images/mistersavant-reward-card-2025_12_19_20_53_11.png" alt="Bug Bounty Proof or Badge" class="project-img" onerror="this.style.display='none'">
-            <div class="tags">
-                <span class="tag">Bug Bounty</span>
-                <span class="tag">Web App Security</span>
-                <span class="tag">Burp Suite</span>
-                <span class="tag">Logic Vulnerabilities</span>
-            </div>
-        </div>
+        </section>
 
-        <div class="project-card">
-            <div class="project-top">
-                <h3>Enterprise Phishing & Data Exfiltration Simulation</h3>
-                <span class="project-type">TryHackMe Investigation</span>
-            </div>
-            <p class="project-date">December 2025</p>
-            <ul class="project-desc">
-                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Conducted a full-lifecycle investigation of a compromised endpoint, reconstructing the Cyber Kill Chain.</li>
-                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Analyzed <b>Sysmon logs</b> to detect "Living off the Land" (LotL) tactics, distinguishing malicious Robocopy use from benign noise.</li>
-                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Identified advanced activities including network reconnaissance via PowerView and stealthy data theft via <b>DNS Tunneling</b>.</li>
-            </ul>
-            <div class="tags">
-                <span class="tag">Sysmon</span>
-                <span class="tag">Forensics</span>
-                <span class="tag">MITRE ATT&CK</span>
-            </div>
-        </div>
+        <section id="contact" class="container reveal">
+            <div class="contact-box">
+                <p class="hero-subtitle">What's Next?</p>
+                <h2>Get In Touch</h2>
+                <p>
+                    I am currently based in Abu Dhabi and actively seeking opportunities in SOC Analysis and Penetration Testing. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                </p>
+                
+                <a href="mailto:shahzeb@shahsmen.com" class="btn btn-fill">Say Hello</a>
+                
+                <div style="margin-top: 2rem;">
+                    <p><i class="fas fa-phone-alt" style="color:var(--accent-gold)"></i> +971 58 611 2232</p>
+                    <p><i class="fas fa-envelope" style="color:var(--accent-gold)"></i> shahzeb@shahsmen.com</p>
+                </div>
 
-        <div class="project-card">
-            <div class="project-top">
-                <h3>Mastercard Cybersecurity Experience</h3>
-                <span class="project-type">Forage Job Simulation</span>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/ishahzebali" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.github.com/ishahzebali" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                    <a href="https://www.twitter.com/ishahzebali" target="_blank" rel="noopener noreferrer" aria-label="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                </div>
             </div>
-            <p class="project-date">December 2025</p>
-            <ul class="project-desc">
-                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Served as an analyst on the Security Awareness Team to identify and report phishing threats.</li>
-                <li><i class="fas fa-angle-right" style="color:var(--accent-gold)"></i> Analyzed business areas requiring robust security training and implemented new procedural safeguards.</li>
-            </ul>
-            <div class="tags">
-                <span class="tag">Phishing Defense</span>
-                <span class="tag">Security Awareness</span>
-                <span class="tag">Risk Analysis</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- --- GLIDE REVEAL SECRET CODE SECTION --- -->
-    <section id="secret-zone" class="reveal">
-        <p>Hover To Decrypt System Access</p>
-        <ul class="code">
-            <li tabindex="0" class="digit">
-                <span>5</span>
-            </li>
-            <li tabindex="0" class="digit">
-                <span>Y</span>
-            </li>
-            <li tabindex="0" class="digit">
-                <span>5</span>
-            </li>
-            <li tabindex="0" class="digit">
-                <span>7</span>
-            </li>
-            <li tabindex="0" class="digit">
-                <span>3</span>
-            </li>
-            <li tabindex="0" class="digit">
-                <span>M</span>
-            </li>
-        </ul>
-    </section>
-
-    <section id="contact" class="container reveal">
-        <div class="contact-box">
-            <p class="hero-subtitle">What's Next?</p>
-            <h2>Get In Touch</h2>
-            <p>
-                I am currently based in Abu Dhabi and actively seeking opportunities in SOC Analysis and Penetration Testing. Whether you have a question or just want to say hi, I'll try my best to get back to you!
-            </p>
-            
-            <a href="mailto:shahzeb@shahsmen.com" class="btn btn-fill">Say Hello</a>
-            
-            <div style="margin-top: 2rem;">
-                <p><i class="fas fa-phone-alt" style="color:var(--accent-gold)"></i> +971 58 611 2232</p>
-                <p><i class="fas fa-envelope" style="color:var(--accent-gold)"></i> shahzeb@shahsmen.com</p>
-            </div>
-
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/ishahzebali" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.github.com/ishahzebali" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.twitter.com/ishahzebali" target="_blank" rel="noopener noreferrer" title="Twitter"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <p>&copy; 2026 Shahzeb Ali | SHAHSMEN. All rights reserved.</p>
@@ -747,38 +760,34 @@
         }
 
         // --- SCROLL ANIMATION OBSERVER ---
-        window.addEventListener('scroll', reveal);
+        // Optimization: Use IntersectionObserver instead of scroll event listener for better performance
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
 
-        function reveal() {
-            var reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
 
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add('active');
-                } else {
-                    reveals[i].classList.remove('active');
-                }
-            }
-        }
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => observer.observe(el));
+        });
 
         // --- LIQUID RIPPLE EFFECT ---
+        // Keep this as it adds character, but optimized selection
         document.body.addEventListener('click', function (e) {
-            // Create ripple element
             const ripple = document.createElement('div');
             ripple.classList.add('ripple');
-            
-            // Set position based on click
-            // Use pageX/Y to account for scrolling
             ripple.style.left = `${e.pageX}px`;
             ripple.style.top = `${e.pageY}px`;
-            
             document.body.appendChild(ripple);
-            
-            // Remove after animation
             ripple.addEventListener('animationend', function() {
                 ripple.remove();
             });
