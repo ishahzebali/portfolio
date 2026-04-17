@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSp
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import Resume from './pages/Resume';
 import { 
   ShieldAlert, Terminal, Briefcase, GraduationCap, Award, 
   MapPin, Mail, Phone, ExternalLink, Linkedin, ChevronRight, 
@@ -781,6 +782,10 @@ export default function App() {
               <span className="text-blue-600 dark:text-blue-400">BLOG</span>
               <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
             </Link>
+            <Link to="/resume" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors relative group px-2">
+              <span>Resume</span>
+              <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
+            </Link>
             <a
               href="/assets/resume/SOC Analyst Resume.pdf"
               target="_blank"
@@ -856,6 +861,20 @@ export default function App() {
                     <ChevronRight className="w-4 h-4 text-blue-400 group-hover:translate-x-1 transition-all duration-200" />
                   </Link>
                 </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.21 }}
+                >
+                  <Link
+                    to="/resume"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white font-bold tracking-[0.15em] uppercase text-sm py-4 border-b border-slate-100 dark:border-white/[0.04] flex items-center justify-between group"
+                  >
+                    Resume
+                    <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-200" />
+                  </Link>
+                </motion.div>
                 <motion.a
                   href="/assets/resume/SOC Analyst Resume.pdf"
                   target="_blank"
@@ -894,6 +913,11 @@ export default function App() {
         <Route path="/blog/:id" element={
           <div className="relative z-10 pt-16">
             <BlogPost />
+          </div>
+        } />
+        <Route path="/resume" element={
+          <div className="relative z-10">
+            <Resume />
           </div>
         } />
       </Routes>
