@@ -540,6 +540,64 @@ const ElegantAvatar = ({ src }) => {
 // --- PORTFOLIO HOME CONTENT ---
 const PortfolioHome = () => (
   <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-36 pb-24 space-y-48" style={{ contain: 'layout' }}>
+    <Helmet>
+      <title>Shahzeb Ali | Cybersecurity Specialist | SOC Analyst & Purple Teamer</title>
+      <meta name="description" content="Professional portfolio of Shahzeb Ali, a SOC Analyst specializing in threat detection, incident response, and purple team operations. Exploring the intersection of offensive exploits and defensive resilience." />
+      <meta name="keywords" content="Shahzeb Ali, SOC Analyst, Cybersecurity Specialist, Purple Team, SIEM, Splunk, Microsoft Sentinel, Threat Hunting, Incident Response, Abu Dhabi, UAE" />
+      <link rel="canonical" href="https://shahsmen.com" />
+      
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://shahsmen.com" />
+      <meta property="og:title" content="Shahzeb Ali | Cybersecurity Specialist & SOC Analyst" />
+      <meta property="og:description" content="Professional cybersecurity portfolio and intelligence briefings. Expert in SIEM operations and threat detection." />
+      <meta property="og:image" content="https://shahsmen.com/assets/images/logo.png" />
+
+      {/* Twitter */}
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content="https://shahsmen.com" />
+      <meta property="twitter:title" content="Shahzeb Ali | Cybersecurity Specialist" />
+      <meta property="twitter:description" content="SOC Analyst & Purple Team Specialist. Defending digital perimeters via advanced threat detection." />
+      <meta property="twitter:image" content="https://shahsmen.com/assets/images/logo.png" />
+
+      {/* Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Shahzeb Ali",
+          "jobTitle": "SOC Analyst & Cybersecurity Specialist",
+          "description": "Results-driven SOC Analyst with over 2 years of experience in SIEM-based threat detection and incident response.",
+          "url": "https://shahsmen.com",
+          "sameAs": [
+            "https://linkedin.com/in/ishahzebali",
+            "https://shahsmen.com"
+          ],
+          "knowsAbout": [
+            "Cybersecurity",
+            "SOC Operations",
+            "Incident Response",
+            "SIEM",
+            "Splunk",
+            "Microsoft Sentinel",
+            "Threat Hunting",
+            "Purple Teaming"
+          ],
+          "worksFor": {
+            "@type": "Organization",
+            "name": "CureMD"
+          }
+        })}
+      </script>
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Shahzeb Ali Portfolio",
+          "url": "https://shahsmen.com"
+        })}
+      </script>
+    </Helmet>
     {/* HERO SECTION */}
     <section id="about" className="min-h-[80vh] flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 relative">
       <div className="flex-1 flex flex-col justify-center order-2 lg:order-1 z-10">

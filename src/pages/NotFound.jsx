@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ShieldAlert, Home, ArrowLeft } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const NotFound = () => {
   const navigate = useNavigate();
@@ -49,6 +50,10 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#060913] flex items-center justify-center px-6 font-sans relative overflow-hidden">
+      <Helmet>
+        <title>404 Detected | System Error | Shahzeb Ali</title>
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
 
       {/* Ambient glow */}
       <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-900/10 rounded-full blur-[120px] pointer-events-none" />
