@@ -748,10 +748,12 @@ export default function App() {
 
       <nav className={`fixed top-0 w-full z-50 transition-all duration-700 ${scrolled || mobileMenuOpen ? 'bg-white/95 dark:bg-[#060913]/95 backdrop-blur-2xl border-b border-slate-200 dark:border-white/[0.05] shadow-[0_10px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.4)]' : 'bg-transparent'} ${mobileMenuOpen ? 'py-4' : scrolled ? 'py-4' : 'py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center">
-          <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 group cursor-pointer relative overflow-hidden">
-            <div className="p-1.5 bg-blue-500/10 border border-blue-500/20 rounded-lg group-hover:bg-blue-500/20 transition-all">
-              <Shield className="w-5 h-5 text-blue-400 group-hover:text-blue-600 dark:text-blue-300" />
-            </div>
+          <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 group cursor-pointer">
+            <img
+              src="/assets/images/logo.png"
+              alt="SHAHSMEN"
+              className="h-9 w-9 object-contain group-hover:scale-110 transition-transform duration-300"
+            />
             <span className="tracking-widest">SA<span className="text-violet-400">.</span></span>
           </Link>
 
@@ -871,9 +873,11 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-24 relative z-10">
             <div className="space-y-8">
               <div className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-4">
-                <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.7, ease: "anticipate" }} className="p-3 bg-[#0A0F1C]/[0.02] dark:bg-white/[0.05] rounded-2xl border border-slate-200 dark:border-white/[0.05]">
-                  <Shield className="w-6 h-6 text-blue-400" />
-                </motion.div>
+                <img
+                  src="/assets/images/logo.png"
+                  alt="SHAHSMEN"
+                  className="h-12 w-12 object-contain"
+                />
                 <span className="tracking-tighter">SHAHZEB<span className="text-violet-400">.ALI</span></span>
               </div>
               <p className="text-slate-400/80 text-base leading-relaxed pr-4 font-medium">
