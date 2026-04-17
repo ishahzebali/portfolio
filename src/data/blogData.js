@@ -287,5 +287,122 @@ End Sub
       <h3>Conclusion</h3>
       <p>By treating security as a collaborative, iterative process rather than a static wall, we ensure that our defenses are grounded in reality, not just theory. That is the true value of a Purple Team approach.</p>
     `
+  },
+  {
+    id: 9,
+    title: "Active Directory Security: Hardening the Kingdom",
+    date: "March 05, 2026",
+    category: "blue-team",
+    badge: "Enterprise Security",
+    badgeType: "blue",
+    excerpt: "Why Active Directory remains the ultimate target for attackers. A strategic guide to hardening domain controllers and implementing tiered administration to prevent lateral movement.",
+    content: `
+      <p>Active Directory (AD) is the backbone of most corporate networks, and because it controls identity and access, it is the primary target for attackers after gaining initial access. If an attacker controls the Domain Controller (DC), they control the organization.</p>
+      
+      <h3>Common Attack Vectors</h3>
+      <p>Most AD compromises don't start with a complex exploit; they start with misconfigurations:</p>
+      <ul>
+          <li><strong>Kerberoasting:</strong> Stealing service account tickets to crack their passwords offline.</li>
+          <li><strong>AS-REP Roasting:</strong> Targeting accounts with "Do not require Kerberos preauthentication" enabled.</li>
+          <li><strong>Privileged Group Overload:</strong> Too many users in the "Domain Admins" group, violating the principle of least privilege.</li>
+      </ul>
+      
+      <h3>Strategic Hardening: The Tiered Model</h3>
+      <p>The most effective defense against AD lateral movement is the <strong>Microsoft Tiered Administration Model</strong>:</p>
+      <ul>
+          <li><strong>Tier 0:</strong> Highest level. Domain Controllers, Domain Admins, and identity management systems. Admins here *never* log into workstations or servers.</li>
+          <li><strong>Tier 1:</strong> Enterprise servers and applications.</li>
+          <li><strong>Tier 2:</strong> Workstations and user devices.</li>
+      </ul>
+      <p>By enforcing these boundaries, you ensure that if a Tier 2 workstation is compromised, the attacker cannot scrape the credentials of a Tier 0 admin who might have logged in to troubleshoot.</p>
+      
+      <h3>Blue Team Tip: Monitoring for DCSync</h3>
+      <p>Keep a close eye on <strong>DS-Replication-Get-Changes-All</strong> rights. An attacker with these rights can use the DCSync technique to dump the entire NTDS.dit database without touching the DC's memory, effectively stealing every password hash in the domain.</p>
+    `
+  },
+  {
+    id: 10,
+    title: "The Rise of AI-Driven Phishing: A Modern Threat",
+    date: "Feb 28, 2026",
+    category: "cve threat-intel",
+    badge: "Emerging Threat",
+    badgeType: "red",
+    excerpt: "How Large Language Models (LLMs) are being used to craft hyper-realistic, personalized phishing campaigns that bypass traditional email filters and user awareness training.",
+    content: `
+      <p>The days of "broken English" and obvious spelling errors in phishing emails are over. Modern threat actors are now leveraging Large Language Models (LLMs) to automate the delivery of sophisticated, highly personalized social engineering attacks at scale.</p>
+      
+      <h3>What has changed?</h3>
+      <p>Previously, a high-quality "spear-phishing" attack required hours of manual research on a target. Today, AI can:</p>
+      <ul>
+          <li><strong>Scrape LinkedIn/Social Media:</strong> Automatically gather context about a target's role, recent projects, and professional tone.</li>
+          <li><strong>Clone Writing Styles:</strong> Replicate the exact tone of a CEO or IT manager based on public memos or past emails.</li>
+          <li><strong>Generate Dynamic Payloads:</strong> Create unique, varying text for every recipient, making signature-based detection (which looks for identical phishing strings) much less effective.</li>
+      </ul>
+      
+      <h3>Vishing and Deepfakes</h3>
+      <p>Beyond text-based phishing, we are seeing a spike in <strong>AI Voice Cloning (Vishing)</strong>. Attackers only need a 30-second clip of a person's voice to clone it well enough to fool an employee over a brief phone call, often requesting "urgent" wire transfers or MFA resets.</p>
+      
+      <h3>Defensive Strategy</h3>
+      <p>Traditional awareness training (looking for typos) is no longer enough. Organizations must shift toward:</p>
+      <ul>
+          <li><strong>Strict Process-Based Controls:</strong> No sensitive action (wire transfer, password reset) should be performed via email or voice alone; out-of-band verification is mandatory.</li>
+          <li><strong>AI-Powered Security Filters:</strong> Using machine learning to detect anomalous writing patterns that "feel" artificial.</li>
+          <li><strong>Hardware MFA:</strong> Using FIDO2/Passkeys (like YubiKeys) to make "credential harvesting" pages useless, regardless of how convincing the phishing email is.</li>
+      </ul>
+    `
+  },
+  {
+    id: 11,
+    title: "Optimizing Microsoft Sentinel for SOC L1 Analysts",
+    date: "Feb 10, 2026",
+    category: "blue-team",
+    badge: "SOC Strategy",
+    badgeType: "blue",
+    excerpt: "A tactical guide to reducing alert fatigue in Azure Sentinel. How to use KQL functions, watchlists, and automation rules to surface the signals that truly matter.",
+    content: `
+      <p>As a SOC L1 analyst, I've spent thousands of hours in <strong>Microsoft Sentinel</strong>. If not tuned correctly, Sentinel can become a "wall of noise." The key to effective monitoring is moving beyond simple "IF activity THEN alert" logic.</p>
+      
+      <h3>1. Leveraging Watchlists for Context</h3>
+      <p>Instead of hardcoding "Expected IPs" into dozens of KQL rules, use <strong>Watchlists</strong>. This allows you to update a central list of authorized VPN ranges or VIP users without touching the underlying detection logic. It makes the SOC more agile and reduces false positives significantly.</p>
+      
+      <h3>2. The Power of KQL Functions</h3>
+      <p>Don't repeat yourself. If you have a complex logic for identifying "Anomalous Sign-ins from New Countries," save it as a <strong>Function</strong>. This allows other analysts to call your logic with one word (e.g., <code>GetAnomalousLogins()</code>) across multiple hunting queries.</p>
+      
+      <h3>3. Entity Mapping: The Key to Investigation</h3>
+      <p>Always ensure your Analytics Rules are mapping <strong>Entities</strong> (Accounts, IPs, Hosts) correctly. This allows Sentinel to automatically build a "Graph" of the incident, showing you how a single IP connected to multiple failed logins across different accounts, saving you 20 minutes of manual pivoting per case.</p>
+      
+      <h3>4. Use Automation for Suppression</h3>
+      <p>If a specific "Known Good" system triggers a "Potential Scanning" alert every Tuesday at 2 PM during a vulnerability scan, don't just close it. Build an <strong>Automation Rule</strong> to auto-resolve that specific incident if the source IP matches your scanner. Focus your human brain on the threats that *can't* be automated.</p>
+    `
+  },
+  {
+    id: 12,
+    title: "Exploiting Misconfigured S3 Buckets: A Common Cloud Flaw",
+    date: "Jan 15, 2026",
+    category: "bug-bounty",
+    badge: "Cloud Security",
+    badgeType: "gold",
+    excerpt: "A bug bounty hunter's perspective on identifying and exploiting public S3 buckets. Why technical 'defaults' are still one of the leading causes of massive data leaks.",
+    content: `
+      <p>Despite years of warnings, "Leaky S3 Buckets" remain one of the most common findings in bug bounty programs. When developers prioritize speed over security, they often leave cloud storage accessible to the public, inadvertently exposing TBs of sensitive data.</p>
+      
+      <h3>How I Find Them</h3>
+      <p>The first step is <strong>Subdomain Enumeration</strong> and <strong>Fuzzing</strong>. Tools like <code>ffuf</code> or <code>gobuster</code> pointing at common naming conventions (e.g., <code>company-prod-backup</code>, <code>test-data-internal</code>) often reveal the URL endpoints for these buckets.</p>
+      
+      <h3>Testing for Public Access</h3>
+      <p>Once a potential bucket URL is found (e.g., <code>https://target-dev.s3.amazonaws.com</code>), I use the AWS CLI to test permissions:</p>
+      <pre><code>aws s3 ls s3://target-dev --no-sign-request</code></pre>
+      <p>If the response lists files, the bucket has "List" permissions enabled for the world. The real "jackpot" is "Write" permission, which allows an attacker to upload their own malicious files, potentially leading to stored XSS or even remote code execution if the bucket hosts web assets.</p>
+      
+      <h3>The "Bypass" - Authenticated Users</h3>
+      <p>A common mistake developers make is setting permissions to <strong>"All Authenticated Users"</strong>. They assume this means "Users in my AWS account," but it actually means <strong>"Anyone with a valid AWS account"</strong> (including the attacker). This is a critical distinction that often leads to "Full Control" findings.</p>
+      
+      <h3>Remediation for Developers</h3>
+      <ol>
+          <li>Enable <strong>"Block Public Access"</strong> at the account level.</li>
+          <li>Use <strong>IAM Roles</strong> and <strong>Bucket Policies</strong> instead of ACLs (Legacy).</li>
+          <li>Implement <strong>VPC Endpoints</strong> so your S3 traffic never even touches the public internet.</li>
+      </ol>
+    `
   }
 ];
