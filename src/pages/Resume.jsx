@@ -134,10 +134,11 @@ const Resume = () => {
             </div>
           </div>
           <a
-            href="/assets/resume/Shahzeb Ali ATS Resume.pdf"
+            href="/assets/resume/Shahzeb%20Ali%20ATS%20Resume.pdf"
+            download="Shahzeb_Ali_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold tracking-[0.15em] uppercase rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(37,99,235,0.35)] hover:shadow-[0_0_30px_rgba(37,99,235,0.55)] hover:-translate-y-0.5 self-start md:self-auto"
+            className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold tracking-[0.15em] uppercase rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(37,99,235,0.35)] hover:shadow-[0_0_30px_rgba(37,99,235,0.55)] hover:-translate-y-0.5 self-start md:self-auto relative z-20 cursor-pointer"
           >
             <FileDown className="w-4 h-4" /> Download PDF
           </a>
