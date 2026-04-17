@@ -204,18 +204,18 @@ const MouseSpotlight = () => {
 
 const FadeInSection = ({ children, delay = 0, direction = "up" }) => {
   const directions = {
-    up: { y: 60, x: 0 },
-    down: { y: -60, x: 0 },
-    left: { x: 60, y: 0 },
-    right: { x: -60, y: 0 }
+    up: { y: 30, x: 0 },
+    down: { y: -30, x: 0 },
+    left: { x: 30, y: 0 },
+    right: { x: -30, y: 0 }
   };
 
   return (
     <motion.div
       initial={{ opacity: 0, ...directions[direction] }}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.9, delay: delay / 1000, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: "150px" }}
+      transition={{ duration: 0.5, delay: delay / 1000, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </motion.div>
@@ -517,7 +517,7 @@ const PortfolioHome = () => (
       </FadeInSection>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {RESUME_DATA.skills.map((skillGroup, idx) => (
-          <FadeInSection key={idx} delay={idx * 100}>
+          <FadeInSection key={idx} delay={idx * 60}>
             <TiltCard className="h-full">
               <div className="bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] backdrop-blur-2xl border border-slate-200 dark:border-white/[0.05] rounded-[2rem] p-8 hover:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.04] hover:border-blue-500/40 transition-all duration-700 group relative overflow-hidden shadow-2xl h-full flex flex-col">
                 <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/0 to-transparent group-hover:via-blue-500/80 transition-all duration-700"></div>
@@ -548,7 +548,7 @@ const PortfolioHome = () => (
       </FadeInSection>
       <div className="space-y-16 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-[2px] before:bg-gradient-to-b before:from-blue-500/50 before:via-slate-300 dark:before:via-white/[0.1] before:to-transparent">
         {RESUME_DATA.experience.map((job, idx) => (
-          <FadeInSection key={idx} delay={idx * 150} direction={idx % 2 === 0 ? "right" : "left"}>
+          <FadeInSection key={idx} delay={idx * 80} direction={idx % 2 === 0 ? "right" : "left"}>
             <div className="relative w-full group">
               
               {/* Elegant Timeline Dot */}
@@ -593,7 +593,7 @@ const PortfolioHome = () => (
       </FadeInSection>
       <div className="flex flex-col gap-16">
         {RESUME_DATA.projects.map((project, idx) => (
-          <FadeInSection key={idx} delay={idx * 150} direction="up">
+          <FadeInSection key={idx} delay={idx * 80} direction="up">
             <div className="group relative flex flex-col lg:flex-row gap-8 lg:flex-row lg:gap-16 border-t border-slate-200 dark:border-white/[0.05] pt-16">
               <div className="absolute top-0 left-0 w-1/3 h-[2px] bg-gradient-to-r from-blue-500/60 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 ease-out origin-left"></div>
               
