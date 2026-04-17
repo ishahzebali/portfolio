@@ -427,6 +427,7 @@ End Sub
           <li>Use <strong>IAM Roles</strong> and <strong>Bucket Policies</strong> instead of ACLs (Legacy).</li>
           <li>Implement <strong>VPC Endpoints</strong> so your S3 traffic never even touches the public internet.</li>
       </ol>
+    `
   },
   {
     id: 13,
