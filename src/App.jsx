@@ -8,7 +8,7 @@ import {
   MapPin, Mail, Phone, ExternalLink, Linkedin, ChevronRight, 
   Activity, Lock, Crosshair, Server, Database, Code, ShieldCheck,
   Bug, Eye, ArrowUpRight, Shield, Cpu, TerminalSquare, Key, Unlock, CheckCircle2, XCircle,
-  Sun, Moon
+  Sun, Moon, Menu, X
 } from 'lucide-react';
 
 // --- DATA ---
@@ -698,6 +698,7 @@ const PortfolioHome = () => (
 
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme') || 'dark';
@@ -743,35 +744,107 @@ export default function App() {
            style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)', backgroundSize: '32px 32px' }}>
       </div>
 
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-700 ${scrolled ? 'bg-white/90 dark:bg-[#060913]/90 backdrop-blur-2xl border-b border-slate-200 dark:border-white/[0.05] py-4 shadow-[0_10px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.4)]' : 'bg-transparent py-6'}`}>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-700 ${scrolled || mobileMenuOpen ? 'bg-white/95 dark:bg-[#060913]/95 backdrop-blur-2xl border-b border-slate-200 dark:border-white/[0.05] shadow-[0_10px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.4)]' : 'bg-transparent'} ${mobileMenuOpen ? 'py-4' : scrolled ? 'py-4' : 'py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center">
-          <Link to="/" className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 group cursor-pointer relative overflow-hidden">
+          <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 group cursor-pointer relative overflow-hidden">
             <div className="p-1.5 bg-blue-500/10 border border-blue-500/20 rounded-lg group-hover:bg-blue-500/20 transition-all">
               <Shield className="w-5 h-5 text-blue-400 group-hover:text-blue-600 dark:text-blue-300" />
             </div>
             <span className="tracking-widest">SA<span className="text-violet-400">.</span></span>
           </Link>
+
+          {/* Desktop Links */}
           <div className="hidden md:flex gap-10 text-sm font-bold tracking-[0.1em] uppercase items-center">
             {['About', 'Skills', 'Experience', 'Projects'].map((item) => (
-              <a key={item} href={`/#${item.toLowerCase()}`} className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-slate-900 dark:text-white transition-colors relative group">
+              <a key={item} href={`/#${item.toLowerCase()}`} className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors relative group">
                 {item}
                 <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-500 dark:bg-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
               </a>
             ))}
-            <Link to="/blog" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-slate-900 dark:text-white transition-colors relative group px-2">
+            <Link to="/blog" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors relative group px-2">
               <span className="text-blue-600 dark:text-blue-400">BLOG</span>
               <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
             </Link>
           </div>
-          <div className="flex items-center gap-4">
-            <button onClick={toggleTheme} className="p-2.5 rounded-full bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.1] hover:bg-slate-200 dark:hover:bg-[#0A0F1C]/[0.05] dark:bg-white/[0.1] text-slate-700 dark:text-slate-300 transition-colors shadow-sm">
+
+          {/* Right Controls */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="p-2.5 rounded-full bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.1] hover:bg-slate-200 dark:hover:bg-white/[0.1] text-slate-700 dark:text-slate-300 transition-colors shadow-sm"
+            >
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
-            <MagneticButton href={`mailto:${RESUME_DATA.personal.email}`} className="px-7 py-3 bg-slate-100 dark:bg-white/[0.03] hover:bg-blue-50 dark:hover:bg-blue-600/20 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/[0.1] hover:border-blue-500/50 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.4)] flex items-center gap-2 backdrop-blur-md">
+            <MagneticButton
+              href={`mailto:${RESUME_DATA.personal.email}`}
+              className="hidden md:flex px-7 py-3 bg-slate-100 dark:bg-white/[0.03] hover:bg-blue-50 dark:hover:bg-blue-600/20 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/[0.1] hover:border-blue-500/50 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.4)] items-center gap-2 backdrop-blur-md"
+            >
               Execute Contact
             </MagneticButton>
+            {/* Hamburger — mobile only */}
+            <button
+              onClick={() => setMobileMenuOpen(prev => !prev)}
+              className="md:hidden p-2.5 rounded-full bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.1] text-slate-700 dark:text-slate-300 transition-colors shadow-sm"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Drawer */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              key="mobile-menu"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden overflow-hidden border-t border-slate-200 dark:border-white/[0.05] mt-4"
+            >
+              <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col gap-2">
+                {['About', 'Skills', 'Experience', 'Projects'].map((item, i) => (
+                  <motion.a
+                    key={item}
+                    href={`/#${item.toLowerCase()}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white font-bold tracking-[0.15em] uppercase text-sm py-4 border-b border-slate-100 dark:border-white/[0.04] flex items-center justify-between group"
+                  >
+                    {item}
+                    <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-200" />
+                  </motion.a>
+                ))}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <Link
+                    to="/blog"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-blue-600 dark:text-blue-400 font-bold tracking-[0.15em] uppercase text-sm py-4 border-b border-slate-100 dark:border-white/[0.04] flex items-center justify-between group"
+                  >
+                    Blog
+                    <ChevronRight className="w-4 h-4 text-blue-400 group-hover:translate-x-1 transition-all duration-200" />
+                  </Link>
+                </motion.div>
+                <motion.a
+                  href={`mailto:${RESUME_DATA.personal.email}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.25 }}
+                  className="mt-6 w-full py-4 text-center bg-blue-600 hover:bg-blue-500 text-white font-bold tracking-[0.2em] uppercase text-xs rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-300"
+                >
+                  Execute Contact
+                </motion.a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       <Routes>
