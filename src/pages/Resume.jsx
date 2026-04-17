@@ -134,7 +134,7 @@ const Resume = () => {
             </div>
           </div>
           <a
-            href="/assets/resume/Shahzeb%20Ali%20ATS%20Resume.pdf"
+            href="/Shahzeb_Ali_Resume.pdf"
             download="Shahzeb_Ali_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
