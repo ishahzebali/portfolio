@@ -504,7 +504,7 @@ const PortfolioHome = () => (
 
         <FadeInSection delay={600} direction="up">
           <a
-            href="/assets/resume/SOC Analyst Resume.pdf"
+            href="/assets/resume/Shahzeb Ali ATS Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-4 mt-2 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold tracking-[0.15em] uppercase text-sm transition-all duration-300 shadow-[0_0_25px_rgba(37,99,235,0.4)] hover:shadow-[0_0_40px_rgba(37,99,235,0.6)] hover:-translate-y-1 group"
@@ -782,7 +782,7 @@ export default function App() {
               <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
             </Link>
             <a
-              href="/assets/resume/SOC Analyst Resume.pdf"
+              href="/assets/resume/Shahzeb Ali ATS Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600/10 hover:bg-blue-600/20 text-blue-600 dark:text-blue-400 border border-blue-500/30 hover:border-blue-500/60 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300"
@@ -857,7 +857,7 @@ export default function App() {
                   </Link>
                 </motion.div>
                 <motion.a
-                  href="/assets/resume/SOC Analyst Resume.pdf"
+                  href="/assets/resume/Shahzeb Ali ATS Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
