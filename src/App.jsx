@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSp
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import Resume from './pages/Resume';
 import NotFound from './pages/NotFound';
 import { Helmet } from 'react-helmet-async';
 import { 
@@ -964,14 +965,12 @@ export default function App() {
               <span className="font-bold">BLOG</span>
               <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
             </Link>
-            <a
-              href="/assets/resume/Shahzeb Ali ATS Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/resume"
               className="flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600/10 hover:bg-blue-600/20 text-blue-600 dark:text-blue-400 border border-blue-500/30 hover:border-blue-500/60 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300"
             >
               <FileDown className="w-3.5 h-3.5" /> <span className="text-slate-700 dark:text-blue-400 group-hover:text-blue-900 dark:group-hover:text-white transition-colors">Resume</span>
-            </a>
+            </Link>
           </div>
 
           {/* Right Controls */}
@@ -1039,19 +1038,20 @@ export default function App() {
                     <ChevronRight className="w-4 h-4 text-blue-400 group-hover:translate-x-1 transition-all duration-200" />
                   </Link>
                 </motion.div>
-                <motion.a
-                  href="/assets/resume/Shahzeb Ali ATS Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMobileMenuOpen(false)}
+                <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.22 }}
-                  className="text-blue-600 dark:text-blue-400 font-bold tracking-[0.15em] uppercase text-sm py-4 border-b border-slate-100 dark:border-white/[0.04] flex items-center justify-between group"
                 >
-                  <span className="flex items-center gap-2"><FileDown className="w-4 h-4" /> Resume</span>
-                  <ChevronRight className="w-4 h-4 text-blue-400 group-hover:translate-x-1 transition-all duration-200" />
-                </motion.a>
+                  <Link
+                    to="/resume"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-blue-600 dark:text-blue-400 font-bold tracking-[0.15em] uppercase text-sm py-4 border-b border-slate-100 dark:border-white/[0.04] flex items-center justify-between group"
+                  >
+                    <span className="flex items-center gap-2"><FileDown className="w-4 h-4" /> Resume</span>
+                    <ChevronRight className="w-4 h-4 text-blue-400 group-hover:translate-x-1 transition-all duration-200" />
+                  </Link>
+                </motion.div>
                 <motion.a
                   href={`mailto:${RESUME_DATA.personal.email}`}
                   initial={{ opacity: 0, y: 10 }}
@@ -1071,6 +1071,7 @@ export default function App() {
         <Route path="/" element={<PortfolioHome />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/resume" element={<Resume />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
@@ -1100,7 +1101,7 @@ export default function App() {
               </h4>
               <ul className="space-y-5">
                 {[
-                  { icon: FileDown, text: "Technical Resume (PDF)", link: "/assets/resume/Shahzeb Ali ATS Resume.pdf" },
+                  { icon: FileDown, text: "Professional Resume", link: "/resume" },
                   { icon: Linkedin, text: "LinkedIn Profile", link: `https://${RESUME_DATA.personal.linkedin}` },
                   { icon: Mail, text: "Secure Transmission", link: `mailto:${RESUME_DATA.personal.email}` },
                   { icon: ExternalLink, text: RESUME_DATA.personal.website, link: `https://${RESUME_DATA.personal.website}` }
