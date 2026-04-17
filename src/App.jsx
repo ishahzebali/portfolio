@@ -504,17 +504,6 @@ const PortfolioHome = () => (
           </TiltCard>
         </FadeInSection>
 
-        <FadeInSection delay={600} direction="up">
-          <a
-            href="/assets/resume/Shahzeb Ali ATS Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 mt-2 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold tracking-[0.15em] uppercase text-sm transition-all duration-300 shadow-[0_0_25px_rgba(37,99,235,0.4)] hover:shadow-[0_0_40px_rgba(37,99,235,0.6)] hover:-translate-y-1 group"
-          >
-            <FileDown className="w-5 h-5 group-hover:animate-bounce" />
-            Download Resume
-          </a>
-        </FadeInSection>
       </div>
 
       <div className="flex-1 order-1 lg:order-2 w-full flex justify-center lg:justify-end">
@@ -941,6 +930,7 @@ export default function App() {
               </h4>
               <ul className="space-y-5">
                 {[
+                  { icon: FileDown, text: "Technical Resume (PDF)", link: "/assets/resume/Shahzeb Ali ATS Resume.pdf" },
                   { icon: Linkedin, text: "LinkedIn Profile", link: `https://${RESUME_DATA.personal.linkedin}` },
                   { icon: Mail, text: "Secure Transmission", link: `mailto:${RESUME_DATA.personal.email}` },
                   { icon: ExternalLink, text: RESUME_DATA.personal.website, link: `https://${RESUME_DATA.personal.website}` }
