@@ -196,5 +196,96 @@ End Sub
       <h3>Conclusion</h3>
       <p>Always perform static analysis of VBA macros in dedicated, isolated virtual machines (such as REMnux) before progressing to dynamic debugging, and never open suspicious files on a corporate endpoint.</p>
     `
+  },
+  {
+    id: 6,
+    title: "Supply Chain Security: Deep Dive into the XZ Backdoor (CVE-2024-3094)",
+    date: "March 20, 2026",
+    category: "cve threat-intel",
+    badge: "Supply Chain",
+    badgeType: "red",
+    excerpt: "Deconstructing the most sophisticated supply chain attack in recent history. A multi-year social engineering effort that almost compromised the global Linux infrastructure.",
+    content: `
+      <p>The discovery of <strong>CVE-2024-3094</strong>, a backdoor in the <code>xz</code> compression library (specifically <code>liblzma</code>), sent shockwaves through the cybersecurity community. It wasn't just another vulnerability; it was a masterclass in patient, professional-grade social engineering and technical obfuscation.</p>
+      
+      <h3>The Long Game: Social Engineering</h3>
+      <p>Unlike many exploits that rely on a single technical flaw, the XZ backdoor was the result of a multi-year effort by an attacker (under the alias \"Jia Tan\") to gain maintainer status. By contributing legitimate fixes over two years, the attacker built enough trust to eventually inject a complex, multi-stage backdoor into the build process.</p>
+      
+      <h3>Technical Complexity</h3>
+      <p>The backdoor was hidden within binary test files, appearing as harmless data. During the <code>m4</code> configuration and <code>make</code> process, these files were extracted and used to modify the <code>liblzma</code> library at build time. The final payload targeted <code>sshd</code> on systemd-based Linux distributions, allowing unauthorized remote execution via a specifically crafted key.</p>
+      
+      <h3>The SOC's Perspective</h3>
+      <p>From a defensive standpoint, this highlights a critical blind spot: <strong>Upstream Dependency Integrity</strong>. Standard vulnerability scanners (SCA tools) only find *known* CVEs. To detect a \"Day Zero\" backdoor like this, SOCs need to monitor for:</p>
+      <ul>
+          <li><strong>Outbound Network Spikes:</strong> Unexpected traffic from core system services.</li>
+          <li><strong>Performance Regressions:</strong> The XZ backdoor was ultimately caught because it caused a slight (0.5s) delay in SSH logins.</li>
+          <li><strong>Anomalous Binary Behavior:</strong> Using tools like <code>strace</code> or <code>ltrace</code> to observe system calls during service startup.</li>
+      </ul>
+      
+      <h3>Key Takeaway</h3>
+      <p>Supply chain security is no longer just about patching; it's about verifying the pedigree of every component in our stack. Zero Trust must extend to our dependencies.</p>
+    `
+  },
+  {
+    id: 7,
+    title: "SOC Operational Excellence: Building Effective Playbooks",
+    date: "Feb 15, 2026",
+    category: "blue-team",
+    badge: "SOC Operations",
+    badgeType: "blue",
+    excerpt: "Professionalizing the incident response lifecycle. How to build repeatable, measurable playbooks that reduce Mean Time to Respond (MTTR) and ensure consistency.",
+    content: `
+      <p>A SOC is only as good as its playbooks. Without structured response procedures, analysts default to "ad-hoc" investigation, leading to inconsistent results, missed IOCs, and high MTTR (Mean Time to Respond).</p>
+      
+      <h3>The Anatomy of a Professional Playbook</h3>
+      <p>Every effective SOC playbook should follow the SANS Incident Handling lifecycle while providing granular, technical instructions for the analyst:</p>
+      <ol>
+          <li><strong>Preparation:</strong> Ensuring the right logs (Sysmon, CrowdStrike, Firewall) are flowing into the SIEM.</li>
+          <li><strong>Identification/Triage:</strong> Using standardized logic to distinguish True Positives from False Positives (e.g., "If source IP is internal AND destination is a known C2...").</li>
+          <li><strong>Containment:</strong> Step-by-step guides for host isolation, credential reset, or firewall blocking.</li>
+          <li><strong>Eradication:</strong> Removing the root cause (e.g., deleting a scheduled task or a malicious binary).</li>
+          <li><strong>Recovery:</strong> Restoring systems to clean states.</li>
+          <li><strong>Lessons Learned:</strong> Mandatory feedback loop to improve detection rules.</li>
+      </ol>
+      
+      <h3>Automation & SOAR</h3>
+      <p>Modern playbooks shouldn't be static PDFs. By leveraging <strong>SOAR</strong> (Security Orchestration, Automation, and Response), we can automate the "grunt work":</p>
+      <ul>
+          <li>Auto-enriching IPs via VirusTotal or AbuseIPDB.</li>
+          <li>Auto-checking if an email sender has a low domain reputation.</li>
+          <li>Providing "one-click" host isolation buttons for analysts.</li>
+      </ul>
+      
+      <h3>Continuous Improvement</h3>
+      <p>Playbooks are living documents. We perform monthly reviews of our most-triggered alerts to identify areas where the playbook logic failed or where automation could further reduce the burden on our L1 analysts.</p>
+    `
+  },
+  {
+    id: 8,
+    title: "Purple Teaming: Operationalizing the Feedback Loop",
+    date: "Jan 28, 2026",
+    category: "blue-team",
+    badge: "Purple Team",
+    badgeType: "violet",
+    excerpt: "Moving beyond silos. How to leverage offensive insights to validate and harden defensive controls through iterative simulation and detection engineering.",
+    content: `
+      <p>Purple Teaming is not just a "meeting" between Red and Blue teams; it is a systematic methodology to bridge the gap between offensive capabilities and defensive resilience.</p>
+      
+      <h3>The Purple Team Cycle</h3>
+      <p>In our SOC, we operate on a recursive Purple Team cycle:</p>
+      <ol>
+          <li><strong>Threat Hypothesis:</strong> Select a MITRE ATT&CK technique (e.g., T1055 - Process Injection).</li>
+          <li><strong>Offensive Simulation:</strong> The (internal or external) Red Team executes a controlled simulation of the technique in a lab or staging environment.</li>
+          <li><strong>Defensive Triage:</strong> The Blue Team checks if the activity was logged (Visibility) and if it triggered an alert (Detection).</li>
+          <li><strong>Gap Analysis:</strong> If detection failed, we ask: "Was it because of log misconfiguration, or was the detection rule too narrow?"</li>
+          <li><strong>Detection Engineering:</strong> We author and test new Sigma or Splunk rules based on the telemetry captured during simulation.</li>
+      </ol>
+      
+      <h3>Real-World Example: LSASS Memory Dumping</h3>
+      <p>During a recent exercise, we simulated LSASS dumping using <code>procdump.exe</code>. While our EDR caught the activity, our SIEM didn't alert because the Sysmon rules were only looking for <code>mimikatz</code>. By broadening our detection to look for specific access masks on the LSASS process (Event ID 10), we hardened our defense against future "Day Zero" credential theft tools.</p>
+      
+      <h3>Conclusion</h3>
+      <p>By treating security as a collaborative, iterative process rather than a static wall, we ensure that our defenses are grounded in reality, not just theory. That is the true value of a Purple Team approach.</p>
+    `
   }
 ];
