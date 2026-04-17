@@ -15,6 +15,7 @@ const RESUME_DATA = {
     email: "shahzeb@shahsmen.com",
     linkedin: "linkedin.com/in/ishahzebali",
     website: "shahsmen.com",
+    image: "/assets/images/profile.jpg",
     details: "Nationality: Pakistani | Visa: UAE Family-Sponsored Residence Visa | Languages: English (Fluent), Urdu (Native)"
   },
   summary: "Results-driven SOC Analyst with over 2 years of hands-on incident response experience across healthcare and technology environments. Specialises in SIEM-based threat detection, log correlation, and full-lifecycle incident management. Holds a unique purple team advantage - using penetration testing knowledge to sharpen defensive detection logic and reduce false-positive rates. Recognised on YesWeHack for responsibly disclosing a critical Broken Access Control vulnerability in Deezer, resulting in a global patch. Proficient in Splunk, Microsoft Sentinel, ELK Stack, Wireshark, and Sysmon; deeply versed in MITRE ATT&CK, the Cyber Kill Chain, and ISO/IEC 27001.",
@@ -111,11 +112,14 @@ const Resume = () => {
         {/* ── HEADER ── */}
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 mb-16">
           <div className="flex items-center gap-6">
-            <img
-              src="/assets/images/logo.png"
-              alt="SHAHSMEN"
-              className="h-16 w-16 object-contain"
-            />
+            <div className="relative group/photo">
+              <div className="absolute inset-0 rounded-2xl bg-blue-500/20 blur-xl opacity-0 group-hover/photo:opacity-100 transition-opacity duration-500"></div>
+              <img
+                src={RESUME_DATA.personal.image}
+                alt={RESUME_DATA.personal.name}
+                className="h-20 w-20 md:h-24 md:w-24 object-cover rounded-2xl border-2 border-slate-200 dark:border-white/[0.1] shadow-2xl relative z-10 group-hover/photo:scale-105 transition-transform duration-500"
+              />
+            </div>
             <div>
               <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
                 {RESUME_DATA.personal.name}
@@ -130,7 +134,7 @@ const Resume = () => {
             </div>
           </div>
           <a
-            href="/assets/resume/SOC Analyst Resume.pdf"
+            href="/assets/resume/Shahzeb Ali ATS Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold tracking-[0.15em] uppercase rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(37,99,235,0.35)] hover:shadow-[0_0_30px_rgba(37,99,235,0.55)] hover:-translate-y-0.5 self-start md:self-auto"
