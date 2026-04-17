@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSp
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import NotFound from './pages/NotFound';
 import { 
   ShieldAlert, Terminal, Briefcase, GraduationCap, Award, 
   MapPin, Mail, Phone, ExternalLink, Linkedin, ChevronRight, 
@@ -896,6 +897,7 @@ export default function App() {
             <BlogPost />
           </div>
         } />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <footer className="relative z-20 border-t border-slate-200 dark:border-white/[0.05] bg-slate-50/90 dark:bg-[#03050A]/90 backdrop-blur-3xl pt-24 pb-12 overflow-hidden mt-32">
