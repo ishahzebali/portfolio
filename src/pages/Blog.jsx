@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Search, ArrowRight, Trophy, Clock, Filter, Eye, ShieldAlert, BookOpen, Activity } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { blogPosts } from '../data/blogData';
 
 const FadeInSection = ({ children, delay = 0, direction = "up" }) => {
@@ -53,7 +54,11 @@ const Blog = () => {
     : filteredPosts;
 
   return (
-    <div className="min-h-screen text-slate-700 dark:text-slate-300 font-sans selection:bg-blue-500/30">
+    <div className="min-h-screen text-slate-700 dark:text-slate-300 font-sans selection:bg-blue-500/30 pt-20">
+      <Helmet>
+        <title>Intelligence Briefings | Shahzeb Ali Cybersecurity Blog</title>
+        <meta name="description" content="Technical writeups, threat intelligence reports, and cybersecurity research by Shahzeb Ali. Covering SOC operations, bug bounty, and blue team tactics." />
+      </Helmet>
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         
         {/* HEADER */}
@@ -127,7 +132,7 @@ const Blog = () => {
                       <div className="flex items-center gap-3 text-slate-600 dark:text-slate-400 font-mono tracking-wider font-semibold">
                         <Clock className="w-5 h-5 text-blue-500" /> {featuredPost.date}
                       </div>
-                      <Link to={`/blog/${featuredPost.id}`} className="flex items-center justify-center gap-3 px-8 py-3 bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white font-bold uppercase tracking-widest text-xs transition-all duration-300 rounded-full shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_40px_rgba(37,99,235,0.6)] hover:-translate-y-1">
+                      <Link to={`/blog/${featuredPost.slug}`} className="flex items-center justify-center gap-3 px-8 py-3 bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white font-bold uppercase tracking-widest text-xs transition-all duration-300 rounded-full shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_40px_rgba(37,99,235,0.6)] hover:-translate-y-1">
                         Access Intel Report <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
@@ -167,7 +172,7 @@ const Blog = () => {
                       <span className="text-slate-500 font-mono text-xs tracking-widest font-semibold flex items-center gap-2">
                         <Clock className="w-3.5 h-3.5" /> {post.date}
                       </span>
-                      <Link to={`/blog/${post.id}`} className="flex items-center gap-2 text-blue-400 font-bold uppercase tracking-widest text-xs transition-all relative z-10 hover:text-slate-900 dark:text-white group/btn">
+                      <Link to={`/blog/${post.slug}`} className="flex items-center gap-2 text-blue-400 font-bold uppercase tracking-widest text-xs transition-all relative z-10 hover:text-slate-900 dark:text-white group/btn">
                         Detail <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-2 transition-transform duration-300" />
                       </Link>
                     </div>

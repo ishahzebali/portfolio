@@ -4,6 +4,7 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import NotFound from './pages/NotFound';
+import { Helmet } from 'react-helmet-async';
 import { 
   ShieldAlert, Terminal, Briefcase, GraduationCap, Award, 
   MapPin, Mail, Phone, ExternalLink, Linkedin, ChevronRight, 
@@ -399,7 +400,7 @@ const ElegantAvatar = ({ src }) => {
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           src={src} 
-          alt="Profile" 
+          alt="Shahzeb Ali - Cybersecurity SOC Analyst & Purple Team Specialist Profile" 
           className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700" 
         />
       </div>
@@ -742,6 +743,28 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-slate-50 dark:bg-[#060913] text-slate-800 dark:text-slate-300 font-sans selection:bg-blue-500/30 overflow-hidden transition-colors duration-700">
+      <Helmet>
+        <title>Shahzeb Ali | Cybersecurity Specialist & SOC Analyst</title>
+        <meta name="description" content="Official portfolio of Shahzeb Ali, a Cybersecurity SOC Analyst and Purple Team Specialist. Expert in SIEM, Incident Response, and Offensive Security (YesWeHack researcher)." />
+        <link rel="canonical" href="https://shahsmen.com" />
+        
+        {/* JSON-LD Persona Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Shahzeb Ali",
+            "url": "https://shahsmen.com",
+            "jobTitle": "SOC Analyst & Cybersecurity Researcher",
+            "alumniOf": "Lahore Garrison University",
+            "sameAs": [
+              "https://linkedin.com/in/ishahzebali",
+              "https://github.com/ishahzebali"
+            ],
+            "description": "Cybersecurity professional specializing in SOC operations, incident response, and purple teaming."
+          })}
+        </script>
+      </Helmet>
       <MouseSpotlight />
       
       {/* Heavy background blobs — desktop only to protect mobile GPU */}
@@ -764,7 +787,7 @@ export default function App() {
           <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 group cursor-pointer">
             <img
               src="/assets/images/logo.png"
-              alt="SHAHSMEN"
+              alt="Shahzeb Ali Logo"
               className="h-9 w-9 object-contain group-hover:scale-110 transition-transform duration-300"
             />
             <span className="tracking-widest">SA<span className="text-violet-400">.</span></span>
@@ -887,16 +910,8 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<PortfolioHome />} />
-        <Route path="/blog" element={
-          <div className="relative z-10 pt-16">
-            <Blog />
-          </div>
-        } />
-        <Route path="/blog/:id" element={
-          <div className="relative z-10 pt-16">
-            <BlogPost />
-          </div>
-        } />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
@@ -910,7 +925,7 @@ export default function App() {
               <div className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-4">
                 <img
                   src="/assets/images/logo.png"
-                  alt="SHAHSMEN"
+                  alt="Shahzeb Ali - Cybersecurity Specialist Logo"
                   className="h-12 w-12 object-contain"
                 />
                 <span className="tracking-tighter">SHAHZEB<span className="text-violet-400">.ALI</span></span>

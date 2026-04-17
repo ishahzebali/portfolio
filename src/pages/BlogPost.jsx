@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, ShieldAlert, CheckCircle2, TerminalSquare, Activity, Crosshair } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import { blogPosts } from '../data/blogData';
 
 const BlogPost = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
-  const post = blogPosts.find(p => p.id === parseInt(id));
+  const post = blogPosts.find(p => p.slug === slug);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [slug]);
 
   if (!post) {
     return (
@@ -27,10 +28,35 @@ const BlogPost = () => {
   }
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="max-w-5xl mx-auto px-6 md:px-12 pb-40 font-sans selection:bg-blue-500/30 relative"
-    >
+    <>
+      <Helmet>
+        <title>{post.title} | Shahzeb Ali Blog</title>
+        <meta name="description" content={post.seoDescription} />
+        <link rel="canonical" href={`https://shahsmen.com/blog/${post.slug}`} />
+        
+        {/* JSON-LD Blog Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": post.seoDescription,
+            "author": {
+              "@type": "Person",
+              "name": "Shahzeb Ali",
+              "url": "https://shahsmen.com"
+            },
+            "datePublished": post.date,
+            "url": `https://shahsmen.com/blog/${post.slug}`,
+            "image": "https://shahsmen.com/assets/images/logo.png"
+          })}
+        </script>
+      </Helmet>
+      
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-5xl mx-auto px-6 md:px-12 pb-40 font-sans selection:bg-blue-500/30 relative pt-20"
+      >
       {/* Background Ambience */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-blue-900/10 to-transparent pointer-events-none -z-10"></div>
       <motion.div 
@@ -187,6 +213,7 @@ const BlogPost = () => {
         }
       `}</style>
     </motion.div>
+    </>
   );
 };
 

