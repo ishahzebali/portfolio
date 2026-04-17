@@ -65,8 +65,8 @@ const BlogPost = () => {
       ></motion.div>
 
       <div className="mb-16 pt-10">
-        <Link to="/blog" className="inline-flex items-center gap-3 text-blue-400 hover:text-slate-900 dark:text-white font-bold uppercase tracking-[0.25em] text-[11px] transition-all hover:-translate-x-3 group bg-blue-500/10 border border-blue-500/20 px-6 py-2.5 rounded-full backdrop-blur-xl">
-          <ArrowLeft className="w-4 h-4 text-blue-500 group-hover:text-slate-900 dark:text-white transition-colors" /> Back to Intelligence Hub
+        <Link to="/blog" className="inline-flex items-center gap-3 text-blue-500 dark:text-blue-400 hover:text-slate-900 dark:hover:text-white font-bold uppercase tracking-[0.25em] text-[11px] transition-all hover:-translate-x-3 group bg-blue-500/10 border border-blue-500/20 px-6 py-2.5 rounded-full backdrop-blur-xl">
+          <ArrowLeft className="w-4 h-4 text-blue-500 group-hover:text-slate-900 dark:group-hover:text-white transition-colors" /> Back to Intelligence Hub
         </Link>
       </div>
 

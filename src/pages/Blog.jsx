@@ -125,7 +125,7 @@ const Blog = () => {
                     <div className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-violet-500/20 text-violet-700 dark:text-violet-300 text-[11px] font-extrabold tracking-[0.2em] uppercase mb-8 border border-violet-500/30 w-fit drop-shadow-[0_0_15px_rgba(139,92,246,0.3)]">
                       <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse"></span> {featuredPost.badge}
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white mb-8 leading-[1.1] tracking-tight group-hover:text-blue-100 transition-colors drop-shadow-xl">{featuredPost.title}</h2>
+                    <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white mb-8 leading-[1.1] tracking-tight group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors drop-shadow-xl">{featuredPost.title}</h2>
                     <p className="text-slate-700 dark:text-slate-300 text-xl leading-relaxed mb-10 font-light opacity-90">{featuredPost.excerpt}</p>
                     
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between mt-auto gap-6 sm:gap-0 border-t border-slate-200 dark:border-white/[0.05] pt-8">
@@ -165,14 +165,14 @@ const Blog = () => {
                        </div>
                     </div>
                     
-                    <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-6 group-hover:text-blue-700 dark:text-blue-200 transition-colors duration-500 leading-[1.25] tracking-tight relative z-10 drop-shadow-md">{post.title}</h3>
+                    <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-6 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors duration-500 leading-[1.25] tracking-tight relative z-10 drop-shadow-md">{post.title}</h3>
                     <p className="text-slate-700 dark:text-slate-300 text-[1.1rem] leading-relaxed font-light mb-12 flex-grow relative z-10 opacity-80 group-hover:opacity-100 transition-opacity duration-300">{post.excerpt}</p>
                     
                     <div className="mt-auto flex items-center justify-between border-t border-slate-200 dark:border-white/[0.05] pt-6 relative z-10">
                       <span className="text-slate-500 font-mono text-xs tracking-widest font-semibold flex items-center gap-2">
                         <Clock className="w-3.5 h-3.5" /> {post.date}
                       </span>
-                      <Link to={`/blog/${post.slug}`} className="flex items-center gap-2 text-blue-400 font-bold uppercase tracking-widest text-xs transition-all relative z-10 hover:text-slate-900 dark:text-white group/btn">
+                      <Link to={`/blog/${post.slug}`} className="flex items-center gap-2 text-blue-500 dark:text-blue-400 font-bold uppercase tracking-widest text-xs transition-all relative z-10 hover:text-blue-700 dark:hover:text-blue-300 group/btn">
                         Detail <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-2 transition-transform duration-300" />
                       </Link>
                     </div>
