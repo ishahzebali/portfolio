@@ -425,7 +425,7 @@ const ElegantAvatar = ({ src }) => {
 
 // --- PORTFOLIO HOME CONTENT ---
 const PortfolioHome = () => (
-  <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-36 pb-24 space-y-48">
+  <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-36 pb-24 space-y-48" style={{ contain: 'layout' }}>
     {/* HERO SECTION */}
     <section id="about" className="min-h-[80vh] flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 relative">
       <div className="flex-1 flex flex-col justify-center order-2 lg:order-1 z-10">
@@ -731,16 +731,18 @@ export default function App() {
     <div className="relative min-h-screen bg-slate-50 dark:bg-[#060913] text-slate-800 dark:text-slate-300 font-sans selection:bg-blue-500/30 overflow-hidden transition-colors duration-700">
       <MouseSpotlight />
       
+      {/* Heavy background blobs — desktop only to protect mobile GPU */}
       <motion.div 
         style={{ y: yBg }}
-        className="fixed top-[-20%] left-[-10%] w-[800px] h-[800px] rounded-full bg-blue-900/10 blur-[130px] pointer-events-none z-0"
+        className="hidden lg:block fixed top-[-20%] left-[-10%] w-[800px] h-[800px] rounded-full bg-blue-900/10 blur-[130px] pointer-events-none z-0"
       />
-      <motion.div 
-        animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.15, 0.1] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="fixed bottom-[-10%] right-[-10%] w-[700px] h-[700px] rounded-full bg-violet-900/15 blur-[140px] pointer-events-none z-0"
+      <div 
+        className="hidden lg:block fixed bottom-[-10%] right-[-10%] w-[700px] h-[700px] rounded-full bg-violet-900/15 blur-[140px] pointer-events-none z-0 opacity-10"
       />
-      <div className="fixed inset-0 z-0 opacity-[0.2]" 
+      {/* Lightweight mobile ambient */}
+      <div className="lg:hidden fixed top-0 left-0 w-full h-[300px] bg-gradient-to-b from-blue-900/10 to-transparent pointer-events-none z-0" />
+      {/* Dot grid — desktop only */}
+      <div className="hidden lg:block fixed inset-0 z-0 opacity-[0.2]" 
            style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)', backgroundSize: '32px 32px' }}>
       </div>
 

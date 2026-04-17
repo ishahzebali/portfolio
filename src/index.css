@@ -9,3 +9,14 @@
     font-family: 'Outfit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 }
+
+/* ---- Mobile GPU optimisations ---- */
+/* Backdrop-filter is very expensive on mobile; disable below md breakpoint */
+@media (max-width: 767px) {
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl,
+  .backdrop-blur-xl {
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+  }
+}
