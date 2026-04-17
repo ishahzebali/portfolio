@@ -427,6 +427,147 @@ End Sub
           <li>Use <strong>IAM Roles</strong> and <strong>Bucket Policies</strong> instead of ACLs (Legacy).</li>
           <li>Implement <strong>VPC Endpoints</strong> so your S3 traffic never even touches the public internet.</li>
       </ol>
+  },
+  {
+    id: 13,
+    slug: "macos-hardening-security-operations-guide",
+    title: "Hardening macOS for High-Security Environments",
+    seoDescription: "A deep dive into macOS hardening for security professionals, covering syspolicy lockdowns, T2/Apple Silicon security, and custom audit rules.",
+    date: "April 05, 2026",
+    category: "blue-team",
+    badge: "Endpoint Defense",
+    badgeType: "blue",
+    excerpt: "Deep dive into the architecture of macOS security. Exploring syspolicy lockdowns, T2/T3 security chips, and custom auditing for high-stakes security operations.",
+    content: `
+      <p>While macOS is often perceived as \"secure by default,\" professional security operations require a much deeper level of hardening. For SOC analysts and researchers, a standard install lacks the granular auditing and lockdown levels required for handling sensitive intelligence.</p>
+      
+      <h3>1. Enforcement of System Policy</h3>
+      <p>The <code>syspolicy</code> subsystem (Gatekeeper) is your first line of defense. However, advanced threats can bypass standard UI-based prompts. Using the CLI, we can enforce a stricter stance:</p>
+      <pre><code># Enforce that only App Store and identified developer apps are run
+sudo spctl --master-enable
+# Disable the ability for users to override Gatekeeper for specific apps
+sudo defaults write /Library/Preferences/com.apple.security.gk.plist AllowIdentifiedDevelopers -bool false</code></pre>
+      
+      <h3>2. Hardware-Rooted Trust (T2 \u0026 Apple Silicon)</h3>
+      <p>The transition to Apple Silicon (M1/M2/M3) shifted the security landscape. The **Secure Enclave** and **Hardware-Rooted Boot** ensure that the OS has not been tampered with. To audit this, always ensure <strong>Full Security</strong> mode is enabled in the Startup Security Utility.</p>
+      
+      <h3>3. Granular Auditing via ESF</h3>
+      <p>Standard logs are insufficient. Modern macOS defense relies on the <strong>Endpoint Security Framework (ESF)</strong>. Tools like <em>FileMonitor</em> or <em>ProcessMonitor</em> (by Objective-See) leverage this for real-time telemetry. In a SOC environment, these events should be forwarded to a central SIEM for anomaly detection, such as identifying unauthorized <code>curl</code> commands from system processes.</p>
+      
+      <h3>Conclusion</h3>
+      <p>Hardening macOS is not a \"one-and-done\" task. It requires a fundamental understanding of <em>System Integrity Protection (SIP)</em> and a proactive approach to monitoring the ever-evolving threat landscape targeting the platform.</p>
+    `
+  },
+  {
+    id: 14,
+    slug: "advanced-kql-hunting-lateral-movement-sentinel",
+    title: "Hunting Lateral Movement with Advanced KQL",
+    seoDescription: "Tactical guide on using Microsoft Sentinel and KQL to detect lateral movement techniques like SMB exec and WMI remotely.",
+    date: "April 08, 2026",
+    category: "blue-team",
+    badge: "Detection Ops",
+    badgeType: "violet",
+    excerpt: "Moving beyond simple alerts. Providing production-ready KQL functions for detecting WMI and SMB-based lateral movement in Microsoft Sentinel.",
+    content: `
+      <p>Detecting an attacker moving laterally through a network is the most critical task for a SOC. By the time lateral movement occurs, the initial compromise is complete, and the attacker is now hunting for your Crown Jewels.</p>
+      
+      <h3>1. Detecting SMB-Based Execution</h3>
+      <p>Attackers often use tools like <code>Psexec</code> or <code>Impacket</code> to execute commands via SMB. This often leaves a unique signature in <strong>SecurityEvent</strong> logs (Event ID 5145 - A network share object was accessed).</p>
+      <pre><code>SecurityEvent
+| where EventID == 5145
+| where RelativeTargetName in (\"psexesvc.exe\", \"remcomsvc.exe\")
+| extend SourceIP = IpAddress
+| project TimeGenerated, Computer, SourceIP, SubjectUserName, RelativeTargetName</code></pre>
+      
+      <h3>2. Correlating Process Creation with Network Activity</h3>
+      <p>The real power of KQL comes from <strong>Joins</strong>. We can look for a process (like <code>cmd.exe</code>) being spawned by a system service (like <code>WmiPrvSE.exe</code>) immediately after a network connection.</p>
+      <pre><code>DeviceProcessEvents
+| where InitiatingProcessFileName =~ \"wmiprvse.exe\"
+| where FileName in~ (\"cmd.exe\", \"powershell.exe\", \"bitsadmin.exe\")
+| join kind=inner (DeviceNetworkEvents | where RemotePort == 135) on DeviceName
+| project TimeGenerated, DeviceName, FileName, RemoteIP, InitiatingProcessCommandLine</code></pre>
+      
+      <h3>3. Reducing False Positives</h3>
+      <p>Always exclude known administrative workstations. Use a <strong>Watchlist</strong> in Sentinel to filter out the IPs of your IT Support team, ensuring that your alerts are focused exclusively on anomalous activity.</p>
+    `
+  },
+  {
+    id: 15,
+    slug: "bgp-hijack-analysis-soc-threat-intel",
+    title: "The Geometry of a BGP Hijack: A SOC Perspective",
+    seoDescription: "Analyzing BGP hijacks and route leakages from a security operations standpoint, focusing on TTL anomalies and latency spikes.",
+    date: "April 10, 2026",
+    category: "cve threat-intel",
+    badge: "Network Intel",
+    badgeType: "red",
+    excerpt: "A technical breakdown of how global routing redirection occurs and what the telemetry looks like for a SOC monitoring cloud-scale infrastructure.",
+    content: `
+      <p>The Border Gateway Protocol (BGP) is the trust-based protocol that keeps the internet's routing table functioning. Because it relies on trust, it is notoriously vulnerable to \"Hijacking\" \u2014 where a malicious actor announces a prefix they do not own, redirecting global traffic through their infrastructure.</p>
+      
+      <h3>How the Redirection Occurs</h3>
+      <p>BGP routes based on the <strong>Shortest AS Path</strong>. If an attacker announces a more specific prefix (e.g., a /24 instead of your /16), the rest of the internet will prioritize the more specific route over the legitimate one. Traffic to your servers is then rerouted, often for inspection or decryption before being forwarded back to you.</p>
+      
+      <h3>Indicators of a Hijack</h3>
+      <ul>
+          <li><strong>Increased Latency (MS Spikes):</strong> Traffic takes a longer physical path.</li>
+          <li><strong>TTL (Time to Live) Deviations:</strong> If your standard TTL to a service is 54 and it suddenly drops to 42, an extra hop has been introduced.</li>
+          <li><strong>Geographic Anomalies:</strong> Traffic that normally stays within the EU suddenly routing through a provider in a different jurisdiction.</li>
+      </ul>
+      
+      <h3>Defensive Strategy: RPKI</h3>
+      <p>The solution is <strong>Resource Public Key Infrastructure (RPKI)</strong>. By cryptographically signing your route announcements, you allow other providers to verify that a prefix actually belongs to you. As more providers enforce RPKI validation, the window for successful BGP hijacking shrinks globally.</p>
+    `
+  },
+  {
+    id: 16,
+    slug: "zero-trust-legacy-infrastructure-cloudflare-tunnel-case-study",
+    title: "Zero-Trust for Legacy Infrastructure: A Case Study",
+    seoDescription: "How to implement Zero-Trust Network Access (ZTNA) for on-premise legacy applications using Cloudflare Tunnel and Entra ID.",
+    date: "April 12, 2026",
+    category: "blue-team",
+    badge: "Architecture",
+    badgeType: "blue",
+    excerpt: "Moving beyond VPNs. A strategic guide on wrapping older on-prem applications in modern zero-trust identity layers without modifying the code.",
+    content: `
+      <p>Many organizations are \"stuck\" with legacy on-premise applications that don't support modern authentication like SAML or OIDC. Traditionally, these are hidden behind a VPN \u2014 but VPNs provide broad network access, violating the principle of <strong>Least Privilege</strong>.</p>
+      
+      <h3>The Solution: The Reverse Proxy Tunnel</h3>
+      <p>By using a tool like <strong>Cloudflare Tunnel</strong> (or Zscaler), we can establish an outbound-only connection from the legacy server to the security provider. This effectively makes the server \"dark\" to the public internet while allowing authorized users to access it via a modern gateway.</p>
+      
+      <h3>Step 1: Identity Integration</h3>
+      <p>We hook the tunnel into our primary Identity Provider (e.g., **Microsoft Entra ID**). Now, before a request even reaches the legacy app, the user must pass MFA and conditional access checks.</p>
+      
+      <h3>Step 2: Policy Enforcement</h3>
+      <p>We can define policies at the gateway level: \"Allow access to the Finance App ONLY if the user is in the Finance Group AND using a managed device AND located in the UAE.\"</p>
+      
+      <h3>The Result</h3>
+      <p>We've achieved a modern Zero-Trust architecture for an application that was built 15 years ago, without changing a single line of code in the legacy app itself.</p>
+    `
+  },
+  {
+    id: 17,
+    slug: "malware-analysis-dissecting-multi-stage-loaders",
+    title: "Advanced Deobfuscation: Dissecting Sophisticated Loaders",
+    seoDescription: "Step-by-step guide on malware deobfuscation, analyzing multi-stage loaders like Gootkit and IcedID to find the final payload.",
+    date: "April 15, 2026",
+    category: "red-team",
+    badge: "Malware Analysis",
+    badgeType: "red",
+    excerpt: "Standard AV can't see what's hidden. A step-by-step guide on peeling back the layers of a modern multi-stage malware loader to find the true payload.",
+    content: `
+      <p>Modern malware rarely arrives as a single, obvious <code>.exe</code> file. Instead, it uses a \"stager\" or \"loader\" \u2014 a small, highly obfuscated script (often JS, VBS, or PowerShell) whose only job is to download and execute the next stage of the attack.</p>
+      
+      <h3>Layer 1: The Initial Script</h3>
+      <p>You'll often see thousands of lines of junk code. The goal is to find the \"Execution Sink\" (e.g., <code>eval()</code> or <code>powershell -e</code>). Use static analysis to clean up the code and look for hidden strings encrypted in base64 or XOR.</p>
+      
+      <h3>Layer 2: Memory-Only Execution</h3>
+      <p>Advanced loaders use <strong>Process Hollowing</strong> or <strong>DLL Sideloading</strong> to run the final malware entirely in the memory of a legitimate process (like <code>svchost.exe</code>). To analyze this, you need to use a debugger like <strong>x64dbg</strong> and set breakpoints on APIs like <code>WriteProcessMemory</code> or <code>VirtualAllocEx</code>.</p>
+      
+      <h3>Reverse Engineering the C2</h3>
+      <p>Once the final stage is extracted, we can identify the **Command \u0026 Control (C2)** infrastructure. By analyzing the traffic patterns, we can develop custom IDS signatures (Snort/Suricata) to detect other infected hosts on the network.</p>
+      
+      <h3>Pro-Tip</h3>
+      <p>Always perform this analysis in a strictly isolated sandbox (such as **FLARE-VM**) with the network interface disabled or redirected to an internal fake-DNS service like INetSim.</p>
     `
   }
 ];
