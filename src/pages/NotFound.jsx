@@ -1,34 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { ShieldAlert, Terminal, Home, ArrowLeft } from 'lucide-react';
-
-const glitchLines = [
-  '> INITIALIZING SCAN...',
-  '> TARGET: ' + window.location.pathname,
-  '> STATUS: ACCESS_DENIED',
-  '> THREAT_LEVEL: UNKNOWN_ROUTE',
-  '> ERROR_CODE: 0x404',
-  '> RECOMMENDATION: RETURN_TO_BASE',
-];
+import { useNavigate, useLocation } from 'react-router-dom';
+import { ShieldAlert, Home, ArrowLeft } from 'lucide-react';
 
 const NotFound = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [visibleLines, setVisibleLines] = useState([]);
   const [cursor, setCursor] = useState(true);
+
+  const glitchLines = [
+    '> INITIALIZING SCAN...',
+    `> TARGET: ${location.pathname}`,
+    '> STATUS: ACCESS_DENIED',
+    '> THREAT_LEVEL: UNKNOWN_ROUTE',
+    '> ERROR_CODE: 0x404',
+    '> RECOMMENDATION: RETURN_TO_BASE',
+  ];
 
   // Type out terminal lines one by one
   useEffect(() => {
     let i = 0;
+    const lines = [
+      '> INITIALIZING SCAN...',
+      `> TARGET: ${location.pathname}`,
+      '> STATUS: ACCESS_DENIED',
+      '> THREAT_LEVEL: UNKNOWN_ROUTE',
+      '> ERROR_CODE: 0x404',
+      '> RECOMMENDATION: RETURN_TO_BASE',
+    ];
     const interval = setInterval(() => {
-      if (i < glitchLines.length) {
-        setVisibleLines(prev => [...prev, glitchLines[i]]);
+      if (i < lines.length) {
+        setVisibleLines(prev => [...prev, lines[i]]);
         i++;
       } else {
         clearInterval(interval);
       }
     }, 380);
     return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Blinking cursor
@@ -111,9 +121,9 @@ const NotFound = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.25 }}
                 className={
-                  line.includes('ACCESS_DENIED') || line.includes('ERROR_CODE')
+                  (line ?? '').includes('ACCESS_DENIED') || (line ?? '').includes('ERROR_CODE')
                     ? 'text-red-400'
-                    : line.includes('RECOMMENDATION')
+                    : (line ?? '').includes('RECOMMENDATION')
                     ? 'text-emerald-400'
                     : 'text-slate-400'
                 }
@@ -121,12 +131,12 @@ const NotFound = () => {
                 {line}
               </motion.div>
             ))}
-            {visibleLines.length < glitchLines.length && (
+            {visibleLines.length < 6 && (
               <span className="text-slate-400">
                 {cursor ? '█' : ' '}
               </span>
             )}
-            {visibleLines.length === glitchLines.length && (
+            {visibleLines.length === 6 && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
