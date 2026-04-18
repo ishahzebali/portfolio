@@ -312,6 +312,19 @@ const CHALLENGES = [
   },
   {
     id: 3,
+    title: "SOC Scenario: Cloud SSRF",
+    scenario: "A WAF alert indicates a Server-Side Request Forgery attempt targeting internal cloud metadata.",
+    type: "AWS CLOUDWATCH - METADATA ACCESS",
+    header: "cloudtrail_audit.json",
+    obfuscatedCode: "GET /api/view?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/ HTTP/1.1",
+    objective: "Identify the common architectural name for this vulnerability (4-letter acronym).",
+    hint: "The attacker is forcing the server to make requests to an internal URI (169.254.x.x).",
+    answer: "SSRF",
+    badge: "CLOUD_RECON_SPECIALIST",
+    successMsg: "SSRF attempt identified and blocked. IAM role permissions are being restricted."
+  },
+  {
+    id: 4,
     title: "SOC Scenario: Exfiltration Attempt",
     scenario: "Network telemetry detected high-frequency DNS queries to a suspicious sub-domain.",
     type: "DNS QUERY LOG - TUNNELING DETECTED",
@@ -324,7 +337,7 @@ const CHALLENGES = [
     successMsg: "Great catch. Data exfiltration via DNS tunneling has been blocked."
   },
   {
-    id: 4,
+    id: 5,
     title: "SOC Scenario: Ransomware Attribution",
     scenario: "A compromised workstation shows a binary signature in the memory dump.",
     type: "PE HEADER ANALYSIS - MALWARE ID",
@@ -335,6 +348,45 @@ const CHALLENGES = [
     answer: "LockBit",
     badge: "THREAT_INTEL_GURU",
     successMsg: "Attribution complete. This is LockBit 3.0. Deploying specific decryptors."
+  },
+  {
+    id: 6,
+    title: "SOC Scenario: Directory Traversal",
+    scenario: "An IDS alert triggered for multiple requests targeting sensitive system files.",
+    type: "IDS ALERT - LFI_ATTEMPT_DETECTED",
+    header: "idps_snort.alerts",
+    obfuscatedCode: "GET /vulnerabilities/display.php?file=../../../../../../etc/passwd HTTP/1.1",
+    objective: "What is the common name for this vulnerability (e.g., LFI)?",
+    hint: "The attacker is using dot-dot-slash to traverse out of the intended directory.",
+    answer: "LFI",
+    badge: "FILESYSTEM_AUDITOR",
+    successMsg: "LFI attack confirmed. Input validation added to the file parameter."
+  },
+  {
+    id: 7,
+    title: "SOC Scenario: Protocol Recon",
+    scenario: "An external scan is targeting a specific port often used for remote administrative access.",
+    type: "NETFLOW ANALYSIS - PORT_SCAN",
+    header: "firewall_logs.traffic",
+    obfuscatedCode: "DST_IP: 10.0.0.5 -> DST_PORT: 3389 (TCP) -> FLAG: [SYN]",
+    objective: "Identify the name of the Windows protocol associated with port 3389.",
+    hint: "It's the standard protocol for Remote Desktop access in Windows environments.",
+    answer: "RDP",
+    badge: "PROTOCOL_PROFILER",
+    successMsg: "RDP port exposure detected. Initiating VPN-only access policy."
+  },
+  {
+    id: 8,
+    title: "SOC Scenario: Privilege Escalation",
+    scenario: "A low-privileged user was found running commands that shouldn't be accessible.",
+    type: "LINUX AUTH LOG - SUDO_ENUM",
+    header: "auth.log",
+    obfuscatedCode: "(ALL : ALL) NOPASSWD: /usr/bin/find",
+    objective: "Identify the misconfiguration category (e.g., SUID, Sudo Over-privilege, or GTFOBins).",
+    hint: "The user can run 'find' as root without a password. Check GTFOBins for the exploit!",
+    answer: "GTFOBins",
+    badge: "PRIVILEGE_ESCALATION_EXPERT",
+    successMsg: "GTFOBins exploit path identified. Sudoers file has been hardened."
   }
 ];
 
