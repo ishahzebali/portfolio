@@ -118,7 +118,7 @@ const SectionHeader = ({ title, icon: Icon, subtitle }) => (
       <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20">
         <Icon size={20} className="text-blue-400" />
       </div>
-      <h2 className="text-2xl font-black tracking-widest uppercase text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
+      <h2 className="text-2xl font-black tracking-widest uppercase text-slate-900 dark:text-white drop-shadow-[0_0_10px_rgba(37,99,235,0.1)]">
         {title}
       </h2>
     </div>
@@ -128,12 +128,12 @@ const SectionHeader = ({ title, icon: Icon, subtitle }) => (
 
 const Resume = () => {
   return (
-    <div className="min-h-screen bg-[#050810] selection:bg-blue-500/30">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#050810] selection:bg-blue-500/30 transition-colors duration-500">
       {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/5 dark:bg-blue-600/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-violet-600/5 dark:bg-violet-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.02] dark:opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
       </div>
 
       <motion.div
@@ -151,16 +151,16 @@ const Resume = () => {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-blue-500/30 rounded-[2.5rem] blur-2xl group-hover:bg-blue-500/40 transition-all duration-700"></div>
-              <div className="relative p-1 rounded-[2.5rem] bg-gradient-to-br from-blue-500/50 to-violet-500/50 border border-white/10">
+              <div className="absolute inset-0 bg-blue-500/20 dark:bg-blue-500/30 rounded-[2.5rem] blur-2xl group-hover:bg-blue-500/30 dark:group-hover:bg-blue-500/40 transition-all duration-700"></div>
+              <div className="relative p-1 rounded-[2.5rem] bg-gradient-to-br from-blue-500/30 to-violet-500/30 dark:from-blue-500/50 dark:to-violet-500/50 border border-slate-200 dark:border-white/10 shadow-xl">
                 <img
                   src={RESUME_DATA.personal.image}
                   alt={RESUME_DATA.personal.name}
-                  className="h-40 w-40 md:h-48 md:w-48 object-cover rounded-[2.2rem] shadow-2xl grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
+                  className="h-40 w-40 md:h-48 md:w-48 object-cover rounded-[2.2rem] shadow-2xl grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 bg-white dark:bg-slate-800"
                 />
               </div>
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-[#050810] border border-blue-500/30 shadow-xl">
-                <span className="text-[10px] font-mono font-black tracking-[0.3em] text-blue-400 uppercase whitespace-nowrap">ID: SHAHS-8291</span>
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-white dark:bg-[#050810] border border-blue-500/20 dark:border-blue-500/30 shadow-xl">
+                <span className="text-[10px] font-mono font-black tracking-[0.3em] text-blue-600 dark:text-blue-400 uppercase whitespace-nowrap">ID: SHAHS-8291</span>
               </div>
             </motion.div>
 
@@ -171,11 +171,11 @@ const Resume = () => {
                 transition={{ delay: 0.3 }}
               >
                 <div className="flex items-center gap-3 mb-2 justify-center md:justify-start">
-                  <div className="h-[2px] w-8 bg-blue-500/50"></div>
-                  <span className="text-xs font-mono font-bold tracking-[0.4em] text-blue-500 uppercase">Operational Dossier</span>
+                  <div className="h-[2px] w-8 bg-blue-500/30 dark:bg-blue-500/50"></div>
+                  <span className="text-xs font-mono font-bold tracking-[0.4em] text-blue-600 dark:text-blue-500 uppercase">Operational Dossier</span>
                 </div>
-                <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase text-white leading-none">
-                  Shahzeb <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-500">Ali</span>
+                <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase text-slate-900 dark:text-white leading-none">
+                  Shahzeb <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-500">Ali</span>
                 </h1>
               </motion.div>
 
@@ -186,7 +186,7 @@ const Resume = () => {
                 transition={{ delay: 0.4 }}
               >
                 {RESUME_DATA.personal.titles.map((t, i) => (
-                  <span key={i} className="px-4 py-1.5 rounded-xl bg-white/5 border border-white/5 text-[10px] font-black tracking-[0.15em] uppercase text-slate-400">
+                  <span key={i} className="px-4 py-1.5 rounded-xl bg-slate-200/50 dark:bg-white/5 border border-slate-200 dark:border-white/5 text-[10px] font-black tracking-[0.15em] uppercase text-slate-600 dark:text-slate-400">
                     {t}
                   </span>
                 ))}
@@ -198,11 +198,11 @@ const Resume = () => {
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                <div className="flex items-center gap-2 text-[11px] font-bold text-slate-500 uppercase tracking-widest">
-                  <MapPin size={14} className="text-blue-500" /> {RESUME_DATA.personal.location}
+                <div className="flex items-center gap-2 text-[11px] font-bold text-slate-500 dark:text-slate-500 uppercase tracking-widest">
+                  <MapPin size={14} className="text-blue-600 dark:text-blue-500" /> {RESUME_DATA.personal.location}
                 </div>
-                <div className="flex items-center gap-2 text-[11px] font-bold text-slate-500 uppercase tracking-widest">
-                  <Globe size={14} className="text-violet-500" /> {RESUME_DATA.personal.website}
+                <div className="flex items-center gap-2 text-[11px] font-bold text-slate-500 dark:text-slate-500 uppercase tracking-widest">
+                  <Globe size={14} className="text-violet-600 dark:text-violet-500" /> {RESUME_DATA.personal.website}
                 </div>
               </motion.div>
             </div>
@@ -216,12 +216,12 @@ const Resume = () => {
             <a
               href="/Shahzeb_Ali_Resume.pdf"
               download="Shahzeb_Ali_Resume.pdf"
-              className="group relative flex items-center gap-4 px-10 py-5 bg-gradient-to-br from-blue-600 to-violet-600 rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(37,99,235,0.2)] hover:shadow-[0_25px_50px_rgba(37,99,235,0.4)] transition-all active:scale-95"
+              className="group relative flex items-center gap-4 px-10 py-5 bg-gradient-to-br from-blue-600 to-violet-600 rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(37,99,235,0.15)] dark:shadow-[0_20px_40px_rgba(37,99,235,0.2)] hover:shadow-[0_25px_50px_rgba(37,99,235,0.3)] dark:hover:shadow-[0_25px_50px_rgba(37,99,235,0.4)] transition-all active:scale-95"
             >
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <FileDown size={24} className="text-white group-hover:scale-110 transition-transform" />
               <div className="flex flex-col items-start leading-tight">
-                <span className="text-[10px] font-mono font-black tracking-widest text-white/60 uppercase">System Export</span>
+                <span className="text-[10px] font-mono font-black tracking-widest text-white/70 uppercase">System Export</span>
                 <span className="text-lg font-black text-white uppercase tracking-tighter">Download PDF</span>
               </div>
             </a>
@@ -230,7 +230,7 @@ const Resume = () => {
 
         {/* ── MISSION OBJECTIVE (SUMMARY) ── */}
         <section className="mb-32 relative">
-          <div className="absolute -left-10 top-0 bottom-0 w-[1px] bg-gradient-to-b from-blue-500/50 via-transparent to-transparent hidden xl:block shadow-[0_0_10px_rgba(59,130,246,0.3)]"></div>
+          <div className="absolute -left-10 top-0 bottom-0 w-[1px] bg-gradient-to-b from-blue-500/30 via-transparent to-transparent hidden xl:block shadow-[0_0_10px_rgba(59,130,246,0.1)]"></div>
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 40 }}
@@ -240,24 +240,24 @@ const Resume = () => {
             <div className="sticky top-32">
               <SectionHeader title="Objective" icon={Crosshair} subtitle="Mission Statement" />
             </div>
-            <div className="relative p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/10 backdrop-blur-3xl overflow-hidden group">
-              <div className="absolute top-0 right-0 p-8 opacity-[0.05] group-hover:scale-110 transition-transform">
+            <div className="relative p-10 rounded-[2.5rem] bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 backdrop-blur-3xl overflow-hidden shadow-xl dark:shadow-none group">
+              <div className="absolute top-0 right-0 p-8 opacity-[0.03] dark:opacity-[0.05] text-slate-900 dark:text-white group-hover:scale-110 transition-transform">
                 <Terminal size={120} />
               </div>
-              <p className="text-lg md:text-xl text-slate-400 font-medium leading-relaxed tracking-tight italic">
+              <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 font-medium leading-relaxed tracking-tight italic">
                 "{RESUME_DATA.summary}"
               </p>
-              <div className="mt-8 pt-8 border-t border-white/5 flex items-center gap-10">
+              <div className="mt-8 pt-8 border-t border-slate-100 dark:border-white/5 flex items-center gap-10">
                 <div className="flex flex-col">
-                  <span className="text-[10px] font-mono font-black text-blue-500 uppercase tracking-widest mb-1">Node Status</span>
+                  <span className="text-[10px] font-mono font-black text-blue-600 dark:text-blue-500 uppercase tracking-widest mb-1">Node Status</span>
                   <div className="flex items-center gap-2">
                     <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                    <span className="text-xs font-bold text-white uppercase font-mono">Verified Active</span>
+                    <span className="text-xs font-bold text-slate-900 dark:text-white uppercase font-mono">Verified Active</span>
                   </div>
                 </div>
-                <div className="flex flex-col text-slate-500">
+                <div className="flex flex-col text-slate-400 dark:text-slate-500">
                   <span className="text-[10px] font-mono font-black uppercase tracking-widest mb-1">Clearance</span>
-                  <span className="text-xs font-bold uppercase font-mono">T-4 Restricted</span>
+                  <span className="text-xs font-bold uppercase font-mono tracking-tight">T-4 Restricted</span>
                 </div>
               </div>
             </div>
@@ -275,21 +275,21 @@ const Resume = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="group relative p-8 rounded-[2rem] bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all duration-500 overflow-hidden shadow-2xl"
+                className="group relative p-8 rounded-[2rem] bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/20 dark:hover:border-blue-500/30 transition-all duration-500 overflow-hidden shadow-lg dark:shadow-2xl"
               >
-                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-all duration-1000 ease-in-out"></div>
+                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/30 dark:via-blue-500/50 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-all duration-1000 ease-in-out"></div>
                 
-                <div className={`p-3 w-fit rounded-2xl bg-${skillGroup.color}-500/10 border border-${skillGroup.color}-500/20 mb-6 group-hover:scale-110 transition-transform`}>
-                  <skillGroup.icon size={24} className={`text-${skillGroup.color}-400`} />
+                <div className={`p-3 w-fit rounded-2xl bg-${skillGroup.color}-500/5 dark:bg-${skillGroup.color}-500/10 border border-${skillGroup.color}-500/10 dark:border-${skillGroup.color}-500/20 mb-6 group-hover:scale-110 transition-transform`}>
+                  <skillGroup.icon size={24} className={`text-${skillGroup.color}-600 dark:text-${skillGroup.color}-400`} />
                 </div>
                 
-                <h3 className="text-lg font-black text-white uppercase tracking-tight mb-4 group-hover:text-blue-300 transition-colors">
+                <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
                   {skillGroup.category}
                 </h3>
                 
                 <div className="flex flex-wrap gap-2">
                   {skillGroup.items.map((skill, j) => (
-                    <span key={j} className="text-[10px] px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-slate-500 font-mono font-bold uppercase tracking-wider group-hover:bg-white/10 group-hover:text-slate-300 transition-all">
+                    <span key={j} className="text-[10px] px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-500 font-mono font-bold uppercase tracking-wider group-hover:bg-blue-50 dark:group-hover:bg-white/10 group-hover:text-blue-600 dark:group-hover:text-slate-300 transition-all">
                       {skill}
                     </span>
                   ))}
@@ -303,7 +303,7 @@ const Resume = () => {
         <section className="mb-32">
           <SectionHeader title="History" icon={Briefcase} subtitle="Operational Log Timeline" />
           <div className="relative space-y-12">
-            <div className="absolute left-[31px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-blue-500/50 via-violet-500/30 to-transparent"></div>
+            <div className="absolute left-[31px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-blue-500/20 dark:from-blue-500/50 via-violet-500/10 dark:via-violet-500/30 to-transparent"></div>
             {RESUME_DATA.experience.map((job, i) => (
               <motion.div
                 key={i}
@@ -313,38 +313,38 @@ const Resume = () => {
                 className="relative pl-24 group"
               >
                 {/* Timeline Point */}
-                <div className="absolute left-0 top-0 p-4 rounded-2xl bg-[#050810] border border-white/10 group-hover:border-blue-500 transition-all z-20">
-                  <Activity size={32} className={`${job.highlight ? 'text-violet-500' : 'text-blue-500'} group-hover:animate-pulse`} />
+                <div className="absolute left-0 top-0 p-4 rounded-2xl bg-white dark:bg-[#050810] border border-slate-200 dark:border-white/10 group-hover:border-blue-500 transition-all z-20 shadow-lg">
+                  <Activity size={32} className={`${job.highlight ? 'text-violet-600 dark:text-violet-500' : 'text-blue-600 dark:text-blue-500'} group-hover:animate-pulse`} />
                 </div>
 
-                <div className={`p-10 rounded-[2.5rem] border backdrop-blur-2xl transition-all duration-700 ${
+                <div className={`p-10 rounded-[2.5rem] border backdrop-blur-2xl transition-all duration-700 shadow-xl dark:shadow-2xl ${
                   job.highlight 
-                  ? 'bg-violet-500/5 border-violet-500/20 shadow-[0_30px_60px_rgba(139,92,246,0.1)]' 
-                  : 'bg-white/[0.02] border-white/5 shadow-2xl'
+                  ? 'bg-violet-500/[0.03] dark:bg-violet-500/5 border-violet-200 dark:border-violet-500/20 shadow-violet-500/5' 
+                  : 'bg-white dark:bg-white/[0.02] border-slate-200 dark:border-white/5'
                 }`}>
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
                     <div>
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-[10px] font-mono font-black text-blue-500 uppercase tracking-widest">Job Entry 0{i + 1}</span>
-                        {job.highlight && <span className="px-2 py-0.5 rounded-lg bg-violet-500 text-white text-[8px] font-black uppercase">Critical</span>}
+                        <span className="text-[10px] font-mono font-black text-blue-600 dark:text-blue-500 uppercase tracking-widest">Entry 0{i + 1}</span>
+                        {job.highlight && <span className="px-2 py-0.5 rounded-lg bg-violet-600 text-white text-[8px] font-black uppercase">Critical Highlight</span>}
                       </div>
-                      <h3 className="text-3xl font-black text-white uppercase tracking-tighter leading-none mb-2">
+                      <h3 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter leading-none mb-2">
                         {job.title}
                       </h3>
-                      <p className="text-xl font-bold text-blue-400 opacity-80 uppercase tracking-tight">
-                        {job.company} <span className="text-slate-600 mx-2">//</span> <span className="text-slate-500 text-sm">{job.location}</span>
+                      <p className="text-xl font-bold text-blue-700 dark:text-blue-400 opacity-80 uppercase tracking-tight">
+                        {job.company} <span className="text-slate-400 dark:text-slate-600 mx-2">//</span> <span className="text-slate-500 text-sm">{job.location}</span>
                       </p>
                     </div>
-                    <div className="px-6 py-3 rounded-2xl bg-white/5 border border-white/5 shadow-inner">
-                      <span className="text-xs font-mono font-black text-slate-400 tracking-widest uppercase">{job.date}</span>
+                    <div className="px-6 py-3 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 shadow-inner">
+                      <span className="text-xs font-mono font-black text-slate-500 dark:text-slate-400 tracking-widest uppercase">{job.date}</span>
                     </div>
                   </div>
 
                   <ul className="grid md:grid-cols-2 gap-6">
                     {job.points.map((pt, j) => (
                       <li key={j} className="flex gap-4 group/li">
-                        <div className="mt-1.5 shrink-0 w-2 h-2 rounded-full bg-blue-500 group-hover/li:scale-150 group-hover/li:bg-white transition-all"></div>
-                        <p className="text-sm text-slate-400 font-medium leading-relaxed group-hover/li:text-slate-200 transition-colors">
+                        <div className="mt-1.5 shrink-0 w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-500 group-hover/li:scale-150 group-hover/li:bg-slate-900 dark:group-hover/li:bg-white transition-all"></div>
+                        <p className="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed group-hover/li:text-slate-900 dark:group-hover/li:text-slate-200 transition-colors">
                           {pt}
                         </p>
                       </li>
@@ -367,35 +367,35 @@ const Resume = () => {
                 initial={{ opacity: 0, y: 20 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all duration-500 shadow-2xl flex flex-col justify-between"
+                className="group p-10 rounded-[2.5rem] bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/20 dark:hover:border-blue-500/30 transition-all duration-500 shadow-xl dark:shadow-2xl flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-8">
-                    <div className="p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20">
-                      <Terminal size={20} className="text-blue-400" />
+                    <div className="p-3 rounded-2xl bg-blue-600/5 dark:bg-blue-500/10 border border-blue-600/10 dark:border-blue-500/20 shadow-sm">
+                      <Terminal size={20} className="text-blue-600 dark:text-blue-400" />
                     </div>
-                    <span className="text-[10px] font-mono font-black text-slate-500 uppercase tracking-widest">{proj.date}</span>
+                    <span className="text-[10px] font-mono font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">{proj.date}</span>
                   </div>
-                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter leading-tight mb-4 group-hover:text-blue-400 transition-colors">
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tighter leading-tight mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     {proj.title}
                   </h3>
-                  <p className="text-[10px] font-mono font-bold text-blue-500 uppercase tracking-[0.3em] mb-8">{proj.org}</p>
+                  <p className="text-[10px] font-mono font-bold text-blue-600 dark:text-blue-500 uppercase tracking-[0.3em] mb-8">{proj.org}</p>
                   
                   <div className="space-y-4">
                     {proj.points.map((pt, j) => (
                       <div key={j} className="flex gap-4">
-                        <ChevronRight size={14} className="mt-1 shrink-0 text-slate-700 group-hover:text-blue-500 transition-colors" />
-                        <p className="text-xs text-slate-500 group-hover:text-slate-400 leading-relaxed font-medium transition-colors">{pt}</p>
+                        <ChevronRight size={14} className="mt-1 shrink-0 text-slate-300 dark:text-slate-700 group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors" />
+                        <p className="text-xs text-slate-500 dark:text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-400 leading-relaxed font-medium transition-colors">{pt}</p>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div className="mt-10 pt-8 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-[9px] font-mono font-bold text-slate-600 uppercase tracking-widest">Protocol: RSA/AES-256</span>
+                <div className="mt-10 pt-8 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+                  <span className="text-[9px] font-mono font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest">Protocol: RSA/AES-256</span>
                   <div className="flex items-center gap-1">
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500"></div>
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500/40"></div>
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500/10"></div>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-blue-500"></div>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-600/40 dark:bg-blue-500/40"></div>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-600/10 dark:bg-blue-500/10"></div>
                   </div>
                 </div>
               </motion.div>
@@ -413,18 +413,18 @@ const Resume = () => {
             <SectionHeader title="Verification" icon={Award} subtitle="Verified Certifications" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {certificationsData.slice(0, 8).map((cert, i) => (
-                <Link key={i} to={`/verify/${cert.id}`} className="group flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-violet-500/40 transition-all hover:bg-white/[0.05] shadow-sm">
-                  <div className="relative w-16 h-12 shrink-0 rounded-xl overflow-hidden border border-white/10 group-hover:scale-105 transition-transform">
+                <Link key={i} to={`/verify/${cert.id}`} className="group flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-violet-500/30 dark:hover:border-violet-500/40 transition-all hover:bg-slate-50 dark:hover:bg-white/[0.05] shadow-sm">
+                  <div className="relative w-16 h-12 shrink-0 rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 group-hover:scale-105 transition-transform bg-white">
                     <img src={cert.image} alt={cert.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100" loading="lazy" />
                   </div>
                   <div className="flex flex-col flex-1 min-w-0">
-                    <span className="text-xs text-white font-black uppercase tracking-tight group-hover:text-violet-400 truncate">{cert.title}</span>
-                    <span className="text-[8px] font-mono font-bold text-slate-500 tracking-widest uppercase truncate">{cert.issuer}</span>
+                    <span className="text-xs text-slate-900 dark:text-white font-black uppercase tracking-tight group-hover:text-violet-600 dark:group-hover:text-violet-400 truncate">{cert.title}</span>
+                    <span className="text-[8px] font-mono font-bold text-slate-400 dark:text-slate-500 tracking-widest uppercase truncate">{cert.issuer}</span>
                   </div>
                 </Link>
               ))}
             </div>
-            <Link to="/#expertise" className="inline-flex items-center gap-2 mt-8 text-[11px] font-black text-blue-500 uppercase tracking-widest hover:text-white transition-colors group">
+            <Link to="/#expertise" className="inline-flex items-center gap-2 mt-8 text-[11px] font-black text-blue-600 dark:text-blue-500 uppercase tracking-widest hover:text-slate-900 dark:hover:text-white transition-colors group">
               View All Operations <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.section>
@@ -435,19 +435,19 @@ const Resume = () => {
             viewport={{ once: true }}
           >
             <SectionHeader title="Education" icon={GraduationCap} subtitle="Academic Foundation" />
-            <div className="p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 text-center group relative overflow-hidden">
+            <div className="p-10 rounded-[2.5rem] bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 text-center group relative overflow-hidden shadow-xl dark:shadow-2xl">
               <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="p-5 w-fit rounded-full bg-blue-500/10 border border-blue-500/20 mx-auto mb-8 group-hover:scale-110 transition-transform">
-                <GraduationCap size={40} className="text-blue-400" />
+              <div className="p-5 w-fit rounded-full bg-blue-600/5 dark:bg-blue-500/10 border border-blue-600/10 dark:border-blue-500/20 mx-auto mb-8 group-hover:scale-110 transition-transform">
+                <GraduationCap size={40} className="text-blue-600 dark:text-blue-400" />
               </div>
-              <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-2 leading-none">
+              <h3 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter mb-2 leading-none">
                 {RESUME_DATA.education.degree}
               </h3>
-              <p className="text-xl font-bold text-blue-400 opacity-80 uppercase tracking-tight mb-2">
+              <p className="text-xl font-bold text-blue-700 dark:text-blue-400 opacity-80 uppercase tracking-tight mb-2">
                 {RESUME_DATA.education.institution}
               </p>
-              <p className="text-slate-500 text-sm uppercase tracking-widest font-mono mb-8">{RESUME_DATA.education.location}</p>
-              <div className="inline-block px-10 py-3 rounded-2xl bg-white/5 border border-white/10 text-xs font-mono font-black text-slate-300 tracking-[0.3em] uppercase">
+              <p className="text-slate-500 dark:text-slate-500 text-sm uppercase tracking-widest font-mono mb-8">{RESUME_DATA.education.location}</p>
+              <div className="inline-block px-10 py-3 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono font-black text-slate-600 dark:text-slate-300 tracking-[0.3em] uppercase">
                 CLASS OF {RESUME_DATA.education.date.split('–')[1].trim()}
               </div>
             </div>
@@ -459,28 +459,21 @@ const Resume = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-32 p-8 rounded-[2rem] bg-white/[0.02] border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6"
+          className="mt-32 p-8 rounded-[2rem] bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg dark:shadow-2xl"
         >
           <div className="flex items-center gap-6">
             <div className="group flex items-center gap-3">
-              <User size={16} className="text-blue-500" />
-              <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest">{RESUME_DATA.personal.details}</span>
+              <User size={16} className="text-blue-600 dark:text-blue-500" />
+              <span className="text-[10px] font-mono font-bold text-slate-500 dark:text-slate-500 uppercase tracking-widest">{RESUME_DATA.personal.details}</span>
             </div>
           </div>
           <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
             <Activity size={14} className="text-emerald-500 animate-pulse" />
-            <span className="text-[10px] font-mono font-bold text-emerald-500/80 uppercase tracking-widest">Protocol: Active Integrity Sync</span>
+            <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-500/80 uppercase tracking-widest">Protocol: Active Integrity Sync</span>
           </div>
         </motion.div>
 
       </motion.div>
-
-      <style jsx="true">{`
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-      `}</style>
     </div>
   );
 };
