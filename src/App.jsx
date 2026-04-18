@@ -85,7 +85,7 @@ const RESUME_DATA = {
       points: [
         "Architected a secure sandbox environment to emulate full-lifecycle Ransomware execution chains (Initial Access -> Persistence -> Impact), utilizing Atomic Red Team to trigger specific TTPs.",
         "Monitored telemetry via Sysmon and Windows Lifecycle events, capturing granular activity such as Volume Shadow Copy deletion (T1490) and high-frequency file modification (T1486).",
-        "Engineered high-fidelity detection logic in Splunk using SPL (Search Processing Language), creating persistent alerting rules that surfaced encrypted behavior with a 0% false-positive rate during validation."
+        "Engineered high-fidelity detection logic in Splunk using SPL, creating persistent alerting rules that surfaced encrypted behavior with a 0% false-positive rate during validation."
       ]
     },
     {
@@ -94,8 +94,8 @@ const RESUME_DATA = {
       date: "Feb 2026",
       points: [
         "Deployed a cloud-native SIEM environment utilizing Microsoft Sentinel, ingesting Azure AD, Office 365, and Defender for Endpoint telemetry via custom Data Connectors.",
-        "Developed automated SOAR (Security Orchestration, Automation, and Response) playbooks using Azure Logic Apps and Python to perform instant IP enrichment and automated account suspension.",
-        "Visualized security posture through KQL (Kusto Query Language) Workbooks, enabling real-time monitoring of identity-based threat vectors and cloud misconfigurations."
+        "Developed automated SOAR playbooks using Azure Logic Apps and Python to perform instant IP enrichment and automated account suspension.",
+        "Visualized security posture through KQL Workbooks, enabling real-time monitoring of identity-based threat vectors and cloud misconfigurations."
       ]
     },
     {
@@ -103,7 +103,7 @@ const RESUME_DATA = {
       org: "Personal Initiative",
       date: "Jan 2026",
       points: [
-        "Architected a custom Elasticsearch, Logstash, and Kibana (ELK) stack via Docker, engineering a centralized logging pipeline for Windows Event Logs and Sysmon telemetry.",
+        "Architected a custom ELK stack via Docker, engineering a centralized logging pipeline for Windows Event Logs and Sysmon telemetry.",
         "Designed real-time SIEM dashboards to monitor anomalous network activity and lateral movement, mapping custom alerts directly to the MITRE ATT&CK framework.",
         "Successfully surfaced active brute-force attempts during simulated breach events by correlating disparate log sources into high-fidelity actionable security incidents."
       ]
@@ -116,6 +116,16 @@ const RESUME_DATA = {
         "Performed multi-vector threat intelligence analysis to identify emerging TTPs targeting financial infrastructure, providing strategic attribution and mitigation recommendations.",
         "Designed a comprehensive security awareness strategy for a simulated global enterprise, focusing on reducing phishing vulnerability across high-risk business units.",
         "Developed executive-level risk reports and incident response playbooks for C-suite stakeholders, translating technical vulnerabilities into actionable business-risk mitigation strategies."
+      ]
+    },
+    {
+      title: "Enterprise Phishing & Data Exfiltration Investigation",
+      org: "TryHackMe",
+      date: "Dec 2025",
+      points: [
+        "Reconstructed the Cyber Kill Chain from phishing access through DNS tunnelling across a compromised enterprise endpoint.",
+        "Decoded obfuscated Base64 payloads and reverse-engineered malicious PowerShell execution chains, accurately mapping all attacker TTPs to MITRE ATT&CK.",
+        "Leveraged Sysmon forensics to identify Living off the Land (LotL) techniques including malicious Robocopy usage for data staging and DNS-based covert channel exfiltration."
       ]
     },
     {
@@ -136,6 +146,26 @@ const RESUME_DATA = {
         "Executed real-time alert triage and investigation within a simulated high-tempo Security Operations Center, identifying unauthorized lateral movement and privilege escalation.",
         "Utilized advanced firewall and proxy log analysis to detect stealthy data exfiltration patterns, leveraging Deep Packet Inspection (DPI) to identify malicious TLS-encrypted payloads.",
         "Drafted and implemented rapid containment protocols for compromised virtual assets, ensuring minimal operational downtime while preserving forensic integrity for root cause analysis."
+      ]
+    },
+    {
+      title: "Vulnerability Scanning Automation & Remediation Pipeline",
+      org: "Personal Lab",
+      date: "Nov 2025",
+      points: [
+        "Developed custom Bash and Python scripts to automate continuous Nmap and Nessus scanning pipelines, scheduling reports to a centralized dashboard.",
+        "Integrated live CVE threat feeds (NVD API) to auto-prioritize high-CVSS vulnerabilities across target Linux servers, reducing manual triage time by 70%.",
+        "Implemented CIS benchmark hardening scripts, mitigating over 85% of identified systemic vulnerabilities across the lab environment."
+      ]
+    },
+    {
+      title: "Mastercard Cybersecurity Virtual Experience",
+      org: "Forage",
+      date: "Dec 2025",
+      points: [
+        "Identified active phishing campaigns targeting employees and performed granular risk exposure assessments across departmental boundaries.",
+        "Analysed which business units were most susceptible and designed targeted security awareness training programs to address specific attack vectors.",
+        "Produced a structured report recommending procedural safeguards and measurable KPIs to track security posture improvement over time."
       ]
     }
   ],
@@ -914,6 +944,8 @@ const PortfolioHome = () => (
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme') || 'dark';
@@ -922,11 +954,32 @@ export default function App() {
   });
   const { scrollYProgress } = useScroll();
   const yBg = useTransform(scrollYProgress, [0, 1], [0, 400]);
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      setShowBackToTop(window.scrollY > 400);
+    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Active section tracking via IntersectionObserver
+  useEffect(() => {
+    const sections = ['about', 'skills', 'experience', 'projects'];
+    const observers = [];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { rootMargin: '-40% 0px -50% 0px', threshold: 0 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach(o => o.disconnect());
   }, []);
 
   useEffect(() => {
@@ -983,7 +1036,33 @@ export default function App() {
            style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)', backgroundSize: '32px 32px' }}>
       </div>
 
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-700 ${scrolled || mobileMenuOpen ? 'bg-white/95 dark:bg-[#060913]/95 backdrop-blur-2xl border-b border-slate-200 dark:border-white/[0.05] shadow-[0_10px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.4)]' : 'bg-transparent'} ${mobileMenuOpen ? 'py-4' : scrolled ? 'py-4' : 'py-6'}`}>
+      {/* SCROLL PROGRESS BAR */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-500 via-violet-500 to-blue-400 origin-left z-[60] shadow-[0_0_10px_rgba(99,102,241,0.6)]"
+        style={{ scaleX }}
+      />
+
+      {/* BACK TO TOP BUTTON */}
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-8 right-8 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold tracking-widest uppercase shadow-[0_8px_30px_rgba(37,99,235,0.4)] hover:shadow-[0_12px_40px_rgba(37,99,235,0.6)] transition-all duration-300 hover:-translate-y-1 group"
+            aria-label="Back to top"
+          >
+            <svg className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+            </svg>
+            Top
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      <nav className={`fixed top-[3px] w-full z-50 transition-all duration-700 ${scrolled || mobileMenuOpen ? 'bg-white/95 dark:bg-[#060913]/95 backdrop-blur-2xl border-b border-slate-200 dark:border-white/[0.05] shadow-[0_10px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.4)]' : 'bg-transparent'} ${mobileMenuOpen ? 'py-4' : scrolled ? 'py-4' : 'py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center">
           <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 group cursor-pointer">
             <img
@@ -996,12 +1075,15 @@ export default function App() {
 
           {/* Desktop Links */}
           <div className="hidden md:flex gap-10 text-sm font-bold tracking-[0.1em] uppercase items-center">
-            {['About', 'Skills', 'Experience', 'Projects'].map((item) => (
-              <a key={item} href={`/#${item.toLowerCase()}`} className="text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-white transition-all relative group">
-                {item}
-                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-500 dark:bg-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
-              </a>
-            ))}
+            {['About', 'Skills', 'Experience', 'Projects'].map((item) => {
+              const isActive = activeSection === item.toLowerCase();
+              return (
+                <a key={item} href={`/#${item.toLowerCase()}`} className={`transition-all relative group font-bold tracking-[0.1em] uppercase text-sm ${ isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-white' }`}>
+                  {item}
+                  <span className={`absolute -bottom-2 left-1/2 -translate-x-1/2 h-1 rounded-full bg-blue-500 dark:bg-blue-400 transition-all duration-300 ${ isActive ? 'w-full opacity-100' : 'w-1 opacity-0 group-hover:opacity-100 group-hover:w-1' }`}></span>
+                </a>
+              );
+            })}
             <Link to="/blog" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors relative group px-2">
               <span className="font-bold">BLOG</span>
               <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
