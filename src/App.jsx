@@ -4,7 +4,9 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Resume from './pages/Resume';
+import VerifyCert from './pages/VerifyCert';
 import NotFound from './pages/NotFound';
+import { certificationsData } from './data/certificationsData';
 import { Helmet } from 'react-helmet-async';
 import { 
   ShieldAlert, Terminal, Briefcase, GraduationCap, Award, 
@@ -827,37 +829,36 @@ const PortfolioHome = () => (
           <TiltCard className="h-full">
             <div className="bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] backdrop-blur-3xl rounded-[2.5rem] p-10 border border-slate-200 dark:border-white/[0.05] flex-grow hover:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.03] transition-all duration-700 shadow-2xl h-full hover:border-blue-500/30">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-2">
-                {RESUME_DATA.certifications.map((cert, idx) => (
-                  <motion.a 
-                    href={cert.file}
-                    target="_blank"
-                    rel="noreferrer"
+                {certificationsData.map((cert, idx) => (
+                  <motion.div 
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: (idx % 8) * 0.1, duration: 0.5 }}
                     viewport={{ once: true, margin: "50px" }}
-                    key={idx} className="flex flex-col bg-white/60 dark:bg-[#0A0F1C]/60 border border-slate-200 dark:border-white/[0.05] rounded-3xl overflow-hidden hover:border-violet-500/50 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_rgba(139,92,246,0.15)] cursor-pointer"
+                    key={idx}
                   >
-                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-white/20 dark:bg-white/[0.02]">
-                      <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-blue-500/0 transition-colors duration-500 z-10" />
-                      <div className="absolute inset-0 border-b border-slate-200 dark:border-white/[0.05] z-20 pointer-events-none" />
-                      <img 
-                        src={cert.image} 
-                        alt={`${cert.title} Certificate`} 
-                        className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-700 ease-out"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1C]/70 via-[#0A0F1C]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-end p-4">
-                        <div className="ml-auto bg-white/20 backdrop-blur-md p-2.5 rounded-full transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 border border-white/30">
-                          <ExternalLink className="w-4 h-4 text-white" />
+                    <Link to={`/verify/${cert.id}`} className="flex flex-col bg-white/60 dark:bg-[#0A0F1C]/60 border border-slate-200 dark:border-white/[0.05] rounded-3xl overflow-hidden hover:border-violet-500/50 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_rgba(139,92,246,0.15)] cursor-pointer h-full">
+                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-white/20 dark:bg-white/[0.02]">
+                        <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-blue-500/0 transition-colors duration-500 z-10" />
+                        <div className="absolute inset-0 border-b border-slate-200 dark:border-white/[0.05] z-20 pointer-events-none" />
+                        <img 
+                          src={cert.image} 
+                          alt={`${cert.title} Certificate`} 
+                          className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-700 ease-out"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1C]/70 via-[#0A0F1C]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-end p-4">
+                          <div className="ml-auto bg-white/20 backdrop-blur-md p-2.5 rounded-full transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 border border-white/30">
+                            <ExternalLink className="w-4 h-4 text-white" />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="p-5 flex flex-col items-center text-center">
-                      <span className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors line-clamp-1">{cert.title}</span>
-                      <span className="text-[10px] text-slate-500 font-bold tracking-[0.2em] uppercase mt-1.5">{cert.issuer}</span>
-                    </div>
-                  </motion.a>
+                      <div className="p-5 flex flex-col items-center text-center">
+                        <span className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors line-clamp-1">{cert.title}</span>
+                        <span className="text-[10px] text-slate-500 font-bold tracking-[0.2em] uppercase mt-1.5">{cert.issuer}</span>
+                      </div>
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -1101,6 +1102,7 @@ export default function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path="/verify/:id" element={<VerifyCert />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
