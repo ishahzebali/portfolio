@@ -6,6 +6,7 @@ import BlogPost from './pages/BlogPost';
 import Resume from './pages/Resume';
 import VerifyCert from './pages/VerifyCert';
 import NotFound from './pages/NotFound';
+import AllProjects from './pages/AllProjects';
 import { certificationsData } from './data/certificationsData';
 import { Helmet } from 'react-helmet-async';
 import { 
@@ -821,7 +822,7 @@ const PortfolioHome = () => (
       </FadeInSection>
       
       <div className="space-y-24 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-[2px] before:bg-gradient-to-b before:from-blue-500/50 before:via-slate-300 dark:before:via-white/[0.1] before:to-transparent">
-        {RESUME_DATA.projects.map((project, idx) => (
+        {RESUME_DATA.projects.slice(0, 4).map((project, idx) => (
           <FadeInSection key={idx} delay={idx * 80} direction={idx % 2 === 0 ? "right" : "left"}>
             <div className="relative w-full group">
               
@@ -867,6 +868,23 @@ const PortfolioHome = () => (
           </FadeInSection>
         ))}
       </div>
+
+      {/* View All Projects CTA */}
+      <FadeInSection delay={400}>
+        <div className="mt-20 flex flex-col items-center gap-4 text-center">
+          <p className="text-slate-500 dark:text-slate-400 text-sm font-light">
+            Showing <span className="text-blue-500 font-bold">4 of {RESUME_DATA.projects.length}</span> operations
+          </p>
+          <Link
+            to="/projects"
+            className="group inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm tracking-widest uppercase shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:shadow-[0_0_50px_rgba(37,99,235,0.55)] transition-all duration-300 hover:-translate-y-1"
+          >
+            <Crosshair className="w-4 h-4" />
+            View All Operations
+            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+      </FadeInSection>
     </section>
 
     {/* INTERACTIVE CHALLENGE SECTION */}
@@ -1209,6 +1227,7 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<PortfolioHome />} />
+        <Route path="/projects" element={<AllProjects />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/resume" element={<Resume />} />
