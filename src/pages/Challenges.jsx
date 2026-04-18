@@ -284,14 +284,14 @@ const Challenges = () => {
                   {/* INPUT AREA */}
                   <form onSubmit={handleAnswer} className="flex flex-col md:flex-row gap-6">
                     <div className="relative flex-grow group">
-                      <div className="absolute inset-0 bg-blue-500/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                      <TerminalSquare className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-hover:text-blue-500 transition-colors" />
+                      <div className="absolute inset-0 bg-blue-500/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                      <TerminalSquare className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-hover:text-blue-500 transition-colors z-20" />
                       <input 
                         type="text" 
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder="Analyze telemetry and enter identifying intel..." 
-                        className="w-full bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 focus:border-blue-500/40 focus:ring-4 focus:ring-blue-500/5 rounded-2xl py-5 pl-16 pr-6 text-slate-900 dark:text-white font-mono text-sm outline-none transition-all placeholder:text-slate-500 shadow-xl dark:shadow-none"
+                        className="w-full bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 focus:border-blue-500/40 focus:ring-4 focus:ring-blue-500/5 rounded-2xl py-5 pl-16 pr-6 text-slate-900 dark:text-white font-mono text-sm outline-none transition-all placeholder:text-slate-500 shadow-xl dark:shadow-none relative z-10"
                         disabled={status === 'checking'}
                       />
                     </div>
