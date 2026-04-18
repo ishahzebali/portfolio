@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 /**
  * DecryptText Component
  * Animates text by scrambling characters before revealing the target string.
- * Uses a "Ghost Text" technique to prevent any layout shifts.
+ * Uses CSS Grid Stacking to prevent layout shifts while remaining compatible 
+ * with background-clip: text and other complex parent styles.
  */
 const DecryptText = ({ text, delay = 0, className = "" }) => {
   const chars = "!<>-_\\/[]{}—=+*^?#________";
@@ -34,17 +35,20 @@ const DecryptText = ({ text, delay = 0, className = "" }) => {
   }, [text]);
 
   return (
-    <span className={`relative inline-grid ${className}`}>
+    <span className={`inline-grid grid-cols-1 grid-rows-1 ${className}`}>
       {/* Ghost Layer: Invisible, reserved space with target text */}
-      <span className="invisible pointer-events-none select-none" aria-hidden="true">
+      <span 
+        className="invisible col-start-1 row-start-1 pointer-events-none select-none h-full w-full" 
+        aria-hidden="true"
+      >
         {text}
       </span>
       
-      {/* Animated Layer: Positioned absolutely on top of the ghost */}
+      {/* Animated Layer: Positioned in the same grid cell as the ghost to stack without 'absolute' */}
       <motion.span 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="absolute inset-0"
+        className="col-start-1 row-start-1"
       >
         {displayText}
       </motion.span>
