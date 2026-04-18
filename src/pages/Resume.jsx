@@ -76,7 +76,69 @@ const RESUME_DATA = {
     institution: "Lahore Garrison University",
     location: "Lahore, Pakistan",
     date: "2020 – 2025"
-  }
+  },
+  projects: [
+    {
+      title: "End-to-End Ransomware Emulation & Detection Engineering",
+      org: "Purple Team Lab",
+      date: "Feb 2026",
+      points: [
+        "Architected a secure sandbox environment to emulate full-lifecycle Ransomware execution chains (Initial Access -> Persistence -> Impact), utilizing Atomic Red Team to trigger specific TTPs.",
+        "Monitored telemetry via Sysmon and Windows Lifecycle events, capturing granular activity such as Volume Shadow Copy deletion (T1490) and high-frequency file modification (T1486).",
+        "Engineered high-fidelity detection logic in Splunk using SPL (Search Processing Language), creating persistent alerting rules that surfaced encrypted behavior with a 0% false-positive rate during validation."
+      ]
+    },
+    {
+      title: "Azure Sentinel (SIEM) & SOAR Automation Playbook Development",
+      org: "Cloud Security Lab",
+      date: "Feb 2026",
+      points: [
+        "Deployed a cloud-native SIEM environment utilizing Microsoft Sentinel, ingesting Azure AD, Office 365, and Defender for Endpoint telemetry via custom Data Connectors.",
+        "Developed automated SOAR (Security Orchestration, Automation, and Response) playbooks using Azure Logic Apps and Python to perform instant IP enrichment and automated account suspension.",
+        "Visualized security posture through KQL (Kusto Query Language) Workbooks, enabling real-time monitoring of identity-based threat vectors and cloud misconfigurations."
+      ]
+    },
+    {
+      title: "Advanced SIEM Integration & Threat Correlation Lab",
+      org: "Personal Initiative",
+      date: "Jan 2026",
+      points: [
+        "Architected a custom Elasticsearch, Logstash, and Kibana (ELK) stack via Docker, engineering a centralized logging pipeline for Windows Event Logs and Sysmon telemetry.",
+        "Designed real-time SIEM dashboards to monitor anomalous network activity and lateral movement, mapping custom alerts directly to the MITRE ATT&CK framework.",
+        "Successfully surfaced active brute-force attempts during simulated breach events by correlating disparate log sources into high-fidelity actionable security incidents."
+      ]
+    },
+    {
+      title: "Cyber Strategic & Technical Advisory Simulation",
+      org: "Deloitte (via Forage)",
+      date: "Jan 2026",
+      points: [
+        "Performed multi-vector threat intelligence analysis to identify emerging TTPs targeting financial infrastructure, providing strategic attribution and mitigation recommendations.",
+        "Designed a comprehensive security awareness strategy for a simulated global enterprise, focusing on reducing phishing vulnerability across high-risk business units.",
+        "Developed executive-level risk reports and incident response playbooks for C-suite stakeholders, translating technical vulnerabilities into actionable business-risk mitigation strategies."
+      ]
+    },
+    {
+      title: "Active Directory Red/Blue Tactics & Mitigation",
+      org: "Home Network",
+      date: "Jan 2026",
+      points: [
+        "Constructed a vulnerable Active Directory domain environment to emulate advanced post-exploitation threats like Kerberoasting, AS-REP Roasting, and Pass-the-Hash.",
+        "Utilized Splunk to ingest logs from the Domain Controller and authored custom detection logic capable of identifying Golden Ticket creation with 99% accuracy.",
+        "Implemented hardened GPO configurations and Tiered Administrative Models to significantly reduce the attack surface and mitigate lateral movement opportunities."
+      ]
+    },
+    {
+      title: "Enterprise SOC Operations & Threat Hunting Simulation",
+      org: "Datacom (via Forage)",
+      date: "Jan 2026",
+      points: [
+        "Executed real-time alert triage and investigation within a simulated high-tempo Security Operations Center, identifying unauthorized lateral movement and privilege escalation.",
+        "Utilized advanced firewall and proxy log analysis to detect stealthy data exfiltration patterns, leveraging Deep Packet Inspection (DPI) to identify malicious TLS-encrypted payloads.",
+        "Drafted and implemented rapid containment protocols for compromised virtual assets, ensuring minimal operational downtime while preserving forensic integrity for root cause analysis."
+      ]
+    }
+  ]
 };
 
 const Section = ({ title, icon: Icon, children }) => (
@@ -231,6 +293,31 @@ const Resume = () => {
             ))}
           </div>
         </Section>
+234: 
+235:         {/* ── PROJECTS ── */}
+236:         <Section title="Key Projects & Simulations" icon={Crosshair}>
+237:           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+238:             {RESUME_DATA.projects.map((proj, i) => (
+239:               <div key={i} className="p-6 rounded-2xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] hover:border-blue-500/30 transition-all group shadow-sm">
+240:                 <div className="flex justify-between items-start mb-4">
+241:                   <div>
+242:                     <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{proj.title}</h3>
+243:                     <p className="text-xs font-bold text-slate-500 mt-1 uppercase tracking-widest">{proj.org}</p>
+244:                   </div>
+245:                   <span className="text-[10px] font-bold py-1 px-3 rounded-full bg-slate-100 dark:bg-white/[0.05] text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/[0.08]">{proj.date}</span>
+246:                 </div>
+247:                 <ul className="space-y-2">
+248:                   {proj.points.map((pt, j) => (
+249:                     <li key={j} className="flex gap-2.5 text-xs text-slate-600 dark:text-slate-400 font-light leading-relaxed">
+250:                       <ChevronRight className="w-3 h-3 shrink-0 mt-0.5 text-blue-500/40 group-hover:text-blue-500 transition-colors" />
+251:                       {pt}
+252:                     </li>
+253:                   ))}
+254:                 </ul>
+255:               </div>
+256:             ))}
+257:           </div>
+258:         </Section>
 
         {/* ── CERTIFICATIONS + EDUCATION ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">

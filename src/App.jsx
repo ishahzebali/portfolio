@@ -79,13 +79,43 @@ const RESUME_DATA = {
   ],
   projects: [
     {
+      title: "End-to-End Ransomware Emulation & Detection Engineering",
+      org: "Purple Team Lab",
+      date: "Feb 2026",
+      points: [
+        "Architected a secure sandbox environment to emulate full-lifecycle Ransomware execution chains (Initial Access -> Persistence -> Impact), utilizing Atomic Red Team to trigger specific TTPs.",
+        "Monitored telemetry via Sysmon and Windows Lifecycle events, capturing granular activity such as Volume Shadow Copy deletion (T1490) and high-frequency file modification (T1486).",
+        "Engineered high-fidelity detection logic in Splunk using SPL (Search Processing Language), creating persistent alerting rules that surfaced encrypted behavior with a 0% false-positive rate during validation."
+      ]
+    },
+    {
+      title: "Azure Sentinel (SIEM) & SOAR Automation Playbook Development",
+      org: "Cloud Security Lab",
+      date: "Feb 2026",
+      points: [
+        "Deployed a cloud-native SIEM environment utilizing Microsoft Sentinel, ingesting Azure AD, Office 365, and Defender for Endpoint telemetry via custom Data Connectors.",
+        "Developed automated SOAR (Security Orchestration, Automation, and Response) playbooks using Azure Logic Apps and Python to perform instant IP enrichment and automated account suspension.",
+        "Visualized security posture through KQL (Kusto Query Language) Workbooks, enabling real-time monitoring of identity-based threat vectors and cloud misconfigurations."
+      ]
+    },
+    {
       title: "Advanced SIEM Integration & Threat Correlation Lab",
       org: "Personal Initiative",
       date: "Jan 2026",
       points: [
-        "Architected a custom Elasticsearch, Logstash, and Kibana (ELK) stack deployed via Docker, seamlessly ingesting Windows Event Logs and Sysmon telemetry.",
-        "Engineered real-time SIEM dashboards to monitor anomalous network activity, privilege escalation, and lateral movement.",
-        "Mapped custom alerts to MITRE ATT&CK, successfully surfacing active brute-force attempts during simulated breach events."
+        "Architected a custom Elasticsearch, Logstash, and Kibana (ELK) stack via Docker, engineering a centralized logging pipeline for Windows Event Logs and Sysmon telemetry.",
+        "Designed real-time SIEM dashboards to monitor anomalous network activity and lateral movement, mapping custom alerts directly to the MITRE ATT&CK framework.",
+        "Successfully surfaced active brute-force attempts during simulated breach events by correlating disparate log sources into high-fidelity actionable security incidents."
+      ]
+    },
+    {
+      title: "Cyber Strategic & Technical Advisory Simulation",
+      org: "Deloitte (via Forage)",
+      date: "Jan 2026",
+      points: [
+        "Performed multi-vector threat intelligence analysis to identify emerging TTPs targeting financial infrastructure, providing strategic attribution and mitigation recommendations.",
+        "Designed a comprehensive security awareness strategy for a simulated global enterprise, focusing on reducing phishing vulnerability across high-risk business units.",
+        "Developed executive-level risk reports and incident response playbooks for C-suite stakeholders, translating technical vulnerabilities into actionable business-risk mitigation strategies."
       ]
     },
     {
@@ -93,38 +123,19 @@ const RESUME_DATA = {
       org: "Home Network",
       date: "Jan 2026",
       points: [
-        "Constructed a vulnerable Active Directory domain environment to emulate advanced post-exploitation threats and misconfigurations.",
-        "Executed offensive AD attacks including Kerberoasting, AS-REP Roasting, and Pass-the-Hash utilizing Mimikatz and Impacket.",
-        "Utilized Splunk to ingest Domain Controller logs and authored custom alert logic capable of detecting ticket anomalies and golden ticket creation with 99% accuracy."
+        "Constructed a vulnerable Active Directory domain environment to emulate advanced post-exploitation threats like Kerberoasting, AS-REP Roasting, and Pass-the-Hash.",
+        "Utilized Splunk to ingest logs from the Domain Controller and authored custom detection logic capable of identifying Golden Ticket creation with 99% accuracy.",
+        "Implemented hardened GPO configurations and Tiered Administrative Models to significantly reduce the attack surface and mitigate lateral movement opportunities."
       ]
     },
     {
-      title: "Enterprise Phishing & Data Exfiltration Investigation",
-      org: "TryHackMe",
-      date: "Dec 2025",
+      title: "Enterprise SOC Operations & Threat Hunting Simulation",
+      org: "Datacom (via Forage)",
+      date: "Jan 2026",
       points: [
-        "Reconstructed the Cyber Kill Chain from phishing access through DNS tunnelling across a compromised enterprise endpoint.",
-        "Decoded obfuscated Base64 payloads and reverse-engineered malicious PowerShell execution chains.",
-        "Leveraged Sysmon forensics to identify Living off the Land (LotL) techniques and accurately mapped all attacker TTPs."
-      ]
-    },
-    {
-      title: "Vulnerability Scanning Automation & Remediation",
-      org: "Personal Lab",
-      date: "Nov 2025",
-      points: [
-        "Developed custom Bash and Python scripts to automate continuous Nmap and vulnerability scanning pipelines.",
-        "Integrated CVE threat feeds to prioritize the remediation of high-CVSS vulnerabilities across target Linux servers.",
-        "Implemented secure baseline configurations (CIS benchmarks) mitigating over 85% of identified systemic vulnerabilities."
-      ]
-    },
-    {
-      title: "Mastercard Cybersecurity Virtual Experience",
-      org: "Forage",
-      date: "Dec 2025",
-      points: [
-        "Identified active phishing campaigns and performed risk exposure assessments across departmental boundaries.",
-        "Designed and proposed targeted security awareness training programs for high-risk business units."
+        "Executed real-time alert triage and investigation within a simulated high-tempo Security Operations Center, identifying unauthorized lateral movement and privilege escalation.",
+        "Utilized advanced firewall and proxy log analysis to detect stealthy data exfiltration patterns, leveraging Deep Packet Inspection (DPI) to identify malicious TLS-encrypted payloads.",
+        "Drafted and implemented rapid containment protocols for compromised virtual assets, ensuring minimal operational downtime while preserving forensic integrity for root cause analysis."
       ]
     }
   ],
