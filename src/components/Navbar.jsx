@@ -24,6 +24,17 @@ const Navbar = () => {
     { name: 'Contact', path: '/#contact' },
   ];
 
+  const checkActive = (path) => {
+    if (path === '/blog') {
+      return location.pathname.startsWith('/blog');
+    }
+    // For hash links, they should only be active if we are on the home page
+    if (path.startsWith('/#')) {
+      return location.pathname === '/' && location.hash === path.substring(1);
+    }
+    return location.pathname === path;
+  };
+
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
@@ -60,14 +71,25 @@ const Navbar = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-10">
               {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.path}
-                  className="relative text-sm font-medium tracking-wide text-slate-300 hover:text-white transition-colors group/link"
-                >
-                  {link.name}
-                  <span className={`absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-500 to-violet-500 transition-all duration-300 group-hover/link:w-full ${location.pathname + location.hash === link.path ? 'w-full' : ''}`}></span>
-                </a>
+                link.path.startsWith('/#') ? (
+                  <a
+                    key={link.name}
+                    href={link.path}
+                    className="relative text-sm font-medium tracking-wide text-slate-300 hover:text-white transition-colors group/link"
+                  >
+                    {link.name}
+                    <span className={`absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-500 to-violet-500 transition-all duration-300 group-hover/link:w-full ${checkActive(link.path) ? 'w-full' : ''}`}></span>
+                  </a>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className="relative text-sm font-medium tracking-wide text-slate-300 hover:text-white transition-colors group/link"
+                  >
+                    {link.name}
+                    <span className={`absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-500 to-violet-500 transition-all duration-300 group-hover/link:w-full ${checkActive(link.path) ? 'w-full' : ''}`}></span>
+                  </Link>
+                )
               ))}
             </div>
 
@@ -133,15 +155,27 @@ const Navbar = () => {
                     closed: { opacity: 0, y: 20 }
                   }}
                 >
-                  <a
-                    href={link.path}
-                    onClick={closeMenu}
-                    className="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40 hover:from-blue-400 hover:to-violet-500 transition-all uppercase tracking-tighter flex items-center gap-4 justify-center group"
-                  >
-                    <span className="text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity text-2xl font-mono">0{navLinks.indexOf(link) + 1}</span>
-                    {link.name}
-                    <ChevronRight className="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-2 text-violet-500" size={40} />
-                  </a>
+                  {link.path.startsWith('/#') ? (
+                    <a
+                      href={link.path}
+                      onClick={closeMenu}
+                      className={`text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r transition-all uppercase tracking-tighter flex items-center gap-4 justify-center group ${checkActive(link.path) ? 'from-blue-400 to-violet-500' : 'from-white to-white/40 hover:from-blue-400 hover:to-violet-500'}`}
+                    >
+                      <span className={`text-blue-500 transition-opacity text-2xl font-mono ${checkActive(link.path) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>0{navLinks.indexOf(link) + 1}</span>
+                      {link.name}
+                      <ChevronRight className={`transition-all group-hover:translate-x-2 text-violet-500 ${checkActive(link.path) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} size={40} />
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      onClick={closeMenu}
+                      className={`text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r transition-all uppercase tracking-tighter flex items-center gap-4 justify-center group ${checkActive(link.path) ? 'from-blue-400 to-violet-500' : 'from-white to-white/40 hover:from-blue-400 hover:to-violet-500'}`}
+                    >
+                      <span className={`text-blue-500 transition-opacity text-2xl font-mono ${checkActive(link.path) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>0{navLinks.indexOf(link) + 1}</span>
+                      {link.name}
+                      <ChevronRight className={`transition-all group-hover:translate-x-2 text-violet-500 ${checkActive(link.path) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} size={40} />
+                    </Link>
+                  )}
                 </motion.div>
               ))}
               
