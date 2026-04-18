@@ -10,6 +10,7 @@ import AllProjects from './pages/AllProjects';
 import Challenges from './pages/Challenges';
 import { certificationsData } from './data/certificationsData';
 import { Helmet } from 'react-helmet-async';
+import DecryptText from './components/DecryptText';
 import { 
   ShieldAlert, Terminal, Briefcase, GraduationCap, Award, 
   MapPin, Mail, Phone, ExternalLink, Linkedin, ChevronRight, 
@@ -464,7 +465,7 @@ const PortfolioHome = () => (
         
         <FadeInSection delay={200} direction="left">
           <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-slate-900 dark:from-white via-slate-500 dark:via-slate-200 to-slate-300 dark:to-slate-400 dark:to-slate-500 mb-6 tracking-tighter leading-[1.05]">
-            {RESUME_DATA.personal.name}
+            <DecryptText text={RESUME_DATA.personal.name} />
           </h1>
         </FadeInSection>
         
