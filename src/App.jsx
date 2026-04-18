@@ -949,100 +949,122 @@ const PortfolioHome = () => (
       </FadeInSection>
     </section>
 
-    {/* CERTIFICATIONS & EDUCATION */}
-    <section className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-12">
+    {/* CERTIFICATIONS SECTION */}
+    <section id="certifications" className="scroll-mt-40 mb-32">
+      <FadeInSection>
+        <SectionHeading title="Certifications" icon={Award} />
+      </FadeInSection>
       
-      <div className="flex flex-col">
-        <FadeInSection>
-          <SectionHeading title="Certifications" icon={Award} />
-        </FadeInSection>
-        <FadeInSection delay={200}>
-          <TiltCard className="h-full">
-            <div className="bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] backdrop-blur-3xl rounded-[2.5rem] p-10 border border-slate-200 dark:border-white/[0.05] flex-grow hover:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.03] transition-all duration-700 shadow-2xl h-full hover:border-blue-500/30">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-2">
-                {certificationsData.map((cert, idx) => (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    whileHover={{ 
-                      y: -8,
-                      scale: 1.02,
-                      rotateY: 5,
-                      rotateX: -5,
-                      transition: { duration: 0.4, ease: "easeOut" }
-                    }}
-                    transition={{ delay: (idx % 8) * 0.1, duration: 0.6, type: "spring", stiffness: 100 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    key={idx}
-                    className="relative group perspective-1000"
-                    style={{ perspective: "1000px" }}
-                  >
-                    <Link to={`/verify/${cert.id}`} className="flex flex-col bg-white/80 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden hover:border-blue-500/50 dark:hover:border-blue-400/50 transition-all duration-500 shadow-md hover:shadow-[0_20px_40px_rgba(59,130,246,0.2)] cursor-pointer h-full relative z-10 backdrop-blur-sm">
-                      {/* Shiny sweep effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out z-20 pointer-events-none" />
-                      
-                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 dark:bg-slate-800/50">
-                        <div className="absolute inset-0 bg-blue-500/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                        <img 
-                          src={cert.image} 
-                          alt={`${cert.title} Certificate`} 
-                          className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-700 ease-[0.16,1,0.3,1]"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-end justify-center p-4">
-                          <div className="flex items-center gap-2 bg-blue-600/90 backdrop-blur-md px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 border border-blue-400/50 shadow-lg">
-                            <span className="text-white text-[10px] font-bold tracking-widest uppercase">Verify</span>
-                            <ExternalLink className="w-3.5 h-3.5 text-white" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="p-5 flex flex-col items-center text-center relative overflow-hidden">
-                        {/* Subtle background glow in footer */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        
-                        <span className="text-sm font-extrabold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1 relative z-10">{cert.title}</span>
-                        <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold tracking-[0.2em] uppercase mt-1.5 relative z-10 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">{cert.issuer}</span>
-                      </div>
-                    </Link>
-                    
-                    {/* Floating ambient glow behind card */}
-                    <div className="absolute -inset-2 bg-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </TiltCard>
-        </FadeInSection>
-      </div>
-
-      <div className="flex flex-col">
-        <FadeInSection>
-          <SectionHeading title="Education" icon={GraduationCap} />
-        </FadeInSection>
-        <FadeInSection delay={400}>
-          <TiltCard className="h-full">
-            <div className="bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] backdrop-blur-3xl rounded-[2.5rem] p-10 border border-slate-200 dark:border-white/[0.05] flex-grow flex flex-col justify-center items-center text-center relative overflow-hidden group hover:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.03] transition-all duration-700 shadow-2xl h-full hover:border-blue-500/30">
-              <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        {certificationsData.map((cert, idx) => (
+          <motion.div 
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            whileHover={{ 
+              y: -8,
+              scale: 1.02,
+              rotateY: 5,
+              rotateX: -5,
+              transition: { duration: 0.4, ease: "easeOut" }
+            }}
+            transition={{ delay: (idx % 8) * 0.1, duration: 0.6, type: "spring", stiffness: 100 }}
+            viewport={{ once: true, margin: "-50px" }}
+            key={idx}
+            className="relative group perspective-1000 h-full"
+            style={{ perspective: "1000px" }}
+          >
+            <Link to={`/verify/${cert.id}`} className="flex flex-col bg-white/80 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden hover:border-blue-500/50 dark:hover:border-blue-400/50 transition-all duration-500 shadow-md hover:shadow-[0_20px_40px_rgba(59,130,246,0.2)] cursor-pointer h-full relative z-10 backdrop-blur-sm">
+              {/* Shiny sweep effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out z-20 pointer-events-none" />
               
-              <motion.div 
-                whileHover={{ rotate: 10, scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="relative z-10 flex items-center justify-center w-28 h-28 rounded-[2rem] bg-white dark:bg-[#0A0F1C] border border-slate-300 dark:border-white/[0.1] mb-12 shadow-inner group-hover:border-blue-500/50 transition-colors duration-700"
-              >
-                <GraduationCap className="w-12 h-12 text-blue-400" />
-              </motion.div>
-              <div className="relative z-10">
-                <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-5 tracking-tight leading-tight">{RESUME_DATA.education.degree}</h3>
-                <p className="text-blue-600 dark:text-blue-300 font-bold mb-10 text-xl tracking-wide">{RESUME_DATA.education.institution}</p>
-                <div className="inline-flex items-center gap-3 px-8 py-3 bg-white/80 dark:bg-[#0A0F1C]/80 rounded-full border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-slate-300 text-sm font-bold tracking-[0.2em] uppercase shadow-sm group-hover:border-white/[0.2] transition-colors duration-500">
-                  <Terminal className="w-4 h-4 text-blue-500" /> Class of {RESUME_DATA.education.date.split('-')[1].trim()}
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 dark:bg-slate-800/50">
+                <div className="absolute inset-0 bg-blue-500/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                <img 
+                  src={cert.image} 
+                  alt={`${cert.title} Certificate`} 
+                  className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-700 ease-[0.16,1,0.3,1]"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-end justify-center p-4">
+                  <div className="flex items-center gap-2 bg-blue-600/90 backdrop-blur-md px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 border border-blue-400/50 shadow-lg">
+                    <span className="text-white text-[10px] font-bold tracking-widest uppercase">Verify</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-white" />
+                  </div>
+                </div>
+              </div>
+              <div className="p-5 flex flex-col items-center text-center relative overflow-hidden flex-grow justify-center">
+                {/* Subtle background glow in footer */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <span className="text-sm font-extrabold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 relative z-10">{cert.title}</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold tracking-[0.2em] uppercase mt-2 relative z-10 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">{cert.issuer}</span>
+              </div>
+            </Link>
+            
+            {/* Floating ambient glow behind card */}
+            <div className="absolute -inset-2 bg-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
+          </motion.div>
+        ))}
+      </div>
+    </section>
+
+    {/* EDUCATION SECTION */}
+    <section id="education" className="scroll-mt-40">
+      <FadeInSection>
+        <SectionHeading title="Education" icon={GraduationCap} />
+      </FadeInSection>
+      
+      <FadeInSection delay={200} className="mt-12">
+        <TiltCard className="w-full">
+          <div className="relative group overflow-hidden rounded-[2.5rem] bg-white dark:bg-[#0A0F1C] border border-slate-200 dark:border-white/[0.08] hover:border-blue-500/40 transition-all duration-700 shadow-xl hover:shadow-[0_20px_80px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_20px_80px_rgba(59,130,246,0.1)]">
+            {/* Dynamic Background Gradients */}
+            <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-blue-500/5 via-transparent to-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+            <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/10 blur-[100px] rounded-full group-hover:bg-blue-500/20 transition-colors duration-1000 pointer-events-none" />
+            
+            <div className="p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-10 lg:gap-20 relative z-10 backdrop-blur-sm bg-white/50 dark:bg-[#0A0F1C]/50">
+              
+              {/* Left Side: Animated Icon + Timeline */}
+              <div className="flex-shrink-0 flex flex-col items-center justify-center relative">
+                <motion.div 
+                  whileHover={{ rotate: [0, -10, 10, -5, 5, 0], scale: 1.1 }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  className="relative flex items-center justify-center w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-tr from-blue-500/10 to-violet-500/10 border border-blue-200 dark:border-blue-500/20 shadow-[inset_0_0_20px_rgba(59,130,246,0.2)] group-hover:shadow-[0_0_50px_rgba(59,130,246,0.3)] transition-all duration-700 z-20 bg-white dark:bg-[#060913]"
+                >
+                  <div className="absolute inset-0 rounded-full bg-blue-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <GraduationCap className="w-14 h-14 md:w-20 md:h-20 text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)] transform group-hover:scale-110 transition-transform duration-500" />
+                </motion.div>
+                
+                {/* Decorative connecting line below icon */}
+                <div className="hidden md:block absolute -bottom-14 left-1/2 -translate-x-1/2 w-1 h-32 bg-gradient-to-b from-blue-500/30 to-transparent z-10" />
+              </div>
+
+              {/* Right Side: Content Content */}
+              <div className="flex-grow text-center md:text-left flex flex-col items-center md:items-start w-full">
+                <div className="inline-flex items-center gap-2 mb-6 text-[10px] font-black tracking-[0.3em] uppercase bg-blue-50 dark:bg-blue-500/5 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full border border-blue-200 dark:border-blue-500/20 shadow-sm group-hover:bg-blue-100 dark:group-hover:bg-blue-500/10 transition-colors">
+                  <Terminal className="w-3.5 h-3.5" /> Class of {RESUME_DATA.education.date.split('-')[1].trim()}
+                </div>
+                
+                <h3 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight leading-tight group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-500">
+                  {RESUME_DATA.education.degree}
+                </h3>
+                
+                <p className="text-slate-600 dark:text-slate-400 font-medium text-lg md:text-xl tracking-wide max-w-2xl flex items-center justify-center md:justify-start gap-3">
+                  <span className="w-8 h-[2px] bg-blue-500/30 hidden md:inline-block" />
+                  {RESUME_DATA.education.institution}
+                </p>
+                
+                <div className="mt-8 flex flex-wrap gap-3 justify-center md:justify-start">
+                  {['Computer Science', 'Cybersecurity', 'Information Security'].map((tag, i) => (
+                    <span key={i} className="text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-lg border border-slate-200 dark:border-white/[0.05] text-slate-500 dark:text-slate-400 group-hover:border-blue-500/20 group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
-          </TiltCard>
-        </FadeInSection>
-      </div>
-      
+          </div>
+        </TiltCard>
+      </FadeInSection>
     </section>
   </main>
 );
