@@ -293,31 +293,31 @@ const Resume = () => {
             ))}
           </div>
         </Section>
-234: 
-235:         {/* ── PROJECTS ── */}
-236:         <Section title="Key Projects & Simulations" icon={Crosshair}>
-237:           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-238:             {RESUME_DATA.projects.map((proj, i) => (
-239:               <div key={i} className="p-6 rounded-2xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] hover:border-blue-500/30 transition-all group shadow-sm">
-240:                 <div className="flex justify-between items-start mb-4">
-241:                   <div>
-242:                     <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{proj.title}</h3>
-243:                     <p className="text-xs font-bold text-slate-500 mt-1 uppercase tracking-widest">{proj.org}</p>
-244:                   </div>
-245:                   <span className="text-[10px] font-bold py-1 px-3 rounded-full bg-slate-100 dark:bg-white/[0.05] text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/[0.08]">{proj.date}</span>
-246:                 </div>
-247:                 <ul className="space-y-2">
-248:                   {proj.points.map((pt, j) => (
-249:                     <li key={j} className="flex gap-2.5 text-xs text-slate-600 dark:text-slate-400 font-light leading-relaxed">
-250:                       <ChevronRight className="w-3 h-3 shrink-0 mt-0.5 text-blue-500/40 group-hover:text-blue-500 transition-colors" />
-251:                       {pt}
-252:                     </li>
-253:                   ))}
-254:                 </ul>
-255:               </div>
-256:             ))}
-257:           </div>
-258:         </Section>
+ 
+         {/* ── PROJECTS ── */}
+         <Section title="Key Projects & Simulations" icon={Crosshair}>
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+             {RESUME_DATA.projects.map((proj, i) => (
+               <div key={i} className="p-6 rounded-2xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] hover:border-blue-500/30 transition-all group shadow-sm">
+                 <div className="flex justify-between items-start mb-4">
+                   <div>
+                     <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{proj.title}</h3>
+                     <p className="text-xs font-bold text-slate-500 mt-1 uppercase tracking-widest">{proj.org}</p>
+                   </div>
+                   <span className="text-[10px] font-bold py-1 px-3 rounded-full bg-slate-100 dark:bg-white/[0.05] text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/[0.08]">{proj.date}</span>
+                 </div>
+                 <ul className="space-y-2">
+                   {proj.points.map((pt, j) => (
+                     <li key={j} className="flex gap-2.5 text-xs text-slate-600 dark:text-slate-400 font-light leading-relaxed">
+                       <ChevronRight className="w-3 h-3 shrink-0 mt-0.5 text-blue-500/40 group-hover:text-blue-500 transition-colors" />
+                       {pt}
+                     </li>
+                   ))}
+                 </ul>
+               </div>
+             ))}
+           </div>
+         </Section>
 
         {/* ── CERTIFICATIONS + EDUCATION ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
