@@ -553,7 +553,7 @@ const ElegantAvatar = ({ src }) => {
 
 // --- PORTFOLIO HOME CONTENT ---
 const PortfolioHome = () => (
-  <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-36 pb-24 space-y-48" style={{ contain: 'layout' }}>
+  <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-16 md:pt-24 pb-24 space-y-40 md:space-y-48" style={{ contain: 'layout' }}>
     <Helmet>
       <title>Shahzeb Ali | Cybersecurity Specialist | SOC Analyst & Purple Teamer</title>
       <meta name="description" content="Professional portfolio of Shahzeb Ali, a SOC Analyst specializing in threat detection, incident response, and purple team operations. Exploring the intersection of offensive exploits and defensive resilience." />
@@ -613,7 +613,7 @@ const PortfolioHome = () => (
       </script>
     </Helmet>
     {/* HERO SECTION */}
-    <section id="about" className="min-h-[80vh] flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 relative">
+    <section id="about" className="min-h-[70vh] md:min-h-[80vh] flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 relative">
       <div className="flex-1 flex flex-col justify-center order-2 lg:order-1 z-10">
         <FadeInSection delay={100} direction="left">
           <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-300 text-[11px] font-bold tracking-[0.3em] uppercase mb-10 w-fit backdrop-blur-xl shadow-[0_0_30px_rgba(59,130,246,0.15)] relative overflow-hidden group">

@@ -28,7 +28,7 @@ const Hero = () => {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding-top: 40px;
+          padding-top: 0px; /* Reduced from 40px */
           gap: 40px;
         }
 
@@ -90,7 +90,7 @@ const Hero = () => {
             flex-direction: column;
             text-align: center;
             justify-content: center;
-            padding-top: 80px;
+            padding-top: 20px; /* Reduced from 80px */
           }
           .hero-image {
             display: block;
