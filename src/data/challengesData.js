@@ -1,4 +1,4 @@
-import { Activity, ShieldAlert, Eye, Bug, Server, Code, ShieldCheck, Lock, Cpu, Crosshair, Terminal } from 'lucide-react';
+import { Activity, ShieldAlert, Eye, Bug, Server, Code, ShieldCheck, Lock, Cpu, Crosshair, Terminal, Database } from 'lucide-react';
 
 export const CHALLENGES = [
   {
