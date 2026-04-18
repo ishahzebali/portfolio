@@ -962,33 +962,51 @@ const PortfolioHome = () => (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-2">
                 {certificationsData.map((cert, idx) => (
                   <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: (idx % 8) * 0.1, duration: 0.5 }}
-                    viewport={{ once: true, margin: "50px" }}
+                    initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    whileHover={{ 
+                      y: -8,
+                      scale: 1.02,
+                      rotateY: 5,
+                      rotateX: -5,
+                      transition: { duration: 0.4, ease: "easeOut" }
+                    }}
+                    transition={{ delay: (idx % 8) * 0.1, duration: 0.6, type: "spring", stiffness: 100 }}
+                    viewport={{ once: true, margin: "-50px" }}
                     key={idx}
+                    className="relative group perspective-1000"
+                    style={{ perspective: "1000px" }}
                   >
-                    <Link to={`/verify/${cert.id}`} className="flex flex-col bg-white/60 dark:bg-[#0A0F1C]/60 border border-slate-200 dark:border-white/[0.05] rounded-3xl overflow-hidden hover:border-violet-500/50 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_rgba(139,92,246,0.15)] cursor-pointer h-full">
-                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-white/20 dark:bg-white/[0.02]">
-                        <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-blue-500/0 transition-colors duration-500 z-10" />
-                        <div className="absolute inset-0 border-b border-slate-200 dark:border-white/[0.05] z-20 pointer-events-none" />
+                    <Link to={`/verify/${cert.id}`} className="flex flex-col bg-white/80 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden hover:border-blue-500/50 dark:hover:border-blue-400/50 transition-all duration-500 shadow-md hover:shadow-[0_20px_40px_rgba(59,130,246,0.2)] cursor-pointer h-full relative z-10 backdrop-blur-sm">
+                      {/* Shiny sweep effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out z-20 pointer-events-none" />
+                      
+                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 dark:bg-slate-800/50">
+                        <div className="absolute inset-0 bg-blue-500/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
                         <img 
                           src={cert.image} 
                           alt={`${cert.title} Certificate`} 
-                          className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-700 ease-out"
+                          className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-700 ease-[0.16,1,0.3,1]"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1C]/70 via-[#0A0F1C]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-end p-4">
-                          <div className="ml-auto bg-white/20 backdrop-blur-md p-2.5 rounded-full transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 border border-white/30">
-                            <ExternalLink className="w-4 h-4 text-white" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-end justify-center p-4">
+                          <div className="flex items-center gap-2 bg-blue-600/90 backdrop-blur-md px-4 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 border border-blue-400/50 shadow-lg">
+                            <span className="text-white text-[10px] font-bold tracking-widest uppercase">Verify</span>
+                            <ExternalLink className="w-3.5 h-3.5 text-white" />
                           </div>
                         </div>
                       </div>
-                      <div className="p-5 flex flex-col items-center text-center">
-                        <span className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors line-clamp-1">{cert.title}</span>
-                        <span className="text-[10px] text-slate-500 font-bold tracking-[0.2em] uppercase mt-1.5">{cert.issuer}</span>
+                      <div className="p-5 flex flex-col items-center text-center relative overflow-hidden">
+                        {/* Subtle background glow in footer */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        <span className="text-sm font-extrabold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1 relative z-10">{cert.title}</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold tracking-[0.2em] uppercase mt-1.5 relative z-10 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">{cert.issuer}</span>
                       </div>
                     </Link>
+                    
+                    {/* Floating ambient glow behind card */}
+                    <div className="absolute -inset-2 bg-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
                   </motion.div>
                 ))}
               </div>
