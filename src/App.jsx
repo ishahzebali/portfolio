@@ -744,28 +744,69 @@ const PortfolioHome = () => (
       <FadeInSection>
         <SectionHeading title="Technical Arsenal" icon={Cpu} />
       </FadeInSection>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      {/* Big bento-grid layout */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {RESUME_DATA.skills.map((skillGroup, idx) => (
-          <FadeInSection key={idx} delay={idx * 60}>
-            <TiltCard className="h-full">
-              <div className="bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] backdrop-blur-2xl border border-slate-200 dark:border-white/[0.05] rounded-[2rem] p-8 hover:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.04] hover:border-blue-500/40 transition-all duration-700 group relative overflow-hidden shadow-2xl h-full flex flex-col">
-                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/0 to-transparent group-hover:via-blue-500/80 transition-all duration-700"></div>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="p-4 bg-white dark:bg-[#0A0F1C] rounded-2xl border border-slate-200 dark:border-white/[0.08] group-hover:border-blue-500/40 shadow-inner transition-colors duration-500">
-                    <skillGroup.icon className="w-6 h-6 text-slate-600 dark:text-slate-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors" />
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.55, delay: idx * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -6, transition: { duration: 0.3 } }}
+            className="group relative rounded-[1.75rem] overflow-hidden cursor-default"
+          >
+            {/* Card bg */}
+            <div className="absolute inset-0 bg-white dark:bg-[#0A0F1C] border border-slate-200 dark:border-white/[0.06] rounded-[1.75rem] transition-all duration-500 group-hover:border-blue-500/40 group-hover:shadow-[0_20px_60px_rgba(59,130,246,0.12)] dark:group-hover:shadow-[0_20px_60px_rgba(59,130,246,0.08)]" />
+            {/* Animated gradient shimmer top */}
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            {/* Corner glow blob */}
+            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-blue-500/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+            <div className="relative z-10 p-7 flex flex-col h-full">
+              {/* Icon + Category header */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-xl bg-blue-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative p-3 bg-slate-100 dark:bg-white/[0.06] rounded-xl border border-slate-200 dark:border-white/[0.08] group-hover:border-blue-500/30 transition-colors duration-400">
+                    <skillGroup.icon className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-blue-500 transition-colors duration-300" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors tracking-tight">{skillGroup.category}</h3>
                 </div>
-                <div className="flex flex-wrap gap-3 flex-grow">
-                  {skillGroup.items.map((skill, sIdx) => (
-                    <span key={sIdx} className="text-[13px] font-medium tracking-wide px-4 py-2 bg-white/50 dark:bg-[#0A0F1C]/50 text-slate-700 dark:text-slate-300 rounded-xl border border-slate-200 dark:border-white/[0.05] group-hover:border-blue-500/30 group-hover:text-blue-700 dark:group-hover:text-blue-200 transition-all shadow-sm">
-                      {skill}
-                    </span>
+                <h3 className="text-[13px] font-extrabold text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white tracking-[0.08em] uppercase transition-colors">
+                  {skillGroup.category}
+                </h3>
+              </div>
+
+              {/* Skill pills */}
+              <div className="flex flex-wrap gap-2 flex-grow">
+                {skillGroup.items.map((skill, sIdx) => (
+                  <motion.span
+                    key={sIdx}
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: idx * 0.06 + sIdx * 0.04 }}
+                    className="text-[12px] font-semibold px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/[0.05] text-slate-600 dark:text-slate-400 border border-slate-200/80 dark:border-white/[0.06] group-hover:bg-blue-50 dark:group-hover:bg-blue-500/10 group-hover:text-blue-700 dark:group-hover:text-blue-300 group-hover:border-blue-200 dark:group-hover:border-blue-500/20 transition-all duration-300"
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div>
+
+              {/* Bottom count indicator */}
+              <div className="mt-5 pt-4 border-t border-slate-100 dark:border-white/[0.04] flex items-center justify-between">
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 dark:text-slate-600 group-hover:text-blue-400 transition-colors">
+                  {skillGroup.items.length} tools
+                </span>
+                <div className="flex gap-1">
+                  {skillGroup.items.slice(0, 5).map((_, i) => (
+                    <div key={i} className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/[0.15] group-hover:bg-blue-400 transition-colors duration-300" style={{ transitionDelay: `${i * 50}ms` }} />
                   ))}
                 </div>
               </div>
-            </TiltCard>
-          </FadeInSection>
+            </div>
+          </motion.div>
         ))}
       </div>
     </section>
@@ -815,63 +856,77 @@ const PortfolioHome = () => (
       </div>
     </section>
 
-    {/* PROJECTS SECTION - SUPREME ELEGANCE */}
+    {/* PROJECTS SECTION */}
     <section id="projects" className="scroll-mt-40">
       <FadeInSection>
         <SectionHeading title="Simulations & Operations" icon={Crosshair} />
       </FadeInSection>
-      
-      <div className="space-y-24 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-[2px] before:bg-gradient-to-b before:from-blue-500/50 before:via-slate-300 dark:before:via-white/[0.1] before:to-transparent">
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {RESUME_DATA.projects.slice(0, 4).map((project, idx) => (
-          <FadeInSection key={idx} delay={idx * 80} direction={idx % 2 === 0 ? "right" : "left"}>
-            <div className="relative w-full group">
-              
-              {/* Timeline Node */}
-              <div className="flex items-center justify-center w-12 h-12 rounded-full border-[4px] border-[#060913] bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.5)] absolute left-0 md:left-1/2 -translate-x-1/2 z-20 transition-transform duration-700 group-hover:scale-125">
-                <Lock className="w-5 h-5 text-white" />
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -5, transition: { duration: 0.3 } }}
+            className="group relative rounded-[2rem] overflow-hidden cursor-default"
+          >
+            {/* Base card */}
+            <div className="absolute inset-0 bg-white dark:bg-[#0A0F1C] border border-slate-200 dark:border-white/[0.06] rounded-[2rem] transition-all duration-500 group-hover:border-blue-500/30 group-hover:shadow-[0_25px_60px_rgba(59,130,246,0.1)] dark:group-hover:shadow-[0_25px_60px_rgba(59,130,246,0.07)]" />
+            {/* Top gradient line */}
+            <motion.div
+              className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 via-violet-500 to-blue-400 origin-left"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: idx * 0.1 + 0.3, ease: 'easeOut' }}
+            />
+            {/* Corner glow */}
+            <div className="absolute -bottom-10 -right-10 w-48 h-48 rounded-full bg-blue-500/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+            <div className="relative z-10 p-8 flex flex-col h-full">
+              {/* Header row */}
+              <div className="flex items-start justify-between gap-4 mb-6">
+                <div className="flex-1">
+                  {/* Number + date row */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-[11px] font-black tracking-[0.3em] text-blue-500/60 uppercase">0{idx + 1}</span>
+                    <span className="flex-1 h-[1px] bg-blue-500/15"></span>
+                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/15">
+                      {project.date}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-extrabold text-slate-800 dark:text-slate-100 leading-snug group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-400">
+                    {project.title}
+                  </h3>
+                </div>
               </div>
 
-              {/* Timestamp Badge (Desktop) */}
-              <div className={`hidden md:flex absolute top-3 ${idx % 2 === 0 ? 'right-[calc(50%+4rem)]' : 'left-[calc(50%+4rem)]'} z-10`}>
-                <span className="text-xs font-bold tracking-[0.3em] uppercase px-6 py-2.5 bg-blue-500/10 backdrop-blur-md rounded-full text-blue-600 dark:text-blue-400 border border-blue-500/20 shadow-inner">
-                  {project.date}
-                </span>
+              {/* Org badge */}
+              <div className="inline-flex items-center gap-2 mb-6 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/[0.05] text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/[0.05] w-fit group-hover:border-blue-500/20 transition-colors">
+                <Lock className="w-3 h-3 text-blue-500/60" />
+                {project.org}
               </div>
-              
-              {/* Content Card */}
-              <TiltCard className={`w-[calc(100%-4.5rem)] ml-[4.5rem] md:ml-0 md:w-[calc(50%-4rem)] ${idx % 2 === 0 ? 'md:ml-auto' : 'md:mr-auto'}`}>
-                <div className="p-10 rounded-[2.5rem] bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] backdrop-blur-3xl border border-slate-200 dark:border-white/[0.05] hover:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.03] hover:border-blue-500/40 transition-all duration-700 hover:shadow-[0_20px_70px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_20px_70px_rgba(0,0,0,0.6)] relative overflow-hidden h-full">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/10 to-transparent rounded-bl-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                  
-                  <div className="flex flex-col mb-8 relative z-10">
-                    <div className="md:hidden text-blue-500 text-xs font-bold tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
-                      <span className="w-8 h-[1px] bg-blue-500/50"></span>
-                      {project.date}
-                    </div>
-                    <h3 className="text-3xl lg:text-4xl font-extrabold text-slate-800 dark:text-slate-100 leading-tight group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-500">{project.title}</h3>
-                    <div className="inline-flex items-center gap-2 mt-4 text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest text-[10px] bg-slate-100/50 dark:bg-white/[0.05] w-fit px-4 py-1.5 rounded-full border border-slate-200 dark:border-white/[0.05]">
-                      <Briefcase className="w-3 h-3 text-blue-500/70" /> {project.org}
-                    </div>
-                  </div>
-                  
-                  <ul className="space-y-6 relative z-10">
-                    {project.points.map((point, pIdx) => (
-                      <li key={pIdx} className="flex gap-5 text-slate-700 dark:text-slate-300 text-base font-light group/item leading-relaxed">
-                        <ChevronRight className="w-5 h-5 shrink-0 mt-0.5 text-blue-500/40 group-hover/item:text-blue-400 group-hover/item:translate-x-2 transition-all duration-300 ease-out" />
-                        <span className="opacity-80 group-hover/item:opacity-100 transition-opacity duration-300">{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </TiltCard>
+
+              {/* Points */}
+              <ul className="space-y-3 flex-grow">
+                {project.points.map((point, pIdx) => (
+                  <li key={pIdx} className="flex gap-3 text-[13px] text-slate-600 dark:text-slate-400 font-light leading-relaxed group/item">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500/50 shrink-0 mt-1.5 group-hover/item:bg-blue-500 transition-colors duration-200" />
+                    <span className="group-hover/item:text-slate-800 dark:group-hover/item:text-slate-200 transition-colors duration-200">{point}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </FadeInSection>
+          </motion.div>
         ))}
       </div>
 
       {/* View All Projects CTA */}
       <FadeInSection delay={400}>
-        <div className="mt-20 flex flex-col items-center gap-4 text-center">
+        <div className="mt-16 flex flex-col items-center gap-4 text-center">
           <p className="text-slate-500 dark:text-slate-400 text-sm font-light">
             Showing <span className="text-blue-500 font-bold">4 of {RESUME_DATA.projects.length}</span> operations
           </p>
