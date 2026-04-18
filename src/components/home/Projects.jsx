@@ -5,7 +5,7 @@ import { ChevronRight } from 'lucide-react';
 const Projects = () => {
   const projects = [
     {
-      title: 'Independent Security Researcher | Yes WeHack',
+      title: 'Independent Security Researcher | YesWeHack',
       type: 'Bug Bounty Hunting',
       date: 'November 2025 - Present',
       desc: [
