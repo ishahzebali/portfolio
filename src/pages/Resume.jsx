@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
   MapPin, Mail, Phone, Linkedin, ExternalLink, ShieldAlert,
   Briefcase, Award, GraduationCap, Bug, ChevronRight, FileDown,
-  Activity, Database, Eye, Server, Code, ShieldCheck, Cpu
+  Activity, Database, Eye, Server, Code, ShieldCheck, Cpu, Crosshair
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { certificationsData } from '../data/certificationsData';
