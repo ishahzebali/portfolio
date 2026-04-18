@@ -68,7 +68,7 @@ const RESUME_DATA = {
     {
       title: "Independent Security Researcher",
       company: "YesWeHack Bug Bounty Platform",
-      date: "Aug 2025 - Aug 2025",
+      date: "Aug 2025 - Present",
       points: [
         "Discovered a critical Insecure Direct Object Reference (IDOR) / Broken Access Control vulnerability in Deezer's production API.",
         "Authored a comprehensive Proof of Concept (PoC) mapped to OWASP Top 10 (A01:2021), enabling a global security patch.",
@@ -819,33 +819,50 @@ const PortfolioHome = () => (
       <FadeInSection>
         <SectionHeading title="Simulations & Operations" icon={Crosshair} />
       </FadeInSection>
-      <div className="flex flex-col gap-16">
+      
+      <div className="space-y-24 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-[2px] before:bg-gradient-to-b before:from-blue-500/50 before:via-slate-300 dark:before:via-white/[0.1] before:to-transparent">
         {RESUME_DATA.projects.map((project, idx) => (
-          <FadeInSection key={idx} delay={idx * 80} direction="up">
-            <div className="group relative flex flex-col lg:flex-row gap-8 lg:flex-row lg:gap-16 border-t border-slate-200 dark:border-white/[0.05] pt-16">
-              <div className="absolute top-0 left-0 w-1/3 h-[2px] bg-gradient-to-r from-blue-500/60 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 ease-out origin-left"></div>
+          <FadeInSection key={idx} delay={idx * 80} direction={idx % 2 === 0 ? "right" : "left"}>
+            <div className="relative w-full group">
               
-              <div className="lg:w-1/3 shrink-0 relative z-10">
-                <div className="text-blue-400 text-sm font-bold tracking-[0.3em] uppercase mb-5 flex items-center gap-4">
-                    <span className="w-10 h-[2px] bg-blue-500/50 inline-block group-hover:w-16 transition-all duration-700"></span> 
-                    {project.date}
-                </div>
-                <h3 className="text-4xl lg:text-5xl font-light text-slate-800 dark:text-slate-100 leading-tight mb-6 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-500">{project.title}</h3>
-                <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] backdrop-blur-md border border-slate-200 dark:border-white/[0.05] rounded-full text-slate-600 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mt-2 group-hover:border-blue-500/30 transition-colors">
-                  <Lock className="w-3.5 h-3.5 text-blue-500/80"/> {project.org}
-                </div>
+              {/* Timeline Node */}
+              <div className="flex items-center justify-center w-12 h-12 rounded-full border-[4px] border-[#060913] bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.5)] absolute left-0 md:left-1/2 -translate-x-1/2 z-20 transition-transform duration-700 group-hover:scale-125">
+                <Lock className="w-5 h-5 text-white" />
+              </div>
+
+              {/* Timestamp Badge (Desktop) */}
+              <div className={`hidden md:flex absolute top-3 ${idx % 2 === 0 ? 'right-[calc(50%+4rem)]' : 'left-[calc(50%+4rem)]'} z-10`}>
+                <span className="text-xs font-bold tracking-[0.3em] uppercase px-6 py-2.5 bg-blue-500/10 backdrop-blur-md rounded-full text-blue-600 dark:text-blue-400 border border-blue-500/20 shadow-inner">
+                  {project.date}
+                </span>
               </div>
               
-              <div className="lg:w-2/3 mt-6 lg:mt-0 relative z-10">
-                <ul className="space-y-8 bg-[#0A0F1C]/[0.02] dark:bg-white/[0.01] p-8 rounded-[2rem] border border-slate-100 dark:border-white/[0.02] group-hover:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] group-hover:border-slate-200 dark:border-white/[0.05] transition-all duration-700">
-                  {project.points.map((point, pIdx) => (
-                    <li key={pIdx} className="flex gap-6 text-slate-700 dark:text-slate-300 text-lg font-light group/item leading-relaxed">
-                      <ChevronRight className="w-6 h-6 shrink-0 mt-1 text-blue-500/40 group-hover/item:text-blue-400 group-hover/item:translate-x-3 transition-all duration-500 ease-out" />
-                      <span className="opacity-70 group-hover/item:opacity-100 transition-opacity duration-300">{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {/* Content Card */}
+              <TiltCard className={`w-[calc(100%-4.5rem)] ml-[4.5rem] md:ml-0 md:w-[calc(50%-4rem)] ${idx % 2 === 0 ? 'md:ml-auto' : 'md:mr-auto'}`}>
+                <div className="p-10 rounded-[2.5rem] bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] backdrop-blur-3xl border border-slate-200 dark:border-white/[0.05] hover:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.03] hover:border-blue-500/40 transition-all duration-700 hover:shadow-[0_20px_70px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_20px_70px_rgba(0,0,0,0.6)] relative overflow-hidden h-full">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/10 to-transparent rounded-bl-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                  
+                  <div className="flex flex-col mb-8 relative z-10">
+                    <div className="md:hidden text-blue-500 text-xs font-bold tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
+                      <span className="w-8 h-[1px] bg-blue-500/50"></span>
+                      {project.date}
+                    </div>
+                    <h3 className="text-3xl lg:text-4xl font-extrabold text-slate-800 dark:text-slate-100 leading-tight group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-500">{project.title}</h3>
+                    <div className="inline-flex items-center gap-2 mt-4 text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest text-[10px] bg-slate-100/50 dark:bg-white/[0.05] w-fit px-4 py-1.5 rounded-full border border-slate-200 dark:border-white/[0.05]">
+                      <Briefcase className="w-3 h-3 text-blue-500/70" /> {project.org}
+                    </div>
+                  </div>
+                  
+                  <ul className="space-y-6 relative z-10">
+                    {project.points.map((point, pIdx) => (
+                      <li key={pIdx} className="flex gap-5 text-slate-700 dark:text-slate-300 text-base font-light group/item leading-relaxed">
+                        <ChevronRight className="w-5 h-5 shrink-0 mt-0.5 text-blue-500/40 group-hover/item:text-blue-400 group-hover/item:translate-x-2 transition-all duration-300 ease-out" />
+                        <span className="opacity-80 group-hover/item:opacity-100 transition-opacity duration-300">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </TiltCard>
             </div>
           </FadeInSection>
         ))}
