@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 import {
   MapPin, Mail, Phone, Linkedin, ExternalLink, ShieldAlert,
   Briefcase, Award, GraduationCap, Bug, ChevronRight, FileDown,
-  Activity, Database, Eye, Server, Code, ShieldCheck, Cpu, Crosshair
+  Activity, Database, Eye, Server, Code, ShieldCheck, Cpu, Crosshair, 
+  Terminal, Globe, Lock, User
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { certificationsData } from '../data/certificationsData';
@@ -22,14 +23,14 @@ const RESUME_DATA = {
   },
   summary: "Results-driven SOC Analyst with over 2 years of hands-on incident response experience across healthcare and technology environments. Specialises in SIEM-based threat detection, log correlation, and full-lifecycle incident management. Holds a unique purple team advantage - using penetration testing knowledge to sharpen defensive detection logic and reduce false-positive rates. Recognised on YesWeHack for responsibly disclosing a critical Broken Access Control vulnerability in Deezer, resulting in a global patch. Proficient in Splunk, Microsoft Sentinel, ELK Stack, Wireshark, and Sysmon; deeply versed in MITRE ATT&CK, the Cyber Kill Chain, and ISO/IEC 27001.",
   skills: [
-    { category: "SIEM & Monitoring", icon: Activity, items: ["Splunk", "Microsoft Sentinel", "ELK Stack", "Azure Cloud Defender", "Snort", "Sysmon", "EDR/XDR", "SOAR"] },
-    { category: "Incident Response", icon: ShieldAlert, items: ["Alert Triage", "IOC Extraction", "Escalation", "Root Cause Analysis", "Phishing Analysis", "Post-Incident Reporting"] },
-    { category: "Log Analysis", icon: Database, items: ["Windows Event Logs", "Linux Syslog", "Firewall Logs", "IDS/IPS Alerts", "Azure AD Sign-in Logs", "Web Activity Logs"] },
-    { category: "Threat Intelligence", icon: Eye, items: ["MITRE ATT&CK", "Cyber Kill Chain", "Pyramid of Pain", "Diamond Model", "TTP Mapping", "Vulnerability Tracking"] },
-    { category: "Offensive Security", icon: Bug, items: ["Burp Suite", "Nmap", "Metasploit", "Hydra", "Gobuster", "OWASP Top 10", "API Security Testing", "Responsible Disclosure"] },
-    { category: "Network & Protocols", icon: Server, items: ["Wireshark", "TCP/IP", "DNS", "HTTP/S", "OSI Model", "Packet Analysis", "DNS Tunnelling Detection"] },
-    { category: "Systems & Scripting", icon: Code, items: ["Windows Internals", "Linux CLI", "Active Directory", "PowerShell", "Python", "Bash", "Privilege Escalation Analysis"] },
-    { category: "Frameworks & GRC", icon: ShieldCheck, items: ["ISO/IEC 27001", "NIST CSF", "CIS Controls", "RBAC", "Security Awareness"] }
+    { category: "SIEM & Monitoring", icon: Activity, items: ["Splunk", "Microsoft Sentinel", "ELK Stack", "Azure Cloud Defender", "Snort", "Sysmon", "EDR/XDR", "SOAR"], color: "blue" },
+    { category: "Incident Response", icon: ShieldAlert, items: ["Alert Triage", "IOC Extraction", "Escalation", "Root Cause Analysis", "Phishing Analysis", "Post-Incident Reporting"], color: "red" },
+    { category: "Log Analysis", icon: Database, items: ["Windows Event Logs", "Linux Syslog", "Firewall Logs", "IDS/IPS Alerts", "Azure AD Sign-in Logs", "Web Activity Logs"], color: "indigo" },
+    { category: "Threat Intelligence", icon: Eye, items: ["MITRE ATT&CK", "Cyber Kill Chain", "Pyramid of Pain", "Diamond Model", "TTP Mapping", "Vulnerability Tracking"], color: "emerald" },
+    { category: "Offensive Security", icon: Bug, items: ["Burp Suite", "Nmap", "Metasploit", "Hydra", "Gobuster", "OWASP Top 10", "API Security Testing", "Responsible Disclosure"], color: "violet" },
+    { category: "Network & Protocols", icon: Server, items: ["Wireshark", "TCP/IP", "DNS", "HTTP/S", "OSI Model", "Packet Analysis", "DNS Tunnelling Detection"], color: "sky" },
+    { category: "Systems & Scripting", icon: Code, items: ["Windows Internals", "Linux CLI", "Active Directory", "PowerShell", "Python", "Bash", "Privilege Escalation Analysis"], color: "orange" },
+    { category: "Frameworks & GRC", icon: ShieldCheck, items: ["ISO/IEC 27001", "NIST CSF", "CIS Controls", "RBAC", "Security Awareness"], color: "teal" }
   ],
   experience: [
     {
@@ -107,260 +108,380 @@ const RESUME_DATA = {
         "Designed real-time SIEM dashboards to monitor anomalous network activity and lateral movement, mapping custom alerts directly to the MITRE ATT&CK framework.",
         "Successfully surfaced active brute-force attempts during simulated breach events by correlating disparate log sources into high-fidelity actionable security incidents."
       ]
-    },
-    {
-      title: "Cyber Strategic & Technical Advisory Simulation",
-      org: "Deloitte (via Forage)",
-      date: "Jan 2026",
-      points: [
-        "Performed multi-vector threat intelligence analysis to identify emerging TTPs targeting financial infrastructure, providing strategic attribution and mitigation recommendations.",
-        "Designed a comprehensive security awareness strategy for a simulated global enterprise, focusing on reducing phishing vulnerability across high-risk business units.",
-        "Developed executive-level risk reports and incident response playbooks for C-suite stakeholders, translating technical vulnerabilities into actionable business-risk mitigation strategies."
-      ]
-    },
-    {
-      title: "Active Directory Red/Blue Tactics & Mitigation",
-      org: "Home Network",
-      date: "Jan 2026",
-      points: [
-        "Constructed a vulnerable Active Directory domain environment to emulate advanced post-exploitation threats like Kerberoasting, AS-REP Roasting, and Pass-the-Hash.",
-        "Utilized Splunk to ingest logs from the Domain Controller and authored custom detection logic capable of identifying Golden Ticket creation with 99% accuracy.",
-        "Implemented hardened GPO configurations and Tiered Administrative Models to significantly reduce the attack surface and mitigate lateral movement opportunities."
-      ]
-    },
-    {
-      title: "Enterprise SOC Operations & Threat Hunting Simulation",
-      org: "Datacom (via Forage)",
-      date: "Jan 2026",
-      points: [
-        "Executed real-time alert triage and investigation within a simulated high-tempo Security Operations Center, identifying unauthorized lateral movement and privilege escalation.",
-        "Utilized advanced firewall and proxy log analysis to detect stealthy data exfiltration patterns, leveraging Deep Packet Inspection (DPI) to identify malicious TLS-encrypted payloads.",
-        "Drafted and implemented rapid containment protocols for compromised virtual assets, ensuring minimal operational downtime while preserving forensic integrity for root cause analysis."
-      ]
     }
   ]
 };
 
-const Section = ({ title, icon: Icon, children }) => (
-  <div className="mb-14">
-    <div className="flex items-center gap-3 mb-8 pb-3 border-b border-slate-200 dark:border-white/[0.07]">
-      <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
-        <Icon className="w-5 h-5 text-blue-500 dark:text-blue-400" />
+const SectionHeader = ({ title, icon: Icon, subtitle }) => (
+  <div className="flex flex-col mb-10">
+    <div className="flex items-center gap-4 mb-2">
+      <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20">
+        <Icon size={20} className="text-blue-400" />
       </div>
-      <h2 className="text-xl font-extrabold tracking-widest uppercase text-slate-800 dark:text-slate-100">
+      <h2 className="text-2xl font-black tracking-widest uppercase text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
         {title}
       </h2>
     </div>
-    {children}
+    {subtitle && <p className="text-slate-500 text-xs font-mono uppercase tracking-[0.2em] ml-14">{subtitle}</p>}
   </div>
 );
 
 const Resume = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="min-h-screen font-sans"
-    >
-      <div className="max-w-5xl mx-auto px-6 md:px-10 pt-32 pb-24">
+    <div className="min-h-screen bg-[#050810] selection:bg-blue-500/30">
+      {/* Background Ambience */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+      </div>
 
-        {/* ── HEADER ── */}
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 mb-16">
-          <div className="flex items-center gap-6">
-            <div className="relative group/photo">
-              <div className="absolute inset-0 rounded-2xl bg-blue-500/20 blur-xl opacity-0 group-hover/photo:opacity-100 transition-opacity duration-500"></div>
-              <img
-                src={RESUME_DATA.personal.image}
-                alt={RESUME_DATA.personal.name}
-                className="h-20 w-20 md:h-24 md:w-24 object-cover rounded-2xl border-2 border-slate-200 dark:border-white/[0.1] shadow-2xl relative z-10 group-hover/photo:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <div>
-              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-                {RESUME_DATA.personal.name}
-              </h1>
-              <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-24"
+      >
+        {/* ── SECURITY CLEARANCE HEADER ── */}
+        <header className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-12 mb-24">
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-10">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="relative group"
+            >
+              <div className="absolute inset-0 bg-blue-500/30 rounded-[2.5rem] blur-2xl group-hover:bg-blue-500/40 transition-all duration-700"></div>
+              <div className="relative p-1 rounded-[2.5rem] bg-gradient-to-br from-blue-500/50 to-violet-500/50 border border-white/10">
+                <img
+                  src={RESUME_DATA.personal.image}
+                  alt={RESUME_DATA.personal.name}
+                  className="h-40 w-40 md:h-48 md:w-48 object-cover rounded-[2.2rem] shadow-2xl grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-[#050810] border border-blue-500/30 shadow-xl">
+                <span className="text-[10px] font-mono font-black tracking-[0.3em] text-blue-400 uppercase whitespace-nowrap">ID: SHAHS-8291</span>
+              </div>
+            </motion.div>
+
+            <div className="text-center md:text-left flex flex-col gap-4">
+              <motion.div
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <div className="flex items-center gap-3 mb-2 justify-center md:justify-start">
+                  <div className="h-[2px] w-8 bg-blue-500/50"></div>
+                  <span className="text-xs font-mono font-bold tracking-[0.4em] text-blue-500 uppercase">Operational Dossier</span>
+                </div>
+                <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase text-white leading-none">
+                  Shahzeb <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-500">Ali</span>
+                </h1>
+              </motion.div>
+
+              <motion.div 
+                className="flex flex-wrap gap-2 justify-center md:justify-start"
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
                 {RESUME_DATA.personal.titles.map((t, i) => (
-                  <span key={i} className="text-sm font-semibold text-blue-600 dark:text-blue-400">
-                    {t}{i < RESUME_DATA.personal.titles.length - 1 && <span className="ml-3 text-slate-300 dark:text-slate-600">|</span>}
+                  <span key={i} className="px-4 py-1.5 rounded-xl bg-white/5 border border-white/5 text-[10px] font-black tracking-[0.15em] uppercase text-slate-400">
+                    {t}
                   </span>
                 ))}
-              </div>
+              </motion.div>
+
+              <motion.div
+                className="flex flex-wrap items-center gap-6 mt-4 justify-center md:justify-start"
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <div className="flex items-center gap-2 text-[11px] font-bold text-slate-500 uppercase tracking-widest">
+                  <MapPin size={14} className="text-blue-500" /> {RESUME_DATA.personal.location}
+                </div>
+                <div className="flex items-center gap-2 text-[11px] font-bold text-slate-500 uppercase tracking-widest">
+                  <Globe size={14} className="text-violet-500" /> {RESUME_DATA.personal.website}
+                </div>
+              </motion.div>
             </div>
           </div>
-          <a
-            href="/Shahzeb_Ali_Resume.pdf"
-            download="Shahzeb_Ali_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold tracking-[0.15em] uppercase rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(37,99,235,0.35)] hover:shadow-[0_0_30px_rgba(37,99,235,0.55)] hover:-translate-y-0.5 self-start md:self-auto relative z-20 cursor-pointer"
+
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
           >
-            <FileDown className="w-4 h-4" /> Download PDF
-          </a>
-        </div>
-
-        {/* ── CONTACT BAR ── */}
-        <div className="flex flex-wrap gap-4 mb-14 p-5 rounded-2xl bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06]">
-          {[
-            { icon: MapPin, text: RESUME_DATA.personal.location },
-            { icon: Phone, text: RESUME_DATA.personal.phone, href: `tel:${RESUME_DATA.personal.phone}` },
-            { icon: Mail, text: RESUME_DATA.personal.email, href: `mailto:${RESUME_DATA.personal.email}` },
-            { icon: Linkedin, text: "LinkedIn", href: `https://${RESUME_DATA.personal.linkedin}` },
-            { icon: ExternalLink, text: RESUME_DATA.personal.website, href: `https://${RESUME_DATA.personal.website}` },
-          ].map((item, i) => (
-            item.href ? (
-              <a key={i} href={item.href} target="_blank" rel="noreferrer"
-                className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                <item.icon className="w-4 h-4 shrink-0 text-blue-500" />
-                {item.text}
-              </a>
-            ) : (
-              <div key={i} className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400">
-                <item.icon className="w-4 h-4 shrink-0 text-blue-500" />
-                {item.text}
+            <a
+              href="/Shahzeb_Ali_Resume.pdf"
+              download="Shahzeb_Ali_Resume.pdf"
+              className="group relative flex items-center gap-4 px-10 py-5 bg-gradient-to-br from-blue-600 to-violet-600 rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(37,99,235,0.2)] hover:shadow-[0_25px_50px_rgba(37,99,235,0.4)] transition-all active:scale-95"
+            >
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <FileDown size={24} className="text-white group-hover:scale-110 transition-transform" />
+              <div className="flex flex-col items-start leading-tight">
+                <span className="text-[10px] font-mono font-black tracking-widest text-white/60 uppercase">System Export</span>
+                <span className="text-lg font-black text-white uppercase tracking-tighter">Download PDF</span>
               </div>
-            )
-          ))}
-        </div>
+            </a>
+          </motion.div>
+        </header>
 
-        {/* ── SUMMARY ── */}
-        <Section title="Professional Summary" icon={ShieldAlert}>
-          <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed font-light">
-            {RESUME_DATA.summary}
-          </p>
-        </Section>
-
-        {/* ── SKILLS ── */}
-        <Section title="Technical Skills" icon={Cpu}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {RESUME_DATA.skills.map((group, i) => (
-              <div key={i} className="p-5 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.05] hover:border-blue-400/40 transition-colors group">
-                <div className="flex items-center gap-2 mb-3">
-                  <group.icon className="w-4 h-4 text-blue-500 dark:text-blue-400" />
-                  <h3 className="font-bold text-sm tracking-wide text-slate-800 dark:text-slate-200">{group.category}</h3>
+        {/* ── MISSION OBJECTIVE (SUMMARY) ── */}
+        <section className="mb-32 relative">
+          <div className="absolute -left-10 top-0 bottom-0 w-[1px] bg-gradient-to-b from-blue-500/50 via-transparent to-transparent hidden xl:block shadow-[0_0_10px_rgba(59,130,246,0.3)]"></div>
+          <motion.div
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 40 }}
+            viewport={{ once: true }}
+            className="grid lg:grid-cols-[1fr_2.5fr] gap-12 items-start"
+          >
+            <div className="sticky top-32">
+              <SectionHeader title="Objective" icon={Crosshair} subtitle="Mission Statement" />
+            </div>
+            <div className="relative p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/10 backdrop-blur-3xl overflow-hidden group">
+              <div className="absolute top-0 right-0 p-8 opacity-[0.05] group-hover:scale-110 transition-transform">
+                <Terminal size={120} />
+              </div>
+              <p className="text-lg md:text-xl text-slate-400 font-medium leading-relaxed tracking-tight italic">
+                "{RESUME_DATA.summary}"
+              </p>
+              <div className="mt-8 pt-8 border-t border-white/5 flex items-center gap-10">
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-mono font-black text-blue-500 uppercase tracking-widest mb-1">Node Status</span>
+                  <div className="flex items-center gap-2">
+                    <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <span className="text-xs font-bold text-white uppercase font-mono">Verified Active</span>
+                  </div>
                 </div>
+                <div className="flex flex-col text-slate-500">
+                  <span className="text-[10px] font-mono font-black uppercase tracking-widest mb-1">Clearance</span>
+                  <span className="text-xs font-bold uppercase font-mono">T-4 Restricted</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* ── TECHNICAL ARSENAL (SKILLS BENTO) ── */}
+        <section className="mb-32">
+          <SectionHeader title="Arsenal" icon={Cpu} subtitle="Technical Skill Matrix" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {RESUME_DATA.skills.map((skillGroup, i) => (
+              <motion.div
+                key={i}
+                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="group relative p-8 rounded-[2rem] bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all duration-500 overflow-hidden shadow-2xl"
+              >
+                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-all duration-1000 ease-in-out"></div>
+                
+                <div className={`p-3 w-fit rounded-2xl bg-${skillGroup.color}-500/10 border border-${skillGroup.color}-500/20 mb-6 group-hover:scale-110 transition-transform`}>
+                  <skillGroup.icon size={24} className={`text-${skillGroup.color}-400`} />
+                </div>
+                
+                <h3 className="text-lg font-black text-white uppercase tracking-tight mb-4 group-hover:text-blue-300 transition-colors">
+                  {skillGroup.category}
+                </h3>
+                
                 <div className="flex flex-wrap gap-2">
-                  {group.items.map((skill, j) => (
-                    <span key={j} className="text-xs px-3 py-1 rounded-lg bg-slate-200 dark:bg-white/[0.05] text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-white/[0.08] font-medium">
+                  {skillGroup.items.map((skill, j) => (
+                    <span key={j} className="text-[10px] px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-slate-500 font-mono font-bold uppercase tracking-wider group-hover:bg-white/10 group-hover:text-slate-300 transition-all">
                       {skill}
                     </span>
                   ))}
                 </div>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* ── EXPERIENCE ── */}
-        <Section title="Work Experience" icon={Briefcase}>
-          <div className="space-y-8">
-            {RESUME_DATA.experience.map((job, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "100px" }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className={`p-7 rounded-2xl border transition-all duration-300 hover:shadow-lg ${
-                  job.highlight
-                    ? 'bg-violet-50 dark:bg-violet-500/5 border-violet-200 dark:border-violet-500/20 hover:border-violet-400/50'
-                    : 'bg-white dark:bg-white/[0.02] border-slate-200 dark:border-white/[0.06] hover:border-blue-400/40'
-                }`}
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
-                  <div>
-                    <h3 className={`text-xl font-extrabold tracking-tight ${job.highlight ? 'text-violet-700 dark:text-violet-300' : 'text-slate-900 dark:text-white'}`}>
-                      {job.title}
-                    </h3>
-                    <p className="text-blue-600 dark:text-blue-400 font-semibold mt-1 text-sm">
-                      {job.company} &mdash; <span className="text-slate-500 dark:text-slate-500 font-normal">{job.location}</span>
-                    </p>
-                  </div>
-                  <span className="shrink-0 text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full bg-slate-100 dark:bg-white/[0.05] text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/[0.08]">
-                    {job.date}
-                  </span>
-                </div>
-                <ul className="space-y-2.5">
-                  {job.points.map((pt, j) => (
-                    <li key={j} className="flex gap-3 text-sm text-slate-600 dark:text-slate-400 font-light leading-relaxed">
-                      <ChevronRight className={`w-4 h-4 shrink-0 mt-0.5 ${job.highlight ? 'text-violet-500' : 'text-blue-500'}`} />
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
               </motion.div>
             ))}
           </div>
-        </Section>
- 
-         {/* ── PROJECTS ── */}
-         <Section title="Key Projects & Simulations" icon={Crosshair}>
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-             {RESUME_DATA.projects.map((proj, i) => (
-               <div key={i} className="p-6 rounded-2xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] hover:border-blue-500/30 transition-all group shadow-sm">
-                 <div className="flex justify-between items-start mb-4">
-                   <div>
-                     <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{proj.title}</h3>
-                     <p className="text-xs font-bold text-slate-500 mt-1 uppercase tracking-widest">{proj.org}</p>
-                   </div>
-                   <span className="text-[10px] font-bold py-1 px-3 rounded-full bg-slate-100 dark:bg-white/[0.05] text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/[0.08]">{proj.date}</span>
-                 </div>
-                 <ul className="space-y-2">
-                   {proj.points.map((pt, j) => (
-                     <li key={j} className="flex gap-2.5 text-xs text-slate-600 dark:text-slate-400 font-light leading-relaxed">
-                       <ChevronRight className="w-3 h-3 shrink-0 mt-0.5 text-blue-500/40 group-hover:text-blue-500 transition-colors" />
-                       {pt}
-                     </li>
-                   ))}
-                 </ul>
-               </div>
-             ))}
-           </div>
-         </Section>
+        </section>
 
-        {/* ── CERTIFICATIONS + EDUCATION ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <Section title="Certifications" icon={Award}>
+        {/* ── OPERATIONAL LOGS (EXPERIENCE TIMELINE) ── */}
+        <section className="mb-32">
+          <SectionHeader title="History" icon={Briefcase} subtitle="Operational Log Timeline" />
+          <div className="relative space-y-12">
+            <div className="absolute left-[31px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-blue-500/50 via-violet-500/30 to-transparent"></div>
+            {RESUME_DATA.experience.map((job, i) => (
+              <motion.div
+                key={i}
+                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, x: -20 }}
+                viewport={{ once: true }}
+                className="relative pl-24 group"
+              >
+                {/* Timeline Point */}
+                <div className="absolute left-0 top-0 p-4 rounded-2xl bg-[#050810] border border-white/10 group-hover:border-blue-500 transition-all z-20">
+                  <Activity size={32} className={`${job.highlight ? 'text-violet-500' : 'text-blue-500'} group-hover:animate-pulse`} />
+                </div>
+
+                <div className={`p-10 rounded-[2.5rem] border backdrop-blur-2xl transition-all duration-700 ${
+                  job.highlight 
+                  ? 'bg-violet-500/5 border-violet-500/20 shadow-[0_30px_60px_rgba(139,92,246,0.1)]' 
+                  : 'bg-white/[0.02] border-white/5 shadow-2xl'
+                }`}>
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+                    <div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-[10px] font-mono font-black text-blue-500 uppercase tracking-widest">Job Entry 0{i + 1}</span>
+                        {job.highlight && <span className="px-2 py-0.5 rounded-lg bg-violet-500 text-white text-[8px] font-black uppercase">Critical</span>}
+                      </div>
+                      <h3 className="text-3xl font-black text-white uppercase tracking-tighter leading-none mb-2">
+                        {job.title}
+                      </h3>
+                      <p className="text-xl font-bold text-blue-400 opacity-80 uppercase tracking-tight">
+                        {job.company} <span className="text-slate-600 mx-2">//</span> <span className="text-slate-500 text-sm">{job.location}</span>
+                      </p>
+                    </div>
+                    <div className="px-6 py-3 rounded-2xl bg-white/5 border border-white/5 shadow-inner">
+                      <span className="text-xs font-mono font-black text-slate-400 tracking-widest uppercase">{job.date}</span>
+                    </div>
+                  </div>
+
+                  <ul className="grid md:grid-cols-2 gap-6">
+                    {job.points.map((pt, j) => (
+                      <li key={j} className="flex gap-4 group/li">
+                        <div className="mt-1.5 shrink-0 w-2 h-2 rounded-full bg-blue-500 group-hover/li:scale-150 group-hover/li:bg-white transition-all"></div>
+                        <p className="text-sm text-slate-400 font-medium leading-relaxed group-hover/li:text-slate-200 transition-colors">
+                          {pt}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── PROJECTS & MISSIONS ── */}
+        <section className="mb-32">
+          <SectionHeader title="Missions" icon={Lock} subtitle="Key Offensive & Defensive Projects" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {RESUME_DATA.projects.map((proj, i) => (
+              <motion.div
+                key={i}
+                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all duration-500 shadow-2xl flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20">
+                      <Terminal size={20} className="text-blue-400" />
+                    </div>
+                    <span className="text-[10px] font-mono font-black text-slate-500 uppercase tracking-widest">{proj.date}</span>
+                  </div>
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter leading-tight mb-4 group-hover:text-blue-400 transition-colors">
+                    {proj.title}
+                  </h3>
+                  <p className="text-[10px] font-mono font-bold text-blue-500 uppercase tracking-[0.3em] mb-8">{proj.org}</p>
+                  
+                  <div className="space-y-4">
+                    {proj.points.map((pt, j) => (
+                      <div key={j} className="flex gap-4">
+                        <ChevronRight size={14} className="mt-1 shrink-0 text-slate-700 group-hover:text-blue-500 transition-colors" />
+                        <p className="text-xs text-slate-500 group-hover:text-slate-400 leading-relaxed font-medium transition-colors">{pt}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-10 pt-8 border-t border-white/5 flex items-center justify-between">
+                  <span className="text-[9px] font-mono font-bold text-slate-600 uppercase tracking-widest">Protocol: RSA/AES-256</span>
+                  <div className="flex items-center gap-1">
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500"></div>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500/40"></div>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500/10"></div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── ACADEMIC INTEL & VERIFIED CERTS ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <motion.section 
+            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            viewport={{ once: true }}
+          >
+            <SectionHeader title="Verification" icon={Award} subtitle="Verified Certifications" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {certificationsData.map((cert, i) => (
-                <Link key={i} to={`/verify/${cert.id}`} className="flex items-center gap-4 p-3 rounded-xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] hover:border-violet-400/40 transition-colors group cursor-pointer overflow-hidden shadow-sm hover:shadow-md">
-                  <div className="w-16 h-12 shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-white/[0.08] relative">
-                    <img src={cert.image} alt={cert.title} className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+              {certificationsData.slice(0, 8).map((cert, i) => (
+                <Link key={i} to={`/verify/${cert.id}`} className="group flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-violet-500/40 transition-all hover:bg-white/[0.05] shadow-sm">
+                  <div className="relative w-16 h-12 shrink-0 rounded-xl overflow-hidden border border-white/10 group-hover:scale-105 transition-transform">
+                    <img src={cert.image} alt={cert.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100" loading="lazy" />
                   </div>
                   <div className="flex flex-col flex-1 min-w-0">
-                    <span className="text-sm text-slate-800 dark:text-slate-200 font-bold group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors truncate">{cert.title}</span>
-                    <span className="text-[10px] text-slate-500 font-bold tracking-[0.15em] uppercase mt-0.5 truncate">{cert.issuer}</span>
+                    <span className="text-xs text-white font-black uppercase tracking-tight group-hover:text-violet-400 truncate">{cert.title}</span>
+                    <span className="text-[8px] font-mono font-bold text-slate-500 tracking-widest uppercase truncate">{cert.issuer}</span>
                   </div>
                 </Link>
               ))}
             </div>
-          </Section>
+            <Link to="/#expertise" className="inline-flex items-center gap-2 mt-8 text-[11px] font-black text-blue-500 uppercase tracking-widest hover:text-white transition-colors group">
+              View All Operations <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.section>
 
-          <Section title="Education" icon={GraduationCap}>
-            <div className="p-7 rounded-2xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] hover:border-blue-400/40 transition-all text-center">
-              <GraduationCap className="w-10 h-10 text-blue-500 dark:text-blue-400 mx-auto mb-4" />
-              <h3 className="text-lg font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
+          <motion.section 
+            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 30 }}
+            viewport={{ once: true }}
+          >
+            <SectionHeader title="Education" icon={GraduationCap} subtitle="Academic Foundation" />
+            <div className="p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 text-center group relative overflow-hidden">
+              <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="p-5 w-fit rounded-full bg-blue-500/10 border border-blue-500/20 mx-auto mb-8 group-hover:scale-110 transition-transform">
+                <GraduationCap size={40} className="text-blue-400" />
+              </div>
+              <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-2 leading-none">
                 {RESUME_DATA.education.degree}
               </h3>
-              <p className="text-blue-600 dark:text-blue-400 font-semibold mb-1">{RESUME_DATA.education.institution}</p>
-              <p className="text-slate-500 dark:text-slate-500 text-sm mb-4">{RESUME_DATA.education.location}</p>
-              <span className="inline-block px-5 py-2 rounded-full bg-slate-100 dark:bg-white/[0.05] border border-slate-200 dark:border-white/[0.08] text-xs font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">
-                {RESUME_DATA.education.date}
-              </span>
+              <p className="text-xl font-bold text-blue-400 opacity-80 uppercase tracking-tight mb-2">
+                {RESUME_DATA.education.institution}
+              </p>
+              <p className="text-slate-500 text-sm uppercase tracking-widest font-mono mb-8">{RESUME_DATA.education.location}</p>
+              <div className="inline-block px-10 py-3 rounded-2xl bg-white/5 border border-white/10 text-xs font-mono font-black text-slate-300 tracking-[0.3em] uppercase">
+                CLASS OF {RESUME_DATA.education.date.split('–')[1].trim()}
+              </div>
             </div>
-          </Section>
+          </motion.section>
         </div>
 
-        {/* ── ADDITIONAL ── */}
-        <div className="mt-4 p-5 rounded-2xl bg-slate-100 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] text-center">
-          <p className="text-sm text-slate-500 dark:text-slate-500 font-medium">
-            {RESUME_DATA.personal.details}
-          </p>
-        </div>
+        {/* ── METADATA FOOTER ── */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-32 p-8 rounded-[2rem] bg-white/[0.02] border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6"
+        >
+          <div className="flex items-center gap-6">
+            <div className="group flex items-center gap-3">
+              <User size={16} className="text-blue-500" />
+              <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest">{RESUME_DATA.personal.details}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
+            <Activity size={14} className="text-emerald-500 animate-pulse" />
+            <span className="text-[10px] font-mono font-bold text-emerald-500/80 uppercase tracking-widest">Protocol: Active Integrity Sync</span>
+          </div>
+        </motion.div>
 
-      </div>
-    </motion.div>
+      </motion.div>
+
+      <style jsx="true">{`
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+      `}</style>
+    </div>
   );
 };
 
