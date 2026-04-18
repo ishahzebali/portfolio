@@ -20,6 +20,7 @@ const Navbar = () => {
     { name: 'About', path: '/#about' },
     { name: 'Expertise', path: '/#expertise' },
     { name: 'Projects', path: '/#projects' },
+    { name: 'Challenges', path: '/challenges' },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/#contact' },
   ];
@@ -29,8 +30,8 @@ const Navbar = () => {
     const currentPath = location.pathname === '/' ? '/' : location.pathname.replace(/\/$/, "");
     const currentHash = location.hash;
 
-    if (path === '/blog') {
-      return currentPath.startsWith('/blog');
+    if (path === '/blog' || path === '/challenges') {
+      return currentPath.startsWith(path);
     }
 
     if (path.startsWith('/#')) {
