@@ -6,6 +6,7 @@ import BlogPost from './pages/BlogPost';
 import Resume from './pages/Resume';
 import VerifyCert from './pages/VerifyCert';
 import NotFound from './pages/NotFound';
+import AppleScrollProjects from './components/home/AppleScrollProjects';
 import { certificationsData } from './data/certificationsData';
 import { Helmet } from 'react-helmet-async';
 import { 
@@ -778,36 +779,8 @@ const PortfolioHome = () => (
       <FadeInSection>
         <SectionHeading title="Simulations & Operations" icon={Crosshair} />
       </FadeInSection>
-      <div className="flex flex-col gap-16">
-        {RESUME_DATA.projects.map((project, idx) => (
-          <FadeInSection key={idx} delay={idx * 80} direction="up">
-            <div className="group relative flex flex-col lg:flex-row gap-8 lg:flex-row lg:gap-16 border-t border-slate-200 dark:border-white/[0.05] pt-16">
-              <div className="absolute top-0 left-0 w-1/3 h-[2px] bg-gradient-to-r from-blue-500/60 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 ease-out origin-left"></div>
-              
-              <div className="lg:w-1/3 shrink-0 relative z-10">
-                <div className="text-blue-400 text-sm font-bold tracking-[0.3em] uppercase mb-5 flex items-center gap-4">
-                    <span className="w-10 h-[2px] bg-blue-500/50 inline-block group-hover:w-16 transition-all duration-700"></span> 
-                    {project.date}
-                </div>
-                <h3 className="text-4xl lg:text-5xl font-light text-slate-800 dark:text-slate-100 leading-tight mb-6 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-500">{project.title}</h3>
-                <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] backdrop-blur-md border border-slate-200 dark:border-white/[0.05] rounded-full text-slate-600 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mt-2 group-hover:border-blue-500/30 transition-colors">
-                  <Lock className="w-3.5 h-3.5 text-blue-500/80"/> {project.org}
-                </div>
-              </div>
-              
-              <div className="lg:w-2/3 mt-6 lg:mt-0 relative z-10">
-                <ul className="space-y-8 bg-[#0A0F1C]/[0.02] dark:bg-white/[0.01] p-8 rounded-[2rem] border border-slate-100 dark:border-white/[0.02] group-hover:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] group-hover:border-slate-200 dark:border-white/[0.05] transition-all duration-700">
-                  {project.points.map((point, pIdx) => (
-                    <li key={pIdx} className="flex gap-6 text-slate-700 dark:text-slate-300 text-lg font-light group/item leading-relaxed">
-                      <ChevronRight className="w-6 h-6 shrink-0 mt-1 text-blue-500/40 group-hover/item:text-blue-400 group-hover/item:translate-x-3 transition-all duration-500 ease-out" />
-                      <span className="opacity-70 group-hover/item:opacity-100 transition-opacity duration-300">{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </FadeInSection>
-        ))}
+      <div className="w-full">
+        <AppleScrollProjects projects={RESUME_DATA.projects} />
       </div>
     </section>
 
