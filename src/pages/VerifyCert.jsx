@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { ShieldCheck, ArrowLeft, ExternalLink, Download, FileDown, Award, Calendar } from 'lucide-react';
 import { certificationsData } from '../data/certificationsData';
-import useRipple from '../hooks/useRipple';
 
 const VerifyCert = () => {
   const { id } = useParams();
@@ -17,8 +16,6 @@ const VerifyCert = () => {
   if (!cert) {
     return <Navigate to="/" replace />;
   }
-
-  const [ripple, event] = useRipple();
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#060913] text-slate-800 dark:text-slate-300 font-sans selection:bg-violet-500/30 overflow-hidden relative pb-32">
@@ -68,10 +65,8 @@ const VerifyCert = () => {
                  href={cert.file} 
                  target="_blank" 
                  rel="noreferrer"
-                 onPointerDown={ripple}
                  className="flex-1 md:flex-none relative overflow-hidden group inline-flex items-center justify-center gap-2 bg-violet-600 hover:bg-violet-500 text-white px-6 py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]"
                >
-                 {event}
                  <ExternalLink className="w-4 h-4" /> View Original
                </a>
             </div>
@@ -79,7 +74,6 @@ const VerifyCert = () => {
 
           <div className="relative z-10 w-full overflow-hidden rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-[#03050a]/40 flex items-center justify-center min-h-[300px]">
              {/* If it's heavily visual, we render the image. Even PDFs have been converted to high quality PNG thumbnails. */}
-             <div className="absolute inset-0 bg-[url('/assets/images/noise.png')] opacity-[0.03] mix-blend-overlay"></div>
              <img 
                src={cert.image} 
                alt={`${cert.title} Document`}
