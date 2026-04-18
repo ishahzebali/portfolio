@@ -4,11 +4,15 @@ import { motion } from 'framer-motion';
 /**
  * DecryptText Component
  * Animates text by scrambling characters before revealing the target string.
- * High-fidelity SOC/Cybersecurity aesthetic.
+ * Optimized to prevent layout shifts.
  */
 const DecryptText = ({ text, delay = 0, className = "" }) => {
-  const [displayText, setDisplayText] = useState("");
   const chars = "!<>-_\\/[]{}—=+*^?#________";
+  
+  // Initialize with scrambled text of same length to prevent layout shift
+  const [displayText, setDisplayText] = useState(() => 
+    text.split("").map(() => chars[Math.floor(Math.random() * chars.length)]).join("")
+  );
   
   useEffect(() => {
     let iteration = 0;
@@ -33,7 +37,7 @@ const DecryptText = ({ text, delay = 0, className = "" }) => {
     <motion.span 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className={`font-mono ${className}`}
+      className={`inline-block ${className}`}
     >
       {displayText}
     </motion.span>
