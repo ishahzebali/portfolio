@@ -24,17 +24,17 @@ import cert13 from '../assets/Certs/The Legend of Python Codex.pdf';
 import certimg13 from '../assets/Certs/The Legend of Python Codex.png';
 
 export const certificationsData = [
-  { id: "bash-scripting", title: "Bash Scripting Cert", issuer: "Codecademy", file: cert1, image: certimg1, date: "Recent" },
-  { id: "deloitte-cyber", title: "Cyber Job Simulation", issuer: "Deloitte Forage", file: cert2, image: certimg2, date: "Recent" },
-  { id: "cybersec-101", title: "Cyber Security 101", issuer: "THM", file: cert3, image: certimg3, date: "Recent" },
-  { id: "datacom-cyber", title: "Cyber Security Operations Job Simulation", issuer: "Datacom Forage", file: cert4, image: certimg4, date: "Recent" },
-  { id: "deep-web", title: "Deep Web: The complete introduction to the hidden web", issuer: "Udemy", file: cert5, image: cert5, date: "Recent" },
-  { id: "ethical-hacking-beginner", title: "Ethical Hacking for Beginners", issuer: "Udemy", file: cert6, image: cert6, date: "Recent" },
+  { id: "soc-l1", title: "SOC Level 1", issuer: "THM", file: cert12, image: certimg12, date: "Recent" },
+  { id: "jr-pentester", title: "Jr Penetration Tester", issuer: "THM", file: cert9, image: certimg9, date: "Recent" },
   { id: "fortinet-associate", title: "Certified Associate Cybersecurity", issuer: "Fortinet", file: cert7, image: certimg7, date: "Recent" },
   { id: "iso-27001", title: "ISO IEC 27001 2022 Information Security Associate", issuer: "SkillFront", file: cert8, image: certimg8, date: "Recent" },
-  { id: "jr-pentester", title: "Jr Penetration Tester", issuer: "THM", file: cert9, image: certimg9, date: "Recent" },
-  { id: "linux-100", title: "Linux 100 Fundamentals", issuer: "TCM Security", file: cert10, image: certimg10, date: "Recent" },
-  { id: "pre-security", title: "Pre Security", issuer: "THM", file: cert11, image: certimg11, date: "Recent" },
-  { id: "soc-l1", title: "SOC Level 1", issuer: "THM", file: cert12, image: certimg12, date: "Recent" },
+  { id: "deloitte-cyber", title: "Cyber Job Simulation", issuer: "Deloitte Forage", file: cert2, image: certimg2, date: "Recent" },
+  { id: "datacom-cyber", title: "Cyber Security Operations Job Simulation", issuer: "Datacom Forage", file: cert4, image: certimg4, date: "Recent" },
+  { id: "bash-scripting", title: "Bash Scripting Cert", issuer: "Codecademy", file: cert1, image: certimg1, date: "Recent" },
   { id: "python-legend", title: "The Legend of Python", issuer: "Codex", file: cert13, image: certimg13, date: "Recent" },
+  { id: "pre-security", title: "Pre Security", issuer: "THM", file: cert11, image: certimg11, date: "Recent" },
+  { id: "cybersec-101", title: "Cyber Security 101", issuer: "THM", file: cert3, image: certimg3, date: "Recent" },
+  { id: "linux-100", title: "Linux 100 Fundamentals", issuer: "TCM Security", file: cert10, image: certimg10, date: "Recent" },
+  { id: "deep-web", title: "Deep Web: The complete introduction to the hidden web", issuer: "Udemy", file: cert5, image: cert5, date: "Recent" },
+  { id: "ethical-hacking-beginner", title: "Ethical Hacking for Beginners", issuer: "Udemy", file: cert6, image: cert6, date: "Recent" },
 ];
