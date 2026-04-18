@@ -25,14 +25,22 @@ const Navbar = () => {
   ];
 
   const checkActive = (path) => {
+    // Normalize pathname (remove trailing slash except for root)
+    const currentPath = location.pathname === '/' ? '/' : location.pathname.replace(/\/$/, "");
+    const currentHash = location.hash;
+
     if (path === '/blog') {
-      return location.pathname.startsWith('/blog');
+      return currentPath.startsWith('/blog');
     }
-    // For hash links, they should only be active if we are on the home page
+
     if (path.startsWith('/#')) {
-      return location.pathname === '/' && location.hash === path.substring(1);
+      const targetHash = path.substring(1); // e.g. "#about" or "#expertise"
+      // Section links are ONLY active if we are on the home page and the hash matches exactly
+      return (currentPath === '/' || currentPath === '') && currentHash === targetHash;
     }
-    return location.pathname === path;
+
+    // Default exact match for other pages (like /blog if it wasn't caught above)
+    return currentPath === path;
   };
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -78,7 +86,10 @@ const Navbar = () => {
                     className="relative text-sm font-medium tracking-wide text-slate-300 hover:text-white transition-colors group/link"
                   >
                     {link.name}
-                    <span className={`absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-500 to-violet-500 transition-all duration-300 group-hover/link:w-full ${checkActive(link.path) ? 'w-full' : ''}`}></span>
+                    <span 
+                      className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-blue-500 to-violet-500 transition-all duration-300 group-hover/link:!w-full"
+                      style={{ width: checkActive(link.path) ? '100%' : '0%' }}
+                    ></span>
                   </a>
                 ) : (
                   <Link
@@ -87,7 +98,10 @@ const Navbar = () => {
                     className="relative text-sm font-medium tracking-wide text-slate-300 hover:text-white transition-colors group/link"
                   >
                     {link.name}
-                    <span className={`absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-500 to-violet-500 transition-all duration-300 group-hover/link:w-full ${checkActive(link.path) ? 'w-full' : ''}`}></span>
+                    <span 
+                      className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-blue-500 to-violet-500 transition-all duration-300 group-hover/link:!w-full"
+                      style={{ width: checkActive(link.path) ? '100%' : '0%' }}
+                    ></span>
                   </Link>
                 )
               ))}
