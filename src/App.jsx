@@ -127,12 +127,23 @@ const RESUME_DATA = {
     }
   ],
   certifications: [
-    "Certified SOC Analyst L1 - TryHackMe",
-    "Jr Penetration Tester - TryHackMe",
-    "Fortinet Certified Associate in Cybersecurity (FCA) - Fortinet",
-    "ISO/IEC 27001 Information Security Associate - Skill Front",
-    "CyberSecurity 101 - TryHackMe",
-    "Linux 100: Fundamentals - TCM Security"
+    { title: "Certified SOC Analyst L1", issuer: "TryHackMe", file: "/assets/Certs/THM Certificate.pdf", image: "/assets/Certs/THM Certificate.png" },
+    { title: "Jr Penetration Tester", issuer: "TryHackMe", file: "/assets/Certs/THM-PUYNGDL9DA.pdf", image: "/assets/Certs/THM-PUYNGDL9DA.png" },
+    { title: "CyberSecurity 101", issuer: "TryHackMe", file: "/assets/Certs/THM Certificate (1).pdf", image: "/assets/Certs/THM Certificate (1).png" },
+    { title: "Fortinet Certified Associate in Cybersecurity", issuer: "Fortinet", file: "/assets/Certs/Fortinet Certified Associate Cybersecurity.pdf", image: "/assets/Certs/Fortinet Certified Associate Cybersecurity.png" },
+    { title: "Practical Ethical Hacking (PEH)", issuer: "TCM Security", file: "/assets/Certs/Practical Ethical Hacking Course.pdf", image: "/assets/Certs/Practical Ethical Hacking Course.png" },
+    { title: "Linux 100: Fundamentals", issuer: "TCM Security", file: "/assets/Certs/gaqol7kz_1762615002343.pdf", image: "/assets/Certs/gaqol7kz_1762615002343.png" },
+    { title: "ISO/IEC 27001 Information Security Associate", issuer: "Skill Front", file: "/assets/Certs/SkillFront Document.pdf", image: "/assets/Certs/SkillFront Document.png" },
+    { title: "Bash Scripting", issuer: "Codecademy", file: "/assets/Certs/Bash Scripting Cert | Codecademy.pdf", image: "/assets/Certs/Bash Scripting Cert | Codecademy.png" },
+    { title: "Additional Qualification", issuer: "TryHackMe", file: "/assets/Certs/THM-TT5DLHBSMX.pdf", image: "/assets/Certs/THM-TT5DLHBSMX.png" },
+    { title: "Additional Qualification", issuer: "TryHackMe", file: "/assets/Certs/THM-TT5DLHBSMX (1).pdf", image: "/assets/Certs/THM-TT5DLHBSMX (1).png" },
+    { title: "SOC Analyst Training", issuer: "LetsDefend", file: "/assets/Certs/E9pA6qsdbeyEkp3ti_9PBTqmSxAf6zZTseP_6941831f49fe35d39a8998e4_1765902408780_completion_certificate.pdf", image: "/assets/Certs/E9pA6qsdbeyEkp3ti_9PBTqmSxAf6zZTseP_6941831f49fe35d39a8998e4_1765902408780_completion_certificate.png" },
+    { title: "Completion Certificate", issuer: "Other", file: "/assets/Certs/Completion Certificate.pdf", image: "/assets/Certs/Completion Certificate.png" },
+    { title: "Certificate Record", issuer: "Udemy", file: "/assets/Certs/UC-1a52400e-4046-4546-80b6-9556034f2f27.jpg", image: "/assets/Certs/UC-1a52400e-4046-4546-80b6-9556034f2f27.jpg" },
+    { title: "Certificate Record", issuer: "Udemy", file: "/assets/Certs/UC-c360a48e-b658-47ac-adf0-f8304ae673b6.jpg", image: "/assets/Certs/UC-c360a48e-b658-47ac-adf0-f8304ae673b6.jpg" },
+    { title: "Activity Record 1", issuer: "Other", file: "/assets/Certs/Screenshot 2025-07-13 at 20.48.03.png", image: "/assets/Certs/Screenshot 2025-07-13 at 20.48.03.png" },
+    { title: "Activity Record 2", issuer: "Other", file: "/assets/Certs/Screenshot 2025-11-01 at 10.47.12.png", image: "/assets/Certs/Screenshot 2025-11-01 at 10.47.12.png" },
+    { title: "Activity Record 3", issuer: "Other", file: "/assets/Certs/Screenshot 2025-11-04 at 21.34.29.png", image: "/assets/Certs/Screenshot 2025-11-04 at 21.34.29.png" },
   ],
   education: {
     degree: "Bachelor of Science in Computer Science",
@@ -815,22 +826,40 @@ const PortfolioHome = () => (
         <FadeInSection delay={200}>
           <TiltCard className="h-full">
             <div className="bg-[#0A0F1C]/[0.02] dark:bg-white/[0.02] backdrop-blur-3xl rounded-[2.5rem] p-10 border border-slate-200 dark:border-white/[0.05] flex-grow hover:bg-[#0A0F1C]/[0.02] dark:bg-white/[0.03] transition-all duration-700 shadow-2xl h-full hover:border-blue-500/30">
-              <ul className="space-y-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-2">
                 {RESUME_DATA.certifications.map((cert, idx) => (
-                  <motion.li 
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1, duration: 0.5 }}
-                    viewport={{ once: true }}
-                    key={idx} className="flex items-center gap-6 p-6 rounded-2xl bg-white/40 dark:bg-[#0A0F1C]/40 border border-slate-200 dark:border-white/[0.05] hover:border-violet-500/40 hover:bg-white/80 dark:bg-[#0A0F1C]/80 transition-all duration-500 group cursor-default shadow-sm"
+                  <motion.a 
+                    href={cert.file}
+                    target="_blank"
+                    rel="noreferrer"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: (idx % 8) * 0.1, duration: 0.5 }}
+                    viewport={{ once: true, margin: "50px" }}
+                    key={idx} className="flex flex-col bg-white/60 dark:bg-[#0A0F1C]/60 border border-slate-200 dark:border-white/[0.05] rounded-3xl overflow-hidden hover:border-violet-500/50 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_rgba(139,92,246,0.15)] cursor-pointer"
                   >
-                    <div className="p-3 rounded-xl bg-violet-500/10 border border-violet-500/20 group-hover:bg-violet-500/30 group-hover:scale-110 transition-all duration-500">
-                        <ShieldCheck className="w-6 h-6 text-violet-400 shrink-0" />
+                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-white/20 dark:bg-white/[0.02]">
+                      <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-blue-500/0 transition-colors duration-500 z-10" />
+                      <div className="absolute inset-0 border-b border-slate-200 dark:border-white/[0.05] z-20 pointer-events-none" />
+                      <img 
+                        src={cert.image} 
+                        alt={`${cert.title} Certificate`} 
+                        className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-700 ease-out"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1C]/70 via-[#0A0F1C]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-end p-4">
+                        <div className="ml-auto bg-white/20 backdrop-blur-md p-2.5 rounded-full transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 border border-white/30">
+                          <ExternalLink className="w-4 h-4 text-white" />
+                        </div>
+                      </div>
                     </div>
-                    <span className="text-base font-bold text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white tracking-wide transition-colors duration-300">{cert}</span>
-                  </motion.li>
+                    <div className="p-5 flex flex-col items-center text-center">
+                      <span className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors line-clamp-1">{cert.title}</span>
+                      <span className="text-[10px] text-slate-500 font-bold tracking-[0.2em] uppercase mt-1.5">{cert.issuer}</span>
+                    </div>
+                  </motion.a>
                 ))}
-              </ul>
+              </div>
             </div>
           </TiltCard>
         </FadeInSection>
