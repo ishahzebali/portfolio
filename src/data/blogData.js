@@ -570,5 +570,82 @@ sudo defaults write /Library/Preferences/com.apple.security.gk.plist AllowIdenti
       <h3>Pro-Tip</h3>
       <p>Always perform this analysis in a strictly isolated sandbox (such as **FLARE-VM**) with the network interface disabled or redirected to an internal fake-DNS service like INetSim.</p>
     `
+  },
+  {
+    id: 18,
+    slug: "phishing-investigations-header-analysis",
+    title: "Phishing Investigations: A Deep Dive into Email Header Analysis",
+    seoDescription: "Learn how to analyze email headers to investigate phishing attempts, identify spoofing, and verify SPF, DKIM, and DMARC records.",
+    date: "May 20, 2026",
+    category: "blue-team",
+    badge: "Incident Response",
+    badgeType: "blue",
+    excerpt: "A foundational skill for any SOC Analyst. Learn how to dissect raw email headers to track the true origin of a phishing email and verify domain authentication.",
+    content: `
+      <p>Email remains the number one initial access vector for cyber attacks. As a SOC Analyst, one of your primary responsibilities is investigating suspicious emails. To truly understand an email's origin, you must look beyond the visual representation and dive into the raw email headers.</p>
+      
+      <h3>The Anatomy of an Email Header</h3>
+      <p>An email header contains a chronological record of the email's journey from the sender's mail server to the recipient's inbox. Key fields include:</p>
+      <ul>
+          <li><strong>Received:</strong> These lines trace the path the email took. You read them from bottom to top. The bottom-most <code>Received</code> header typically indicates the originating IP address.</li>
+          <li><strong>Return-Path:</strong> The email address where bounce messages are sent. Attackers often spoof the <code>From</code> address but leave the true sender in the <code>Return-Path</code>.</li>
+          <li><strong>Message-ID:</strong> A unique identifier for the email, useful for tracking the email across different systems.</li>
+      </ul>
+      
+      <h3>Authenticating the Sender: SPF, DKIM, and DMARC</h3>
+      <p>To detect spoofing, you must verify the email authentication protocols. Look for the <code>Authentication-Results</code> header:</p>
+      <ul>
+          <li><strong>SPF (Sender Policy Framework):</strong> Checks if the sending IP is authorized to send emails on behalf of the domain. Look for <code>spf=pass</code>.</li>
+          <li><strong>DKIM (DomainKeys Identified Mail):</strong> Verifies the email hasn't been tampered with in transit using cryptographic signatures. Look for <code>dkim=pass</code>.</li>
+          <li><strong>DMARC (Domain-based Message Authentication, Reporting, and Conformance):</strong> Ensures both SPF and DKIM pass and align with the <code>From</code> domain. Look for <code>dmarc=pass</code>.</li>
+      </ul>
+      
+      <h3>Detecting Red Flags</h3>
+      <p>During an investigation, look for these common anomalies:</p>
+      <ul>
+          <li><strong>Mismatched Domains:</strong> The domain in the <code>From</code> header differs from the <code>Return-Path</code> domain.</li>
+          <li><strong>Authentication Failures:</strong> <code>spf=fail</code> or <code>dkim=fail</code> often indicates spoofing. However, be aware of forwarded emails, which can break SPF.</li>
+          <li><strong>Suspicious Originating IPs:</strong> Use OSINT tools like AbuseIPDB or VirusTotal to check the reputation of the originating IP address found in the first <code>Received</code> header.</li>
+      </ul>
+      
+      <h3>Conclusion</h3>
+      <p>Mastering email header analysis allows you to quickly triage phishing alerts, identify spoofing campaigns, and extract critical Indicators of Compromise (IOCs) to block further attacks.</p>
+    `
+  },
+  {
+    id: 19,
+    slug: "automating-soc-workflows-soar",
+    title: "Automating the SOC: Scaling Threat Response with SOAR",
+    seoDescription: "Explore how Security Orchestration, Automation, and Response (SOAR) can streamline SOC operations, reduce alert fatigue, and accelerate incident response times.",
+    date: "May 22, 2026",
+    category: "blue-team",
+    badge: "Automation",
+    badgeType: "violet",
+    excerpt: "Stop doing repetitive tasks manually. Discover how SOAR platforms can transform your SOC operations by automating triage, enrichment, and containment workflows.",
+    content: `
+      <p>In a modern Security Operations Center (SOC), analysts are constantly bombarded with a high volume of alerts. This leads to \"alert fatigue,\" where genuine threats might be missed amidst the noise. The solution to scaling your defensive capabilities is <strong>Security Orchestration, Automation, and Response (SOAR)</strong>.</p>
+      
+      <h3>What is SOAR?</h3>
+      <p>SOAR platforms integrate with your existing security tools (SIEM, EDR, Firewalls, Threat Intel feeds) to execute automated workflows known as <strong>Playbooks</strong>. These playbooks can perform tasks that would otherwise take an analyst valuable time.</p>
+      
+      <h3>Key Use Cases for Automation</h3>
+      <p>Implementing SOAR effectively involves identifying repetitive, high-volume tasks. Some common use cases include:</p>
+      <ul>
+          <li><strong>Alert Enrichment:</strong> Automatically extracting IPs, URLs, and file hashes from an alert and querying Threat Intelligence platforms (like VirusTotal or AlienVault OTX) for reputation scores.</li>
+          <li><strong>Phishing Investigation Triage:</strong> Extracting email headers, analyzing attachments in a sandbox, checking URLs against blocklists, and automatically creating a Jira ticket for the SOC team.</li>
+          <li><strong>Automated Containment:</strong> If an EDR tool detects a high-confidence ransomware execution, a SOAR playbook can instantly isolate the infected host from the network, preventing lateral movement.</li>
+      </ul>
+      
+      <h3>Building Effective Playbooks</h3>
+      <p>When designing playbooks, keep these best practices in mind:</p>
+      <ul>
+          <li><strong>Start Small:</strong> Don't try to automate the entire incident response process at once. Begin with simple enrichment tasks to build confidence in the automation.</li>
+          <li><strong>Human-in-the-Loop:</strong> For critical actions (like blocking an IP on a core firewall or isolating a VIP user's laptop), include an approval step where an analyst must explicitly confirm the action.</li>
+          <li><strong>Modular Design:</strong> Create smaller, reusable playbooks (e.g., a \"Block IP\" playbook) that can be called by larger, more complex playbooks.</li>
+      </ul>
+      
+      <h3>The Analyst's New Role</h3>
+      <p>SOAR doesn't replace the SOC Analyst; it empowers them. By automating the \"grunt work,\" analysts can focus their time on complex threat hunting, proactive defense tuning, and strategic incident response.</p>
+    `
   }
 ];
