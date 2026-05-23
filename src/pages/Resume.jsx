@@ -4,7 +4,7 @@ import {
   MapPin, Mail, Phone, Linkedin, ExternalLink, ShieldAlert,
   Briefcase, Award, GraduationCap, Bug, ChevronRight, FileDown,
   Activity, Database, Eye, Server, Code, ShieldCheck, Cpu, Crosshair, 
-  Terminal, Globe, Lock, User
+  Terminal, Globe, Lock, User, Github
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { certificationsData } from '../data/certificationsData';
@@ -17,6 +17,7 @@ const RESUME_DATA = {
     phone: "+971 58 611 2232",
     email: "shahzeb@shahsmen.com",
     linkedin: "linkedin.com/in/ishahzebali",
+    github: "github.com/ishahzebali",
     website: "shahsmen.com",
     image: "/assets/images/profile.jpg",
     details: "Nationality: Pakistani | Visa: UAE Family-Sponsored Residence Visa | Languages: English (Fluent), Urdu (Native)"
@@ -79,6 +80,16 @@ const RESUME_DATA = {
     date: "2020 – 2025"
   },
   projects: [
+    {
+      title: "Email Analyzer SOC Tool",
+      org: "Personal Initiative",
+      date: "2026",
+      points: [
+        "Developed a web-based Email Analyzer tool designed to assist SOC analysts in investigating phishing attempts.",
+        "Provides quick parsing of email headers and identification of potentially malicious indicators.",
+        <span key="link">Live Tool: <a href="https://emailanalyzersoc.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">https://emailanalyzersoc.netlify.app/</a></span>
+      ]
+    },
     {
       title: "End-to-End Ransomware Emulation & Detection Engineering",
       org: "Purple Team Lab",
@@ -204,6 +215,9 @@ const Resume = () => {
                 <div className="flex items-center gap-2 text-[11px] font-bold text-slate-500 dark:text-slate-500 uppercase tracking-widest">
                   <Globe size={14} className="text-violet-600 dark:text-violet-500" /> {RESUME_DATA.personal.website}
                 </div>
+                <div className="flex items-center gap-2 text-[11px] font-bold text-slate-500 dark:text-slate-500 uppercase tracking-widest">
+                  <Github size={14} className="text-slate-600 dark:text-slate-500" /> <a href={`https://${RESUME_DATA.personal.github}`} target="_blank" rel="noreferrer" className="hover:text-blue-500 transition-colors">GitHub</a>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -214,8 +228,8 @@ const Resume = () => {
             transition={{ delay: 0.6 }}
           >
             <a
-              href="/Shahzeb_Ali_Resume.pdf"
-              download="Shahzeb_Ali_Resume.pdf"
+              href="/assets/resume/Shahzeb_Ali_Resume_UAE_v2.pdf"
+              download="Shahzeb_Ali_Resume_UAE_v2.pdf"
               className="group relative flex items-center gap-4 px-10 py-5 bg-gradient-to-br from-blue-600 to-violet-600 rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(37,99,235,0.15)] dark:shadow-[0_20px_40px_rgba(37,99,235,0.2)] hover:shadow-[0_25px_50px_rgba(37,99,235,0.3)] dark:hover:shadow-[0_25px_50px_rgba(37,99,235,0.4)] transition-all active:scale-95"
             >
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>

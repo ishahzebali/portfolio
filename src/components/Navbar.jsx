@@ -119,7 +119,7 @@ const Navbar = () => {
               </div>
               
               <a 
-                href="/assets/resume/SOC analyst resume.pdf"
+                href="/assets/resume/Shahzeb_Ali_Resume_UAE_v2.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-br from-blue-600 to-violet-600 text-white text-[11px] font-bold uppercase tracking-widest hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transition-all active:scale-95"
@@ -202,7 +202,7 @@ const Navbar = () => {
                 className="mt-8"
               >
                 <a 
-                  href="/assets/resume/SOC analyst resume.pdf"
+                  href="/assets/resume/Shahzeb_Ali_Resume_UAE_v2.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-4 px-10 py-5 rounded-3xl bg-white text-[#050810] text-lg font-black uppercase tracking-[0.2em] shadow-2xl active:scale-95"

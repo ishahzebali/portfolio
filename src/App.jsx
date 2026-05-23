@@ -16,7 +16,7 @@ import {
   MapPin, Mail, Phone, ExternalLink, Linkedin, ChevronRight, 
   Activity, Lock, Crosshair, Server, Database, Code, ShieldCheck,
   Bug, Eye, ArrowUpRight, Shield, Cpu, TerminalSquare, Key, Unlock, CheckCircle2, XCircle,
-  Sun, Moon, Menu, X, FileDown
+  Sun, Moon, Menu, X, FileDown, Github
 } from 'lucide-react';
 
 // --- DATA ---
@@ -29,6 +29,7 @@ const RESUME_DATA = {
     phone: "+971 58 611 2232",
     email: "shahzeb@shahsmen.com",
     linkedin: "linkedin.com/in/ishahzebali",
+    github: "github.com/ishahzebali",
     website: "shahsmen.com",
     details: "Nationality: Pakistani | Visa: UAE Family-Sponsored Residence Visa | Languages: English (Fluent), Urdu (Native)"
   },
@@ -81,6 +82,16 @@ const RESUME_DATA = {
     }
   ],
   projects: [
+    {
+      title: "Email Analyzer SOC Tool",
+      org: "Personal Initiative",
+      date: "2026",
+      points: [
+        "Developed a web-based Email Analyzer tool designed to assist SOC analysts in investigating phishing attempts.",
+        "Provides quick parsing of email headers and identification of potentially malicious indicators.",
+        <span key="link">Live Tool: <a href="https://emailanalyzersoc.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">https://emailanalyzersoc.netlify.app/</a></span>
+      ]
+    },
     {
       title: "End-to-End Ransomware Emulation & Detection Engineering",
       org: "Purple Team Lab",
@@ -487,6 +498,7 @@ const PortfolioHome = () => (
               { icon: Phone, text: RESUME_DATA.personal.phone },
               { icon: Mail, text: RESUME_DATA.personal.email, link: `mailto:${RESUME_DATA.personal.email}` },
               { icon: Linkedin, text: "LinkedIn", link: `https://${RESUME_DATA.personal.linkedin}` },
+              { icon: Github, text: "GitHub", link: `https://${RESUME_DATA.personal.github}` },
               { icon: ExternalLink, text: RESUME_DATA.personal.website, link: `https://${RESUME_DATA.personal.website}` }
             ].map((item, idx) => (
               item.link ? (
